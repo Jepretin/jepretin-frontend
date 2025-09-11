@@ -10,14 +10,13 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('LoginView'), centerTitle: true),
-      body: const Center(
+      body: Center(
         child: Column(
           children: [
             Column(children: [Text("Masuk")]),
+
             SizedBox(height: 20),
-            Column(
-              
-            ),
+            Image.asset('assets/images/monyet.jpg'),
           ],
         ),
       ),

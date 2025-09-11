@@ -10,19 +10,31 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
+import '../modules/transaction/cart/bindings/cart_binding.dart';
+import '../modules/transaction/cart/views/cart_view.dart';
+import '../modules/transaction/history_transaction/bindings/history_transaction_binding.dart';
+import '../modules/transaction/history_transaction/views/history_transaction_view.dart';
+import '../modules/transaction/order/bindings/order_binding.dart';
+import '../modules/transaction/order/views/order_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN; // Untuk tes ganti dot setelah routes, contoh: Routes.HOME -> ini sebagai defauld
+  // Untuk tes ganti dot setelah routes, contoh: Routes.HOME -> ini sebagai defauld
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAIN,
+      page: () => const MainView(),
+      binding: MainBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
@@ -33,6 +45,21 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.ORDER,
+      page: () => const OrderView(),
+      binding: OrderBinding(),
+    ),
+    GetPage(
+      name: _Paths.HISTORY_TRANSACTION,
+      page: () => const HistoryTransactionView(),
+      binding: HistoryTransactionBinding(),
+    ),
+    GetPage(
+      name: _Paths.CART,
+      page: () => const CartView(),
+      binding: CartBinding(),
     ),
   ];
 }
