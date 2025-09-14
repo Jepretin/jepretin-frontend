@@ -1,50 +1,72 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jepretin/app/shared/customButton.dart';
+import 'package:jepretin/app/shared/customComponent.dart';
+import 'package:jepretin/app/themes/themes.dart';
 
 import '../controllers/login_controller.dart';
-
-import 'package:jepretin/app/shared/customComponent.dart';
-
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('LoginView'), centerTitle: true),
-      body: Center(
-        child: Column(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                customTextField(
-                  hintText: "Email",
-                  prefixWidget: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: SvgPicture.asset(
-                      "assets/icons/email.svg",
-                      width: 20,
-                      height: 20,
+      body: GetBuilder(
+        init: LoginController(),
+        builder: (controller) => SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  Text(
+                    "Masuk",
+                    style: styletext(
+                      fontsize: 32,
+                      fontWeight: bold,
+                      fontStyle: FontStyle.normal,
+                      fontFamily: 'poppins',
                     ),
                   ),
+                ],
+              ),
+              InputWithLabel(
+                label: "",
+                input: CustomInput(
+                  hintText: "Email",
+                  controller: TextEditingController(),
+                  
+                  onIconTap: () => {print("Hit")},
                 ),
-                const SizedBox(height: 16),
-                customTextField(
-                    hintText: "Password",
-                    isPassword: true,
-                    prefixWidget: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: SvgPicture.asset(
-                          "assets/icons/lock_key.svg",
-                          width: 20,
-                          height: 20,
-                        ))),
-              ],
-            ),
-          ],
+              ),
+              SizedBox(height: 10),
+              InputWithLabel(
+                label: "",
+                input: CustomInputAuth(
+                  hintText: "Password",
+                  controller: TextEditingController(),
+                  icon: Icons.lock,
+                ),
+              ),
+              SizedBox(height: 10),
+              customAuthButton(
+                text: "Masuk", 
+              onTap: () => print("Anda menekan tombol masuk"),
+              backgroundColor: Colors.blue,
+              textColor: Colors.white,
+              ),
+
+              SizedBox(height: 10),
+              customAuthButton(
+                text: "Daftar", 
+              onTap: () => print("Anda menekan tombol daftar"),
+              backgroundColor: Colors.blueGrey,
+              textColor: Colors.blue,
+              ),
+            ],
+          ),
         ),
       ),
     );

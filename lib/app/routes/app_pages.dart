@@ -6,17 +6,24 @@ import '../modules/auth/otp/bindings/otp_binding.dart';
 import '../modules/auth/otp/views/otp_view.dart';
 import '../modules/auth/register/bindings/register_binding.dart';
 import '../modules/auth/register/views/register_view.dart';
+import '../modules/help/bindings/help_binding.dart';
+import '../modules/help/views/help_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
+import '../modules/promotion/bindings/promotion_binding.dart';
+import '../modules/promotion/views/promotion_view.dart';
+import '../modules/user/customer/profile/bindings/profile_binding.dart';
+import '../modules/user/customer/profile/views/profile_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN; // Untuk tes ganti dot setelah routes, contoh: Routes.HOME -> ini sebagai defauld
+  static const INITIAL = Routes
+      .LOGIN; // Untuk tes ganti dot setelah routes, contoh: Routes.HOME -> ini sebagai defauld
 
   static final routes = [
     GetPage(
@@ -33,6 +40,21 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROMOTION,
+      page: () => const PromotionView(),
+      binding: PromotionBinding(),
+    ),
+    GetPage(
+      name: _Paths.HELP,
+      page: () => const HelpView(),
+      binding: HelpBinding(),
     ),
   ];
 }
