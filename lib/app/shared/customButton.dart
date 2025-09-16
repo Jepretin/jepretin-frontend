@@ -24,6 +24,7 @@ Widget customElevatedButton({
           fontsize: 14,
           fontWeight: bold,
           fontFamily: 'Poppins',
+          fontStyle: FontStyle.normal,
           color:
               condition
                   ? color

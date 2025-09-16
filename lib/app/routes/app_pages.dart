@@ -10,6 +10,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
+import '../modules/promotion/bindings/promotion_binding.dart';
+import '../modules/promotion/views/promotion_view.dart';
 import '../modules/transaction/cart/bindings/cart_binding.dart';
 import '../modules/transaction/cart/views/cart_view.dart';
 import '../modules/transaction/history_transaction/bindings/history_transaction_binding.dart';
@@ -60,6 +62,11 @@ class AppPages {
       name: _Paths.CART,
       page: () => const CartView(),
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROMOTION,
+      page: () => const PromotionView(),
+      binding: PromotionBinding(),
     ),
   ];
 }

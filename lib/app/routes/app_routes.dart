@@ -11,6 +11,7 @@ abstract class Routes {
   static const ORDER = _Paths.ORDER;
   static const HISTORY_TRANSACTION = _Paths.HISTORY_TRANSACTION;
   static const CART = _Paths.CART;
+  static const PROMOTION = _Paths.PROMOTION;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const ORDER = '/order';
   static const HISTORY_TRANSACTION = '/history-transaction';
   static const CART = '/cart';
+  static const PROMOTION = '/promotion';
 }

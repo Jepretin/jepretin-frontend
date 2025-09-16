@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   final isFavorite = false.obs;
   final isNama = ''.obs;
+  final isLocation = false.obs;
+  final selectedLocation = "".obs;
 
   bool isStar = false;
   int index = 0;
@@ -15,6 +17,19 @@ class HomeController extends GetxController {
     {'image': Icons.policy_outlined, 'title': 'Syarat & Ketentuan', 'ontap': () {}},
     {'image': Icons.error_outline, 'title': 'Laporkan', 'ontap': () {}},
   ];
+
+  List locations = [
+    "Kota Kediri",
+    "Ngajuk",
+    "Ngasem",
+    "Pare",
+  ];
+
+  @override
+  void setLocation(String loc){
+    selectedLocation.value = loc;
+    isLocation.value = true;
+  }
 
   @override
   void onInit() {

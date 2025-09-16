@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jepretin/app/shared/customComponent.dart';
+import 'package:jepretin/app/themes/themes.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -9,16 +11,48 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('LoginView'), centerTitle: true),
-      body: Center(
-        child: Column(
-          children: [
-            Column(children: [Text("Masuk")]),
-
-            SizedBox(height: 20),
-            Image.asset('assets/images/monyet.jpg'),
-          ],
-        ),
+      body: GetBuilder(
+        init: LoginController(),
+        builder:
+            (controller) => SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+              child: Column(
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        "Masuk",
+                        style: styletext(
+                          fontsize: 32,
+                          fontWeight: bold,
+                          fontFamily: 'poppins',
+                          fontStyle: FontStyle.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                  InputWithLabel(
+                    label: "",
+                    input: CustomInputAuth(
+                      hintText: "Email",
+                      controller: TextEditingController(),
+                      icon: Icons.email,
+                      onIconTap: () => {print("Hit")},
+                    ),
+                  ),
+                  SizedBox(height: 14),
+                  InputWithLabel(
+                    label: "",
+                    input: CustomInputAuth(
+                      hintText: "Password",
+                      controller: TextEditingController(),
+                      icon: Icons.lock,
+                      onIconTap: () => {print("Hit")},
+                    ),
+                  ),
+                ],
+              ),
+            ),
       ),
     );
   }

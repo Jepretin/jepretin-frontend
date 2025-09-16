@@ -7,8 +7,11 @@ Color primaryColor = const Color(0xff03314B);
 Color whiteColor = const Color(0xffFFFFFF);
 Color blackColor = const Color(0xff000000);
 Color disableColor = const Color(0xffC4C4C4);
+
+// Color sesuai yang di figma
 Color inputColor = const Color(0xffF2F2F2);
 Color textInputColor = const Color(0xff03314B);
+Color alertComponentColor = const Color(0xffF66868);
 
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
@@ -19,6 +22,7 @@ FontWeight bold = FontWeight.w700;
 TextStyle styletext({
   required double fontsize,
   required FontWeight fontWeight,
+  required fontStyle,
   Color? color,
   String fontFamily = 'poppins',
   double letterSpacing = 0.0,
@@ -29,6 +33,7 @@ TextStyle styletext({
       return GoogleFonts.montserrat(
         fontSize: fontsize,
         fontWeight: fontWeight,
+        fontStyle: fontStyle,
         color: color ?? Colors.black,
         letterSpacing: letterSpacing,
       );
@@ -36,10 +41,9 @@ TextStyle styletext({
       return GoogleFonts.poppins(
         fontSize: fontsize,
         fontWeight: fontWeight,
+        fontStyle: fontStyle,
         color: color ?? Colors.black,
         letterSpacing: letterSpacing,
       );
   }
 }
-
-// -8

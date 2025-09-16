@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:jepretin/app/routes/app_pages.dart';
+// import 'package:jepretin/app/routes/app_pages.dart';
 import 'package:jepretin/app/shared/customButton.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
+// import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/themes/themes.dart';
-import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
+// import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -32,6 +34,7 @@ class HomeView extends GetView<HomeController> {
                     fontsize: 35,
                     fontWeight: bold,
                     fontFamily: 'poppins',
+                    fontStyle: FontStyle.normal,
                     color: primaryColor,
                     letterSpacing: -3,
                   ),
@@ -62,42 +65,11 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
       ),
-      body: GetBuilder(
-        init: HomeController(),
-        builder:
-            (controller) => SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-              child: Column(
-                children: [
-                  _alertContainer(),
-                  SizedBox(height: 15),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return _menuContainer();
-                    },
-                    separatorBuilder: (context, index) => SizedBox(height: 10),
-                  ),
-                  SizedBox(height: 100),
-                  Column(
-                    children: [
-                      Text(
-                        'Tambahkan lokasi acaramu untuk memuat lebih banyak...',
-                        style: styletext(
-                          fontsize: 12,
-                          fontWeight: light,
-                          fontFamily: 'montserrat',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-      ),
+      body: Obx(() {
+        return controller.isLocation.value
+            ? buildAfterMainView()
+            : buildBeforeMainView();
+      }),
     );
   }
 
@@ -129,28 +101,33 @@ class HomeView extends GetView<HomeController> {
 
   Widget _alertContainer() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 17),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 17),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(11),
-        color: Colors.white,
+        color: alertComponentColor,
         boxShadow: [
           BoxShadow(
-            blurRadius: 5,
-            spreadRadius: 0.2,
-            color: Colors.black.withOpacity(0.2),
-            offset: Offset(2, 4),
+            blurRadius: 30,
+            spreadRadius: -5,
+            color: alertComponentColor,
+            offset: const Offset(0, 0),
           ),
         ],
       ),
       child: Column(
-        spacing: 10,
         children: [
           Row(
-            spacing: 10,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.local_cafe_rounded),
+              SvgPicture.asset(
+                'icons/ads.svg',
+                width: 41,
+                height: 41,
+                color: whiteColor,
+              ),
+              const SizedBox(width: 10),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Ingin menampilkan Portofolio Tim kami? klik",
@@ -158,21 +135,27 @@ class HomeView extends GetView<HomeController> {
                     style: styletext(
                       fontsize: 12,
                       fontWeight: medium,
+                      fontStyle: FontStyle.italic,
                       fontFamily: 'montserrat',
-                      color: primaryColor,
-                      // letterSpacing: ,
+                      color: whiteColor,
                     ),
                   ),
-
-                  Text(
-                    "disini untuk menambahkan lokasi acara kamu",
-                    softWrap: true,
-                    style: styletext(
-                      fontsize: 12,
-                      fontWeight: medium,
-                      fontFamily: 'montserrat',
-                      color: primaryColor,
-                      // letterSpacing: ,
+                  GestureDetector(
+                    onTap: () {
+                      // arahkan ke dropdown daerah (contoh ke halaman HomeView)
+                      Get.to(() => (()));
+                    },
+                    child: Text(
+                      "disini untuk menambahkan lokasi acara kamu",
+                      softWrap: true,
+                      style: styletext(
+                        fontsize: 12,
+                        fontWeight: medium,
+                        fontStyle: FontStyle.normal,
+                        fontFamily: 'montserrat',
+                        color: whiteColor, // biar beda warna
+                        // decoration: TextDecoration.underline, // kasih underline
+                      ),
                     ),
                   ),
                 ],
@@ -215,10 +198,7 @@ class HomeView extends GetView<HomeController> {
                 width: 40,
                 decoration: BoxDecoration(shape: BoxShape.circle),
                 child: ClipOval(
-                  child: Image.asset(
-                    'assets/images/monyet.jpg',
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.asset('images/monyet.jpg', fit: BoxFit.cover),
                 ),
               ),
               Expanded(
@@ -231,6 +211,7 @@ class HomeView extends GetView<HomeController> {
                         fontsize: 18,
                         fontWeight: medium,
                         fontFamily: 'poppins',
+                        fontStyle: FontStyle.normal,
                       ),
                     ),
                     Text(
@@ -239,6 +220,7 @@ class HomeView extends GetView<HomeController> {
                         fontsize: 12,
                         fontWeight: light,
                         fontFamily: 'poppins',
+                        fontStyle: FontStyle.normal,
                       ),
                     ),
                   ],
@@ -252,11 +234,8 @@ class HomeView extends GetView<HomeController> {
           //   style: styletext(fontsize: 12, fontWeight: medium),
           // ),
           Container(
-            height: 260,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.grey[300],
-            ),
+            height: 200,
+            child: Image.asset("images/monyet.jpg", fit: BoxFit.cover),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -285,6 +264,7 @@ class HomeView extends GetView<HomeController> {
                         fontsize: 18,
                         fontWeight: bold,
                         fontFamily: 'poppins',
+                        fontStyle: FontStyle.normal,
                         color: primaryColor,
                       ),
                     ),
@@ -303,6 +283,88 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
+    );
+  }
+
+  // Widget locationSelection() {
+    
+  // }
+
+  Widget buildBeforeMainView() {
+    return GetBuilder(
+      init: HomeController(),
+      builder:
+          (controller) => SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+            child: Column(
+              children: [
+                _alertContainer(),
+                SizedBox(height: 15),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return _menuContainer();
+                  },
+                  separatorBuilder: (context, index) => SizedBox(height: 10),
+                ),
+                SizedBox(height: 100),
+                Column(
+                  children: [
+                    Text(
+                      'Tambahkan lokasi acaramu untuk memuat lebih banyak...',
+                      style: styletext(
+                        fontsize: 12,
+                        fontWeight: light,
+                        fontFamily: 'montserrat',
+                        fontStyle: FontStyle.normal,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+    );
+  }
+
+  Widget buildAfterMainView() {
+    return GetBuilder(
+      init: HomeController(),
+      builder:
+          (controller) => SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+            child: Column(
+              children: [
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return _menuContainer();
+                  },
+                  separatorBuilder: (context, index) => SizedBox(height: 10),
+                ),
+                SizedBox(height: 100),
+                Column(
+                  children: [
+                    Text(
+                      'Tambahkan lokasi acaramu untuk memuat lebih banyak...',
+                      style: styletext(
+                        fontsize: 12,
+                        fontWeight: light,
+                        fontFamily: 'montserrat',
+                        fontStyle: FontStyle.normal,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
     );
   }
 }
