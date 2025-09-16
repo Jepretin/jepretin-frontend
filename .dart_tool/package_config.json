@@ -719,10 +719,10 @@
       "name": "jepretin",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "3.7"
+      "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-09-16T09:21:51.735971Z",
+  "generated": "2025-09-16T09:28:21.303671Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///C:/src/flutter/3.29.0",

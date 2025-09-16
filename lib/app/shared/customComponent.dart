@@ -1,7 +1,5 @@
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
-
-// Import kebutuhan province and city
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 customAppbar({
@@ -35,68 +33,6 @@ customAppbar({
   );
 }
 
-// Custom input untuk auth
-class CustomInputAuth extends StatelessWidget {
-  final String hintText;
-  final TextEditingController controller;
-  final bool obscureText;
-  final TextInputType keyboardType;
-  final IconData? icon;
-  final VoidCallback? onIconTap;
-  final TextStyle? hintStyle;
-
-  const CustomInputAuth({
-    super.key,
-    required this.hintText,
-    required this.controller,
-    this.obscureText = false,
-    this.keyboardType = TextInputType.text,
-    this.icon,
-    this.onIconTap,
-    this.hintStyle,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: styletext(
-            fontsize: 12,
-            fontWeight: medium,
-            fontFamily: 'poppins',
-            fontStyle: FontStyle.normal,
-            color: textInputColor.withOpacity(0.7),
-          ),
-          filled: true,
-          fillColor: inputColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 14,
-          ),
-          prefixIcon:
-              icon != null
-                  ? Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 5),
-                    child: Icon(icon, color: Colors.blueGrey, size: 21),
-                  )
-                  : null,
-        ),
-      ),
-    );
-  }
-}
-// Penutup Custom input auth
-
-// Custom input untuk bagian order_view
 class CustomInput extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
@@ -129,8 +65,8 @@ class CustomInput extends StatelessWidget {
           hintStyle: styletext(
             fontsize: 12,
             fontWeight: medium,
-            fontFamily: 'poppins',
             fontStyle: FontStyle.normal,
+            fontFamily: 'poppins',
             color: textInputColor.withOpacity(0.7),
           ),
           filled: true,
@@ -143,15 +79,80 @@ class CustomInput extends StatelessWidget {
             horizontal: 16,
             vertical: 14,
           ),
-          suffixIcon:
-              suffixIcon != null
-                  ? IconButton(
-                    icon: Icon(suffixIcon, color: Colors.blueGrey, size: 21),
-                    onPressed: onIconTap,
-                  )
-                  : null,
+          suffixIcon: suffixIcon != null
+              ? IconButton(
+                  icon: Icon(suffixIcon, color: Colors.blueGrey, size: 21),
+                  onPressed: onIconTap,
+                )
+              : null,
         ),
       ),
+    );
+  }
+}
+
+class CustomInputAuth extends StatefulWidget {
+  final String hintText;
+  final TextEditingController controller;
+  final TextInputType keyboardType;
+  final IconData? icon;
+  final TextStyle? hintStyle;
+
+  const CustomInputAuth({
+    super.key,
+    required this.hintText,
+    required this.controller,
+    this.keyboardType = TextInputType.text,
+    this.icon,
+    this.hintStyle,
+  });
+
+  @override
+  State<CustomInputAuth> createState() => _CustomInputAuthState();
+}
+
+class _CustomInputAuthState extends State<CustomInputAuth> {
+  bool _obscureText = true; // bisa berubah
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: widget.controller,
+      obscureText: _obscureText,
+      keyboardType: widget.keyboardType,
+      decoration: InputDecoration(
+          hintText: widget.hintText,
+          hintStyle: styletext(
+            fontsize: 12,
+            fontWeight: medium,
+            fontStyle: FontStyle.normal,
+            fontFamily: 'poppins',
+            color: textInputColor.withOpacity(0.7),
+          ),
+          filled: true,
+          fillColor: inputColor,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(100),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          prefixIcon: widget.icon != null
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 5),
+                  child: Icon(widget.icon, color: Colors.blueGrey, size: 21),
+                )
+              : null,
+          suffixIcon: IconButton(
+              icon: Icon(
+                _obscureText ? Icons.visibility_off : Icons.visibility,
+                color: Colors.blueGrey,
+              ),
+              onPressed: () {
+                setState(() {
+                  _obscureText = !_obscureText;
+                });
+              })),
     );
   }
 }
@@ -487,9 +488,8 @@ class InputWithLabel extends StatelessWidget {
           style: styletext(
             fontsize: 13,
             fontWeight: bold,
-            fontFamily: 'poppins',
             fontStyle: FontStyle.normal,
-            color: textInputColor,
+            fontFamily: 'poppins',
           ),
         ),
         const SizedBox(height: 6),
@@ -499,4 +499,19 @@ class InputWithLabel extends StatelessWidget {
   }
 }
 
-// Penutup Custom input order_view
+// Widget customText({
+//   required String? title,
+//   bool centerPosition = false,
+// }) {
+//   return Align(
+//     alignment: centerPosition,
+//     centerTitle: centerPosition,
+//     title: Text(
+//       title ?? '',
+//       style: styletext(
+//         fontsize: 20,
+//         fontWeight: bold,
+//       ),
+//     ),
+//   );
+// }
