@@ -36,7 +36,7 @@ class RegisterView extends GetView<RegisterController> {
                 input: CustomInput(
                   hintText: "Email",
                   controller: TextEditingController(),
-                  prefixIcon: 'assets/icons/email.svg',
+                  prefixIcon: 'icons/email.svg',
                 ),
               ),
               InputWithLabel(
@@ -44,14 +44,14 @@ class RegisterView extends GetView<RegisterController> {
                 input: CustomInput(
                     hintText: "Nama Lengkap",
                     controller: TextEditingController(),
-                    prefixIcon: 'assets/icons/user.svg'),
+                    prefixIcon: 'icons/user.svg'),
               ),
               InputWithLabel(
                 label: "",
                 input: CustomInputAuth(
                   hintText: "Kata Sandi",
                   controller: TextEditingController(),
-                  Icon: 'assets/icons/lock_key.svg',
+                  Icon: 'icons/lock_key.svg',
                 ),
               ),
               InputWithLabel(
@@ -59,7 +59,7 @@ class RegisterView extends GetView<RegisterController> {
                 input: CustomInputAuth(
                   hintText: "Konfirmasi Kata Sandi",
                   controller: TextEditingController(),
-                  Icon: 'assets/icons/lock_key.svg',
+                  Icon: 'icons/lock_key.svg',
                 ),
               ),
               SizedBox(height: 44),

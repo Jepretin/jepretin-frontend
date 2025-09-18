@@ -82,5 +82,10 @@ class AppPages {
       page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
+    GetPage(
+      name: _Paths.PROFILE_EDIT,
+      page: () => const ProfileEditView(),
+      binding: ProfileBinding(),
+    ),
   ];
 }

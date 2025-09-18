@@ -37,7 +37,7 @@ class LoginView extends GetView<LoginController> {
                   hintText: "Email",
                   controller: TextEditingController(),
                   onIconTap: () => {print("Hit")},
-                  prefixIcon: 'assets/icons/email.svg',
+                  prefixIcon: 'icons/email.svg',
                 ),
               ),
               InputWithLabel(
@@ -45,7 +45,7 @@ class LoginView extends GetView<LoginController> {
                 input: CustomInputAuth(
                   hintText: "Password",
                   controller: TextEditingController(),
-                  Icon: 'assets/icons/lock_key.svg',
+                  Icon: 'icons/lock_key.svg',
                 ),
               ),
               SizedBox(

@@ -25,7 +25,7 @@ class OrderView extends GetView<OrderController> {
                     input: CustomInput(
                       hintText: "Masukkan Nama Lengkapmu",
                       controller: TextEditingController(),
-                      prefixIcon: "assets/icons/lock_key.svg",
+                      prefixIcon: "icons/lock_key.svg",
                       // suffixIcon: Icons.edit,
                       // // ✏️ icon di kanan
                       onIconTap: () {
