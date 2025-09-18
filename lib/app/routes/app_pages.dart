@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:jepretin/app/modules/user/customer/profile/bindings/profile_binding.dart';
 
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
@@ -21,12 +20,15 @@ import '../modules/transaction/history_transaction/bindings/history_transaction_
 import '../modules/transaction/history_transaction/views/history_transaction_view.dart';
 import '../modules/transaction/order/bindings/order_binding.dart';
 import '../modules/transaction/order/views/order_view.dart';
+import '../modules/user/customer/favorite/bindings/favorite_binding.dart';
+import '../modules/user/customer/favorite/views/favorite_view.dart';
+import '../modules/user/customer/profile/bindings/profile_binding.dart';
 import '../modules/user/customer/profile/controllers/profile_controller.dart';
 import '../modules/user/customer/profile/views/profile_view.dart';
 import '../modules/user/customer/profile_edit/bindings/profile_edit_binding.dart';
 import '../modules/user/customer/profile_edit/views/profile_edit_view.dart';
-import '../modules/user/customer/favorite/bindings/favorite_binding.dart';
-import '../modules/user/customer/favorite/views/favorite_view.dart';
+import '../modules/user/customer/profile_settings/bindings/profile_settings_binding.dart';
+import '../modules/user/customer/profile_settings/views/profile_settings_view.dart';
 
 part 'app_routes.dart';
 
@@ -86,6 +88,11 @@ class AppPages {
       name: _Paths.PROFILE_EDIT,
       page: () => const ProfileEditView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_SETTINGS,
+      page: () => const ProfileSettingsView(),
+      binding: ProfileSettingsBinding(),
     ),
   ];
 }

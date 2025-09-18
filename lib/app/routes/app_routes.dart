@@ -16,6 +16,7 @@ abstract class Routes {
   static const HELP = _Paths.HELP;
   static const FAVORITE = _Paths.FAVORITE;
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
+  static const PROFILE_SETTINGS = _Paths.PROFILE_SETTINGS;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const HELP = '/help';
   static const FAVORITE = '/favorite';
   static const PROFILE_EDIT = '/profile-edit';
+  static const PROFILE_SETTINGS = '/profile-settings';
 }
