@@ -8,8 +8,11 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const OTP = _Paths.OTP;
-  static const PROFILE = _Paths.PROFILE;
+  static const ORDER = _Paths.ORDER;
+  static const HISTORY_TRANSACTION = _Paths.HISTORY_TRANSACTION;
+  static const CART = _Paths.CART;
   static const PROMOTION = _Paths.PROMOTION;
+  static const PROFILE = _Paths.PROFILE;
   static const HELP = _Paths.HELP;
   static const FAVORITE = _Paths.FAVORITE;
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
@@ -22,8 +25,11 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const OTP = '/otp';
-  static const PROFILE = '/profile';
+  static const ORDER = '/order';
+  static const HISTORY_TRANSACTION = '/history-transaction';
+  static const CART = '/cart';
   static const PROMOTION = '/promotion';
+  static const PROFILE = '/profile';
   static const HELP = '/help';
   static const FAVORITE = '/favorite';
   static const PROFILE_EDIT = '/profile-edit';

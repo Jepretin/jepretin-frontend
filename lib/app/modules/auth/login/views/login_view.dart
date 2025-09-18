@@ -45,7 +45,7 @@ class LoginView extends GetView<LoginController> {
                 input: CustomInputAuth(
                   hintText: "Password",
                   controller: TextEditingController(),
-                  prefixIcon: 'assets/icons/lock_key.svg',
+                  Icon: 'assets/icons/lock_key.svg',
                 ),
               ),
               SizedBox(
