@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:jepretin/app/modules/user/customer/profile/bindings/profile_binding.dart';
 
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
@@ -20,6 +21,8 @@ import '../modules/transaction/history_transaction/bindings/history_transaction_
 import '../modules/transaction/history_transaction/views/history_transaction_view.dart';
 import '../modules/transaction/order/bindings/order_binding.dart';
 import '../modules/transaction/order/views/order_view.dart';
+import '../modules/user/customer/profile/controllers/profile_controller.dart';
+import '../modules/user/customer/profile/views/profile_view.dart';
 
 part 'app_routes.dart';
 
@@ -69,6 +72,11 @@ class AppPages {
       name: _Paths.PROMOTION,
       page: () => const PromotionView(),
       binding: PromotionBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

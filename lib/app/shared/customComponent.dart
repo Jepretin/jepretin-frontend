@@ -499,19 +499,22 @@ class InputWithLabel extends StatelessWidget {
   }
 }
 
-// Widget customText({
-//   required String? title,
-//   bool centerPosition = false,
-// }) {
-//   return Align(
-//     alignment: centerPosition,
-//     centerTitle: centerPosition,
-//     title: Text(
-//       title ?? '',
-//       style: styletext(
-//         fontsize: 20,
-//         fontWeight: bold,
-//       ),
-//     ),
-//   );
-// }
+CustomMenu({
+  required IconData leadingIcon,
+  required String placeholder,
+  IconData? trailingIcon, // optional
+}) {
+  return Row(
+    children: [
+      Icon(leadingIcon, color: textInputColor),
+      const SizedBox(width: 10),
+      Expanded(
+        child: Text(
+          placeholder,
+          style: styletext(fontsize: 15, fontWeight: regular, fontStyle: FontStyle.normal, fontFamily: 'poppins', color: textInputColor),
+        ),
+      ),
+      if (trailingIcon != null) Icon(trailingIcon, color: textInputColor),
+    ],
+  );
+}

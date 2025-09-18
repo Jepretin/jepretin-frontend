@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
-import 'package:jepretin/app/shared/customBottomCard.dart';
+import 'package:jepretin/app/shared/customCardContent.dart';
 
 import 'package:get/get.dart';
 import 'package:jepretin/app/themes/themes.dart';
