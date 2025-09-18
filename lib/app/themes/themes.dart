@@ -10,7 +10,8 @@ Color disableColor = const Color(0xffC4C4C4);
 
 // Color sesuai yang di figma
 Color inputColor = const Color(0xffF2F2F2);
-Color textInputColor = const Color(0xff03314B);
+Color inputColorAuth = const Color(0xffEBEDF0);
+Color hintInputAuth = const Color(0xff6C6868);
 Color alertComponentColor = const Color(0xffF66868);
 
 FontWeight light = FontWeight.w300;

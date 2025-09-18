@@ -28,7 +28,7 @@ class PromotionView extends GetView<PromotionController> {
                   'assets/icons/coupon.svg',
                   width: 80,
                   height: 80,
-                  color: textInputColor,
+                  color: primaryColor,
                 ),
                 // SizedBox(height: 10),
                 Text(

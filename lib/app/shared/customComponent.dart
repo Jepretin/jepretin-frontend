@@ -1,5 +1,6 @@
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 customAppbar({
   required VoidCallback backButton,
@@ -37,9 +38,9 @@ class CustomInput extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
   final TextInputType keyboardType;
-  final IconData? suffixIcon;
   final VoidCallback? onIconTap;
   final TextStyle? hintStyle;
+  final String prefixIcon;
 
   const CustomInput({
     super.key,
@@ -47,45 +48,50 @@ class CustomInput extends StatelessWidget {
     required this.controller,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    this.suffixIcon,
     this.onIconTap,
     this.hintStyle,
+    required this.prefixIcon,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: styletext(
-            fontsize: 12,
-            fontWeight: medium,
-            fontStyle: FontStyle.normal,
-            fontFamily: 'poppins',
-            color: textInputColor.withOpacity(0.7),
+    return Column(
+      children: [
+        Container(
+          width: 301,
+          child: TextField(
+            controller: controller,
+            keyboardType: keyboardType,
+            decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: styletext(
+                  fontsize: 13,
+                  fontWeight: regular,
+                  fontStyle: FontStyle.normal,
+                  fontFamily: 'poppins',
+                  color: hintInputAuth,
+                ),
+                filled: true,
+                fillColor: inputColorAuth,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 20,
+                ),
+                prefixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    child: SvgPicture.asset(
+                      prefixIcon,
+                      width: 20,
+                      height: 20,
+                      color: hintInputAuth,
+                    ))),
           ),
-          filled: true,
-          fillColor: inputColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 14,
-          ),
-          suffixIcon: suffixIcon != null
-              ? IconButton(
-                  icon: Icon(suffixIcon, color: Colors.blueGrey, size: 21),
-                  onPressed: onIconTap,
-                )
-              : null,
         ),
-      ),
+        const SizedBox(height: 10)
+      ],
     );
   }
 }
@@ -94,7 +100,7 @@ class CustomInputAuth extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
-  final IconData? icon;
+  final String prefixIcon;
   final TextStyle? hintStyle;
 
   const CustomInputAuth({
@@ -102,7 +108,7 @@ class CustomInputAuth extends StatefulWidget {
     required this.hintText,
     required this.controller,
     this.keyboardType = TextInputType.text,
-    this.icon,
+    required this.prefixIcon,
     this.hintStyle,
   });
 
@@ -111,47 +117,59 @@ class CustomInputAuth extends StatefulWidget {
 }
 
 class _CustomInputAuthState extends State<CustomInputAuth> {
-  bool _obscureText = true; // bisa berubah
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: widget.controller,
-      obscureText: _obscureText,
-      keyboardType: widget.keyboardType,
-      decoration: InputDecoration(
-          hintText: widget.hintText,
-          hintStyle: styletext(
-            fontsize: 12,
-            fontWeight: medium,
-            fontStyle: FontStyle.normal,
-            fontFamily: 'poppins',
-            color: textInputColor.withOpacity(0.7),
-          ),
-          filled: true,
-          fillColor: inputColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          prefixIcon: widget.icon != null
-              ? Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 5),
-                  child: Icon(widget.icon, color: Colors.blueGrey, size: 21),
-                )
-              : null,
-          suffixIcon: IconButton(
-              icon: Icon(
-                _obscureText ? Icons.visibility_off : Icons.visibility,
-                color: Colors.blueGrey,
-              ),
-              onPressed: () {
-                setState(() {
-                  _obscureText = !_obscureText;
-                });
-              })),
+    return Column(
+      children: [
+        Container(
+          width: 301,
+          child: TextField(
+              controller: widget.controller,
+              obscureText: _obscureText,
+              keyboardType: widget.keyboardType,
+              decoration: InputDecoration(
+                hintText: widget.hintText,
+                hintStyle: styletext(
+                    fontsize: 13,
+                    fontWeight: regular,
+                    fontStyle: FontStyle.normal,
+                    fontFamily: 'poppins',
+                    color: hintInputAuth),
+                filled: true,
+                fillColor: inputColorAuth,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 20),
+                prefixIcon: Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    child: SvgPicture.asset(
+                      widget.prefixIcon,
+                      width: 20,
+                      height: 20,
+                      color: hintInputAuth,
+                    )),
+                suffixIcon: Padding(
+                    padding: const EdgeInsets.only(right: 15, left: 5),
+                    child: IconButton(
+                      icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: hintInputAuth),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      },
+                    )),
+              )),
+        ),
+        const SizedBox(height: 10)
+      ],
     );
   }
 }
@@ -177,7 +195,7 @@ class InputWithLabel extends StatelessWidget {
             fontFamily: 'poppins',
           ),
         ),
-        const SizedBox(height: 6),
+        // const SizedBox(height: 6),
         input,
       ],
     );

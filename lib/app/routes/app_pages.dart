@@ -14,8 +14,12 @@ import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
 import '../modules/promotion/bindings/promotion_binding.dart';
 import '../modules/promotion/views/promotion_view.dart';
+import '../modules/user/customer/favorite/bindings/favorite_binding.dart';
+import '../modules/user/customer/favorite/views/favorite_view.dart';
 import '../modules/user/customer/profile/bindings/profile_binding.dart';
 import '../modules/user/customer/profile/views/profile_view.dart';
+import '../modules/user/customer/profile_edit/bindings/profile_edit_binding.dart';
+import '../modules/user/customer/profile_edit/views/profile_edit_view.dart';
 
 part 'app_routes.dart';
 
@@ -55,6 +59,16 @@ class AppPages {
       name: _Paths.HELP,
       page: () => const HelpView(),
       binding: HelpBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAVORITE,
+      page: () => const FavoriteView(),
+      binding: FavoriteBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_EDIT,
+      page: () => const ProfileEditView(),
+      binding: ProfileEditBinding(),
     ),
   ];
 }
