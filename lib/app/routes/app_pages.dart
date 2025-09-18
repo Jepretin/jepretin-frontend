@@ -25,10 +25,26 @@ import '../modules/user/customer/favorite/views/favorite_view.dart';
 import '../modules/user/customer/profile/bindings/profile_binding.dart';
 import '../modules/user/customer/profile/controllers/profile_controller.dart';
 import '../modules/user/customer/profile/views/profile_view.dart';
+import '../modules/user/customer/profile_address/bindings/profile_address_binding.dart';
+import '../modules/user/customer/profile_address/views/profile_address_view.dart';
 import '../modules/user/customer/profile_edit/bindings/profile_edit_binding.dart';
 import '../modules/user/customer/profile_edit/views/profile_edit_view.dart';
+import '../modules/user/customer/profile_email/bindings/profile_email_binding.dart';
+import '../modules/user/customer/profile_email/views/profile_email_view.dart';
+import '../modules/user/customer/profile_notification/bindings/profile_notification_binding.dart';
+import '../modules/user/customer/profile_notification/views/profile_notification_view.dart';
+import '../modules/user/customer/profile_password/bindings/profile_password_binding.dart';
+import '../modules/user/customer/profile_password/views/profile_password_view.dart';
+import '../modules/user/customer/profile_policy/bindings/profile_policy_binding.dart';
+import '../modules/user/customer/profile_policy/views/profile_policy_view.dart';
+import '../modules/user/customer/profile_report/bindings/profile_report_binding.dart';
+import '../modules/user/customer/profile_report/views/profile_report_view.dart';
 import '../modules/user/customer/profile_settings/bindings/profile_settings_binding.dart';
 import '../modules/user/customer/profile_settings/views/profile_settings_view.dart';
+import '../modules/user/customer/profile_term/bindings/profile_term_binding.dart';
+import '../modules/user/customer/profile_term/views/profile_term_view.dart';
+import '../modules/user/customer/profile_username/bindings/profile_username_binding.dart';
+import '../modules/user/customer/profile_username/views/profile_username_view.dart';
 
 part 'app_routes.dart';
 
@@ -93,6 +109,48 @@ class AppPages {
       name: _Paths.PROFILE_SETTINGS,
       page: () => const ProfileSettingsView(),
       binding: ProfileSettingsBinding(),
+      children: [
+      ],
+    ),
+    GetPage(
+      name: _Paths.PROFILE_USERNAME,
+      page: () => const ProfileUsernameView(),
+      binding: ProfileUsernameBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_ADDRESS,
+      page: () => const ProfileAddressView(),
+      binding: ProfileAddressBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_POLICY,
+      page: () => const ProfilePolicyView(),
+      binding: ProfilePolicyBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_TERM,
+      page: () => const ProfileTermView(),
+      binding: ProfileTermBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_REPORT,
+      page: () => const ProfileReportView(),
+      binding: ProfileReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_PASSWORD,
+      page: () => const ProfilePasswordView(),
+      binding: ProfilePasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_NOTIFICATION,
+      page: () => const ProfileNotificationView(),
+      binding: ProfileNotificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_EMAIL,
+      page: () => const ProfileEmailView(),
+      binding: ProfileEmailBinding(),
     ),
   ];
 }
