@@ -25,7 +25,7 @@ class ProfileReportView extends GetView<ProfileReportController> {
                       InputWithLabel(
                           label: 'Laporkan Masalah',
                           input: CustomCardSingle(
-                              child: Row(
+                            child: Row(
                             children: [
                               Expanded(
                                 child: TextField(
