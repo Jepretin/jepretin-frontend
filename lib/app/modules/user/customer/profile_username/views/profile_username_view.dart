@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
 import '../controllers/profile_username_controller.dart';
-import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/shared/customCardContent.dart';
 
 class ProfileUsernameView extends GetView<ProfileUsernameController> {
