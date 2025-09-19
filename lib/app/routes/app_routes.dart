@@ -14,6 +14,8 @@ abstract class Routes {
   static const PROMOTION = _Paths.PROMOTION;
   static const PROFILE = _Paths.PROFILE;
   static const HELP = _Paths.HELP;
+  static const CONFIRM_PEMBAYARAN = _Paths.CONFIRM_PEMBAYARAN;
+  static const METODE_PEMBAYARAN = _Paths.METODE_PEMBAYARAN;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const PROMOTION = '/promotion';
   static const PROFILE = '/profile';
   static const HELP = '/help';
+  static const CONFIRM_PEMBAYARAN = '/confirm-pembayaran';
+  static const METODE_PEMBAYARAN = '/metode-pembayaran';
 }

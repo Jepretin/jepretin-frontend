@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:jepretin/app/modules/user/customer/profile/bindings/profile_binding.dart';
 
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
@@ -17,10 +16,15 @@ import '../modules/promotion/bindings/promotion_binding.dart';
 import '../modules/promotion/views/promotion_view.dart';
 import '../modules/transaction/cart/bindings/cart_binding.dart';
 import '../modules/transaction/cart/views/cart_view.dart';
+import '../modules/transaction/confirm_pembayaran/bindings/confirm_pembayaran_binding.dart';
+import '../modules/transaction/confirm_pembayaran/views/confirm_pembayaran_view.dart';
 import '../modules/transaction/history_transaction/bindings/history_transaction_binding.dart';
 import '../modules/transaction/history_transaction/views/history_transaction_view.dart';
+import '../modules/transaction/metode_pembayaran/bindings/metode_pembayaran_binding.dart';
+import '../modules/transaction/metode_pembayaran/views/metode_pembayaran_view.dart';
 import '../modules/transaction/order/bindings/order_binding.dart';
 import '../modules/transaction/order/views/order_view.dart';
+import '../modules/user/customer/profile/bindings/profile_binding.dart';
 import '../modules/user/customer/profile/controllers/profile_controller.dart';
 import '../modules/user/customer/profile/views/profile_view.dart';
 
@@ -77,6 +81,16 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.CONFIRM_PEMBAYARAN,
+      page: () => const ConfirmPembayaranView(),
+      binding: ConfirmPembayaranBinding(),
+    ),
+    GetPage(
+      name: _Paths.METODE_PEMBAYARAN,
+      page: () => const MetodePembayaranView(),
+      binding: MetodePembayaranBinding(),
     ),
   ];
 }

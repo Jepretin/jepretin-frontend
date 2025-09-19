@@ -1,6 +1,7 @@
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:flutter/material.dart';
 
 customAppbar({
   required VoidCallback backButton,
@@ -221,17 +222,16 @@ class CustomAddressInput extends StatelessWidget {
                 horizontal: 16,
                 vertical: 14,
               ),
-              suffixIcon:
-                  suffixIcon != null
-                      ? IconButton(
-                        icon: Icon(
-                          suffixIcon,
-                          color: Colors.blueGrey,
-                          size: 21,
-                        ),
-                        onPressed: onIconTap,
-                      )
-                      : null,
+              suffixIcon: suffixIcon != null
+                  ? IconButton(
+                      icon: Icon(
+                        suffixIcon,
+                        color: Colors.blueGrey,
+                        size: 21,
+                      ),
+                      onPressed: onIconTap,
+                    )
+                  : null,
             ),
           );
         },
@@ -443,17 +443,16 @@ class CustomProviderInput extends StatelessWidget {
                 horizontal: 16,
                 vertical: 14,
               ),
-              suffixIcon:
-                  suffixIcon != null
-                      ? IconButton(
-                        icon: Icon(
-                          suffixIcon,
-                          color: Colors.blueGrey,
-                          size: 21,
-                        ),
-                        onPressed: onIconTap,
-                      )
-                      : null,
+              suffixIcon: suffixIcon != null
+                  ? IconButton(
+                      icon: Icon(
+                        suffixIcon,
+                        color: Colors.blueGrey,
+                        size: 21,
+                      ),
+                      onPressed: onIconTap,
+                    )
+                  : null,
             ),
           );
         },
@@ -511,10 +510,59 @@ CustomMenu({
       Expanded(
         child: Text(
           placeholder,
-          style: styletext(fontsize: 15, fontWeight: regular, fontStyle: FontStyle.normal, fontFamily: 'poppins', color: textInputColor),
+          style: styletext(
+              fontsize: 15,
+              fontWeight: regular,
+              fontStyle: FontStyle.normal,
+              fontFamily: 'poppins',
+              color: textInputColor),
         ),
       ),
       if (trailingIcon != null) Icon(trailingIcon, color: textInputColor),
     ],
   );
+}
+
+class SharedDraggableSheet extends StatelessWidget {
+  final List<Widget> children; // isi sheet biar fleksibel
+  final double initialSize;
+  final double minSize;
+  final double maxSize;
+
+  const SharedDraggableSheet({
+    super.key,
+    required this.children,
+    this.initialSize = 0.2,
+    this.minSize = 0.1,
+    this.maxSize = 0.7,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: initialSize,
+      minChildSize: minSize,
+      maxChildSize: maxSize,
+      builder: (context, scrollController) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10,
+                offset: Offset(0, -2),
+              )
+            ],
+          ),
+          child: ListView(
+            controller: scrollController,
+            children: children,
+          ),
+        );
+      },
+    );
+  }
 }
