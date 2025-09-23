@@ -23,7 +23,6 @@ Widget customElevatedButton({
         style: styletext(
           fontsize: 18,
           fontWeight: medium,
-          fontStyle: FontStyle.normal,
           color: condition
               ? color
               : isOutlined
@@ -48,27 +47,87 @@ Widget customAuthButton({
   Color borderCol = enable ? fg : disableColor;
 
   return GestureDetector(
+      onTap: enable ? onTap : null,
+      child: Opacity(
+        opacity: enable ? 1.0 : 0.6,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+          decoration: BoxDecoration(
+            color: isOutlined ? whiteColor : bg,
+            borderRadius: BorderRadius.circular(24),
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: styletext(
+              fontsize: 18,
+              fontWeight: medium,
+              color: enable ? fg : disableColor,
+            ),
+          ),
+        ),
+      ));
+}
+
+customButtonKecil({
+  required String text,
+  required VoidCallback onTap,
+  bool enable = true,
+  double? width, 
+  double? height, 
+}) {
+  return GestureDetector(
     onTap: enable ? onTap : null,
-    child: Opacity(opacity: enable ? 1.0:0.6,
     child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+      width: width, // <--- pake di sini
+      height: height, // <--- pake di sini
+      padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
       decoration: BoxDecoration(
-        color: isOutlined ? whiteColor : bg,
+        color: primaryColor,
         borderRadius: BorderRadius.circular(24),
+        // border: Border.all(width: 1.6),
       ),
-      alignment: Alignment.center,
+      alignment: Alignment.center, // biar teksnya tetap di tengah
       child: Text(
         text,
-        textAlign: TextAlign.center,
         style: styletext(
-          fontsize: 18,
-          fontWeight: medium,
-          fontStyle: FontStyle.normal,
-          color: enable
-              ? fg : disableColor,
+          fontsize: 8,
+          fontWeight: semibold,
+          color: whiteColor,
         ),
       ),
     ),
-    )
+  );
+}
+
+customButtonNormal({
+  required String text,
+  required VoidCallback onTap,
+  bool enable = true,
+  double? width, 
+  double? height, 
+}) {
+  return GestureDetector(
+    onTap: enable ? onTap : null,
+    child: Container(
+      width: width, // <--- pake di sini
+      height: height, // <--- pake di sini
+      padding: EdgeInsets.symmetric(vertical: 14),
+      decoration: BoxDecoration(
+        color: primaryColor,
+        borderRadius: BorderRadius.circular(24),
+        // border: Border.all(width: 1.6),
+      ),
+      alignment: Alignment.center, // biar teksnya tetap di tengah
+      child: Text(
+        text,
+        style: styletext(
+          fontsize: 13,
+          fontWeight: semibold,
+          color: whiteColor,
+        ),
+      ),
+    ),
   );
 }

@@ -12,108 +12,112 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pesan Jasa'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('ProfileView'),
+        centerTitle: true,
+      ),
       body: GetBuilder(
-          init: ProfileController(),
-          builder: (controller) => SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
-                child: Column(
+        init: ProfileController(),
+        builder: (controller) => SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
+          child: Column(
+            children: [
+              CustomCardProfile(
+                profileImage: "images/monyet.jpg",
+                child: Row(
                   children: [
-                    CustomCardProfile(
-                      profileImage: "images/monyet.jpg",
-                      child: Row(
-                        children: [
-                          SizedBox(width: 15),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    "Nama User",
-                                    style: styletext(
-                                        fontsize: 15,
-                                        fontWeight: regular,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily: 'poppins',
-                                        color: textInputColor),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    "email@gmail.com",
-                                    style: styletext(
-                                        fontsize: 15,
-                                        fontWeight: regular,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily: 'poppins',
-                                        color: textInputColor),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Spacer(),
-                          Icon(Icons.edit),
-                        ],
-                      ),
-                    ),
-                    CustomCardMultiple(
+                    // SizedBox(width: 15),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        CustomMenu(
-                            leadingIcon: Icons.location_on_outlined,
-                            placeholder: "Alamat",
-                            trailingIcon: Icons.chevron_right),
-                        SizedBox(height: 20),
-                        CustomMenu(
-                            leadingIcon: Icons.favorite_border_outlined,
-                            placeholder: "Favorite",
-                            trailingIcon: Icons.chevron_right),
-                        SizedBox(height: 20),
-                        CustomMenu(
-                            leadingIcon: Icons.notifications,
-                            placeholder: "Notifikasi",
-                            trailingIcon: Icons.chevron_right),
-                        SizedBox(height: 20),
-                        CustomMenu(
-                            leadingIcon: Icons.person_add,
-                            placeholder: "Daftar Sebagai Provider",
-                            trailingIcon: Icons.chevron_right),
+                        Column(
+                          children: [
+                            Text(
+                              "Nama User",
+                              style: styletext(
+                                  fontsize: 15,
+                                  fontWeight: regular,
+                                  color: textInputColor),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              "email@gmail.com",
+                              style: styletext(
+                                  fontsize: 15,
+                                  fontWeight: regular,
+                                  color: textInputColor),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
-                    CustomCardMultiple(
-                      children: [
-                        CustomMenu(
-                            leadingIcon: Icons.privacy_tip_outlined,
-                            placeholder: "Kebijakan",
-                            trailingIcon: Icons.chevron_right),
-                        SizedBox(height: 20),
-                        CustomMenu(
-                            leadingIcon: Icons.check_circle_outline,
-                            placeholder: "Syarat & Ketentuan",
-                            trailingIcon: Icons.chevron_right),
-                        SizedBox(height: 20),
-                        CustomMenu(
-                            leadingIcon: Icons.info_outline_rounded,
-                            placeholder: "Laporkan",
-                            trailingIcon: Icons.chevron_right),
-                      ],
-                    ),
-                    CustomCardMultiple(
-                      children: [
-                        CustomMenu(
-                            leadingIcon: Icons.settings,
-                            placeholder: "Pengaturan"),
-                        SizedBox(height: 20),
-                        CustomMenu(
-                            leadingIcon: Icons.logout, placeholder: "Keluar"),
-                      ],
-                    ),
+                    Spacer(),
+                    Icon(Icons.edit),
                   ],
                 ),
-              )),
+              ),
+              CustomCardMultiple(
+                children: [
+                  CustomMenu(
+                      onTap: () => controller.goTo('/address'),
+                      leadingIcon: Icons.location_on_outlined,
+                      placeholder: "Alamat",
+                      trailingIcon: Icons.chevron_right),
+                  CustomMenu(
+                      onTap: () => controller.goTo('/favorite'),
+                      leadingIcon: Icons.favorite_border_outlined,
+                      placeholder: "Favorite",
+                      trailingIcon: Icons.chevron_right),
+                  CustomMenu(
+                      onTap: () => controller.goTo('/notification'),
+                      leadingIcon: Icons.notifications,
+                      placeholder: "Notifikasi",
+                      trailingIcon: Icons.chevron_right),
+                  CustomMenu(
+                      onTap: () => controller.goTo('/regis-provider'),
+                      leadingIcon: Icons.person_add,
+                      placeholder: "Daftar Sebagai Provider",
+                      trailingIcon: Icons.chevron_right),
+                ],
+              ),
+              CustomCardMultiple(
+                children: [
+                  CustomMenu(
+                      onTap: () => controller.goTo('/policy'),
+                      leadingIcon: Icons.privacy_tip_outlined,
+                      placeholder: "Kebijakan",
+                      trailingIcon: Icons.chevron_right),
+                  CustomMenu(
+                      onTap: () => controller.goTo('/term'),
+                      leadingIcon: Icons.check_circle_outline,
+                      placeholder: "Syarat & Ketentuan",
+                      trailingIcon: Icons.chevron_right),
+                  CustomMenu(
+                      onTap: () => controller.goTo('/report'),
+                      leadingIcon: Icons.info_outline_rounded,
+                      placeholder: "Laporkan",
+                      trailingIcon: Icons.chevron_right),
+                ],
+              ),
+              CustomCardMultiple(
+                children: [
+                  CustomMenu(
+                      onTap: () => controller.goTo('/settings'),
+                      leadingIcon: Icons.settings,
+                      placeholder: "Pengaturan"),
+                  CustomMenu(
+                      onTap: () => controller.goTo('/logout'),
+                      leadingIcon: Icons.logout,
+                      placeholder: "Keluar"),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

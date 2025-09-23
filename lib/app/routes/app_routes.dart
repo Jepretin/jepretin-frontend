@@ -14,6 +14,18 @@ abstract class Routes {
   static const PROMOTION = _Paths.PROMOTION;
   static const PROFILE = _Paths.PROFILE;
   static const HELP = _Paths.HELP;
+  static const CONFIRM_PEMBAYARAN = _Paths.CONFIRM_PEMBAYARAN;
+  static const METODE_PEMBAYARAN = _Paths.METODE_PEMBAYARAN;
+  static const FAVORITE = _Paths.FAVORITE;
+  static const ADDRESS = _Paths.ADDRESS;
+  static const NOTIFICATION = _Paths.NOTIFICATION;
+  static const REGIS_PROVIDER = _Paths.REGIS_PROVIDER;
+  static const POLICY = _Paths.POLICY;
+  static const TERM = _Paths.TERM;
+  static const REPORT = _Paths.REPORT;
+  static const SETTINGS = _Paths.SETTINGS;
+  static const LOGOUT = _Paths.LOGOUT;
+  static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
 }
 
 abstract class _Paths {
@@ -29,4 +41,16 @@ abstract class _Paths {
   static const PROMOTION = '/promotion';
   static const PROFILE = '/profile';
   static const HELP = '/help';
+  static const CONFIRM_PEMBAYARAN = '/confirm-pembayaran';
+  static const METODE_PEMBAYARAN = '/metode-pembayaran';
+  static const FAVORITE = '/favorite';
+  static const ADDRESS = '/address';
+  static const NOTIFICATION = '/notification';
+  static const REGIS_PROVIDER = '/regis-provider';
+  static const POLICY = '/policy';
+  static const TERM = '/term';
+  static const REPORT = '/report';
+  static const SETTINGS = '/settings';
+  static const LOGOUT = '/logout';
+  static const PROFILE_EDIT = '/profile-edit';
 }

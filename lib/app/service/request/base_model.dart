@@ -1,0 +1,45 @@
+// ignore_for_file: use_function_type_syntax_for_parameters
+
+class BaseResponse<T> {
+  BaseResponse({
+    this.data,
+    this.msg,
+  });
+
+  T? data;
+  String? msg;
+
+  factory BaseResponse.fromJson(Map<String, dynamic> json, converter(jsonData)) => BaseResponse(
+        data: json["data"] == null ? null : converter(json["data"]),
+        msg: json["message"],
+      );
+
+  Map<String, dynamic> toJson(Function() toJsonConverter) => {
+        "data": data == null ? null : toJsonConverter(),
+        "msg": msg,
+      };
+}
+
+class ExceptionResponse {
+  ExceptionResponse({
+    this.message,
+    this.statusCode,
+    this.path,
+  });
+
+  final String? message;
+  final int? statusCode;
+  final String? path;
+
+  factory ExceptionResponse.fromJson(Map<String, dynamic> json) => ExceptionResponse(
+        path: json["path"],
+        message: json["message"],
+        statusCode: json["status_code"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "path": path,
+        "message": message,
+        "status_code": statusCode,
+      };
+}
