@@ -26,8 +26,6 @@ class LoginView extends GetView<LoginController> {
                     style: styletext(
                       fontsize: 32,
                       fontWeight: bold,
-                      fontStyle: FontStyle.normal,
-                      fontFamily: 'poppins',
                     ),
                   ),
                 ],
@@ -37,7 +35,6 @@ class LoginView extends GetView<LoginController> {
                 input: CustomInput(
                   hintText: "Email",
                   controller: TextEditingController(),
-                  
                   onIconTap: () => {print("Hit")},
                 ),
               ),
@@ -52,18 +49,17 @@ class LoginView extends GetView<LoginController> {
               ),
               SizedBox(height: 10),
               customAuthButton(
-                text: "Masuk", 
-              onTap: () => print("Anda menekan tombol masuk"),
-              backgroundColor: Colors.blue,
-              textColor: Colors.white,
+                text: "Masuk",
+                onTap: () => print("Anda menekan tombol masuk"),
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
               ),
-
               SizedBox(height: 10),
               customAuthButton(
-                text: "Daftar", 
-              onTap: () => print("Anda menekan tombol daftar"),
-              backgroundColor: Colors.blueGrey,
-              textColor: Colors.blue,
+                text: "Daftar",
+                onTap: () => print("Anda menekan tombol daftar"),
+                backgroundColor: Colors.blueGrey,
+                textColor: Colors.blue,
               ),
             ],
           ),

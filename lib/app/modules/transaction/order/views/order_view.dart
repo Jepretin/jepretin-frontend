@@ -12,78 +12,80 @@ class OrderView extends GetView<OrderController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Pesan Jasa'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('ProfileView'),
+        centerTitle: true,
+      ),
       body: GetBuilder(
         init: OrderController(),
-        builder:
-            (controller) => SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
-              child: Column(
-                children: [
-                  InputWithLabel(
-                    label: "Nama Lengkap",
-                    input: CustomInput(
-                      hintText: "Masukkan Nama Lengkapmu",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.edit, // ✏️ icon di kanan
-                      onIconTap: () {
-                        print("Icon edit diklik");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  InputWithLabel(
-                    label: "Alamat",
-                    input: CustomAddressInput(
-                      hintText: "Pilih Domisili kamu saat ini",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.location_city,
-                      onIconTap: () {
-                        print("Icon edit diklik");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  InputWithLabel(
-                    label: "Detail Alamat",
-                    input: CustomInput(
-                      hintText: "Lengkapi detail alamat kamu",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.edit, // ✏️ icon di kanan
-                      onIconTap: () {
-                        print("Icon edit diklik");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  DateTimeInput(),
-                  SizedBox(height: 14),
-                  InputWithLabel(
-                    label: "Pilih rovider",
-                    input: CustomProviderInput(
-                      hintText: "Pilih disini",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.edit,
-                      onIconTap: () {
-                        print("Hit");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  InputWithLabel(
-                    label: "Pilih Produk Jasa",
-                    input: CustomProviderInput(
-                      hintText: "Pilih provider terlebih dahulu",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.edit,
-                      onIconTap: () {
-                        print("Hit");
-                      },
-                    ),
-                  ),
-                ],
+        builder: (controller) => SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
+          child: Column(
+            children: [
+              InputWithLabel(
+                label: "Nama Lengkap",
+                input: CustomInput(
+                  hintText: "Masukkan Nama Lengkapmu",
+                  controller: TextEditingController(),
+                  suffixIcon: Icons.edit, // ✏️ icon di kanan
+                  onIconTap: () {
+                    print("Icon edit diklik");
+                  },
+                ),
               ),
-            ),
+              SizedBox(height: 14),
+              InputWithLabel(
+                label: "Alamat",
+                input: CustomAddressInput(
+                  hintText: "Pilih Domisili kamu saat ini",
+                  controller: TextEditingController(),
+                  suffixIcon: Icons.location_city,
+                  onIconTap: () {
+                    print("Icon edit diklik");
+                  },
+                ),
+              ),
+              SizedBox(height: 14),
+              InputWithLabel(
+                label: "Detail Alamat",
+                input: CustomInput(
+                  hintText: "Lengkapi detail alamat kamu",
+                  controller: TextEditingController(),
+                  suffixIcon: Icons.edit, // ✏️ icon di kanan
+                  onIconTap: () {
+                    print("Icon edit diklik");
+                  },
+                ),
+              ),
+              SizedBox(height: 14),
+              DateTimeInput(),
+              SizedBox(height: 14),
+              InputWithLabel(
+                label: "Pilih rovider",
+                input: CustomProviderInput(
+                  hintText: "Pilih disini",
+                  controller: TextEditingController(),
+                  suffixIcon: Icons.edit,
+                  onIconTap: () {
+                    print("Hit");
+                  },
+                ),
+              ),
+              SizedBox(height: 14),
+              InputWithLabel(
+                label: "Pilih Produk Jasa",
+                input: CustomProviderInput(
+                  hintText: "Pilih provider terlebih dahulu",
+                  controller: TextEditingController(),
+                  suffixIcon: Icons.edit,
+                  onIconTap: () {
+                    print("Hit");
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
@@ -114,18 +116,14 @@ class OrderView extends GetView<OrderController> {
                   style: styletext(
                     fontsize: 17,
                     fontWeight: bold,
-                    fontFamily: "poppins",
-                    fontStyle: FontStyle.normal,
                     color: textInputColor.withOpacity(0.7),
                   ),
                 ),
                 Text(
                   "Rp. 0",
                   style: styletext(
-                     fontsize: 18,
+                    fontsize: 18,
                     fontWeight: bold,
-                    fontFamily: "poppins",
-                    fontStyle: FontStyle.normal,
                     color: textInputColor,
                   ),
                 ),
@@ -178,8 +176,6 @@ class OrderView extends GetView<OrderController> {
                         style: styletext(
                           fontsize: 13,
                           fontWeight: semibold,
-                          fontFamily: "poppins",
-                          fontStyle: FontStyle.normal,
                           color: whiteColor,
                         ),
                       ),

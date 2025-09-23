@@ -24,6 +24,26 @@ import '../modules/transaction/metode_pembayaran/bindings/metode_pembayaran_bind
 import '../modules/transaction/metode_pembayaran/views/metode_pembayaran_view.dart';
 import '../modules/transaction/order/bindings/order_binding.dart';
 import '../modules/transaction/order/views/order_view.dart';
+import '../modules/user/customer/menu_profile/address/bindings/address_binding.dart';
+import '../modules/user/customer/menu_profile/address/views/address_view.dart';
+import '../modules/user/customer/menu_profile/favorite/bindings/favorite_binding.dart';
+import '../modules/user/customer/menu_profile/favorite/views/favorite_view.dart';
+import '../modules/user/customer/menu_profile/logout/bindings/logout_binding.dart';
+import '../modules/user/customer/menu_profile/logout/views/logout_view.dart';
+import '../modules/user/customer/menu_profile/notification/bindings/notification_binding.dart';
+import '../modules/user/customer/menu_profile/notification/views/notification_view.dart';
+import '../modules/user/customer/menu_profile/policy/bindings/policy_binding.dart';
+import '../modules/user/customer/menu_profile/policy/views/policy_view.dart';
+import '../modules/user/customer/menu_profile/profile_edit/bindings/profile_edit_binding.dart';
+import '../modules/user/customer/menu_profile/profile_edit/views/profile_edit_view.dart';
+import '../modules/user/customer/menu_profile/regis_provider/bindings/regis_provider_binding.dart';
+import '../modules/user/customer/menu_profile/regis_provider/views/regis_provider_view.dart';
+import '../modules/user/customer/menu_profile/report/bindings/report_binding.dart';
+import '../modules/user/customer/menu_profile/report/views/report_view.dart';
+import '../modules/user/customer/menu_profile/settings/bindings/settings_binding.dart';
+import '../modules/user/customer/menu_profile/settings/views/settings_view.dart';
+import '../modules/user/customer/menu_profile/term/bindings/term_binding.dart';
+import '../modules/user/customer/menu_profile/term/views/term_view.dart';
 import '../modules/user/customer/profile/bindings/profile_binding.dart';
 import '../modules/user/customer/profile/controllers/profile_controller.dart';
 import '../modules/user/customer/profile/views/profile_view.dart';
@@ -91,6 +111,56 @@ class AppPages {
       name: _Paths.METODE_PEMBAYARAN,
       page: () => const MetodePembayaranView(),
       binding: MetodePembayaranBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAVORITE,
+      page: () => const FavoriteView(),
+      binding: FavoriteBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADDRESS,
+      page: () => const AddressView(),
+      binding: AddressBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGIS_PROVIDER,
+      page: () => const RegisProviderView(),
+      binding: RegisProviderBinding(),
+    ),
+    GetPage(
+      name: _Paths.POLICY,
+      page: () => const PolicyView(),
+      binding: PolicyBinding(),
+    ),
+    GetPage(
+      name: _Paths.TERM,
+      page: () => const TermView(),
+      binding: TermBinding(),
+    ),
+    GetPage(
+      name: _Paths.REPORT,
+      page: () => const ReportView(),
+      binding: ReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTINGS,
+      page: () => const SettingsView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOGOUT,
+      page: () => const LogoutView(),
+      binding: LogoutBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_EDIT,
+      page: () => const ProfileEditView(),
+      binding: ProfileEditBinding(),
     ),
   ];
 }

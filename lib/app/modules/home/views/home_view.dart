@@ -34,8 +34,6 @@ class HomeView extends GetView<HomeController> {
                   style: styletext(
                     fontsize: 35,
                     fontWeight: bold,
-                    fontFamily: 'poppins',
-                    fontStyle: FontStyle.normal,
                     color: primaryColor,
                     letterSpacing: -3,
                   ),
@@ -48,15 +46,15 @@ class HomeView extends GetView<HomeController> {
                   spacing: 15,
                   children: [
                     _topIconComponent(
-                      onTap: () {},
+                      onTap: () => controller.goToNotif(),
                       icon: Icons.notifications_none_sharp,
                     ),
                     _topIconComponent(
-                      onTap: () {},
+                      onTap: () => controller.goToCart(),
                       icon: Icons.shopping_cart_outlined,
                     ),
                     _topIconComponent(
-                      onTap: () {},
+                      onTap: () => controller.goToProfile(),
                       icon: Icons.person_2_outlined,
                     ),
                   ],
@@ -127,121 +125,99 @@ class HomeView extends GetView<HomeController> {
                 color: whiteColor,
               ),
               const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Ingin menampilkan Portofolio Tim kami? klik",
-                    softWrap: true,
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(
+                  "Ingin menampilkan Portofolio Tim kami? klik",
+                  softWrap: true,
+                  style: styletext(
+                    fontsize: 12,
+                    fontWeight: medium,
+                    fontStyle: EnumFontStyle.italic,
+                    fontFamily: EnumFontFamily.montserrat,
+                    color: whiteColor,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.dialog(
+                      PopScope(
+                        canPop: true,
+                        onPopInvokedWithResult: (didPop, result) {
+                          if (didPop) {
+                            controller.selectLocation();
+                          }
+                        },
+                        child: AlertDialog(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(11),
+                          ),
+                          title: Center(
+                            child: Text(
+                              "Pilih Lokasi",
+                              style: styletext(
+                                fontsize: 19,
+                                fontWeight: semibold,
+                                color: textInputColor,
+                              ),
+                            ),
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              InputWithLabel(
+                                label: "Alamat",
+                                input: CustomAddressInput(
+                                  hintText: "Isi alamat sesuai acara",
+                                  hintStyle: styletext(
+                                    fontsize: 10,
+                                    fontWeight: medium,
+                                    color: textInputColor,
+                                  ),
+                                  controller: TextEditingController(),
+                                ),
+                              ),
+                              const SizedBox(height: 15),
+                              InputWithLabel(
+                                label: "Koordinat",
+                                input: CustomInput(
+                                  hintText: "Isi koordinat lokasi",
+                                  hintStyle: styletext(
+                                    fontsize: 10,
+                                    fontWeight: medium,
+                                    color: textInputColor,
+                                  ),
+                                  controller: TextEditingController(),
+                                ),
+                              ),
+                            ],
+                          ),
+                          actions: [
+                            customElevatedButton(
+                              text: "Pilih",
+                              onTap: () {
+                                controller.selectLocation(); // ✅ ubah state
+                                Get.back(); // tutup popup
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    controller.isLocation.value
+                        ? "Lokasi sudah dipilih"
+                        : "Klik untuk menambahkan lokasi",
                     style: styletext(
                       fontsize: 12,
                       fontWeight: medium,
-                      fontStyle: FontStyle.italic,
-                      fontFamily: 'montserrat',
+                      fontFamily: EnumFontFamily.montserrat,
                       color: whiteColor,
                     ),
                   ),
-                  GestureDetector(
-                      onTap: () {
-                        Get.dialog(
-                          AlertDialog(
-                            backgroundColor: Colors.white, // ubah background
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(11), // rounded corner
-                            ),
-                            title: Center(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Pilih Lokasi",
-                                    style: styletext(
-                                        fontsize: 19,
-                                        fontWeight: semibold,
-                                        fontStyle: FontStyle.normal,
-                                        fontFamily: 'poppins',
-                                        color: textInputColor),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                SizedBox(height: 12),
-                                InputWithLabel(
-                                    label: "Alamat",
-                                    input: CustomAddressInput(
-                                        hintText:
-                                            "Pilih lokasi alamat sesuai dengan acara",
-                                        hintStyle: styletext(
-                                            fontsize: 10,
-                                            fontWeight: medium,
-                                            fontStyle: FontStyle.normal,
-                                            fontFamily: 'poppins',
-                                            color: textInputColor),
-                                        controller: TextEditingController())),
-                                // Obx(() => DropdownButtonFormField<String>(
-                                //       value: controller
-                                //               .selectedLocation.value.isEmpty
-                                //           ? null
-                                //           : controller.selectedLocation.value,
-                                //       decoration: InputDecoration(
-                                //         border: OutlineInputBorder(
-                                //           borderRadius:
-                                //               BorderRadius.circular(12),
-                                //         ),
-                                //         contentPadding: EdgeInsets.symmetric(
-                                //             horizontal: 12, vertical: 10),
-                                //       ),
-                                //       hint: Text("Pilih daerah"),
-                                //       items: ["Jakarta", "Bandung", "Surabaya"]
-                                //           .map((e) => DropdownMenuItem(
-                                //               value: e, child: Text(e)))
-                                //           .toList(),
-                                //       onChanged: (val) {
-                                //         controller.selectedLocation.value =
-                                //             val!;
-                                //         Get.back(); // tutup popup
-                                //       },
-                                //     )),
-                                SizedBox(height: 15),
-                                InputWithLabel(
-                                    label: "Koordinat Alamat",
-                                    input: CustomInput(
-                                        hintText:
-                                            "Isi koordinat alamat agar provider lokasi tepatnya",
-                                        hintStyle: styletext(
-                                            fontsize: 10,
-                                            fontWeight: medium,
-                                            fontStyle: FontStyle.normal,
-                                            fontFamily: 'poppins',
-                                            color: textInputColor),
-                                        controller: TextEditingController())),
-                              ],
-                            ),
-                            actions: [
-                              customElevatedButton(
-                                  text: "Pilih",
-                                  onTap: () => Get.to(buildAfterMainView()))
-                            ],
-                          ),
-                        );
-                      },
-                      child: Text(
-                        controller.selectedLocation.value.isEmpty
-                            ? "disini untuk menambahkan lokasi acara kamu"
-                            : "Lokasi: ${controller.selectedLocation.value}",
-                        style: styletext(
-                          fontsize: 12,
-                          fontWeight: medium,
-                          fontStyle: FontStyle.italic,
-                          fontFamily: 'montserrat',
-                          color: whiteColor,
-                        ),
-                      )),
-                ],
-              ),
+                ),
+              ]),
             ],
           ),
         ],
@@ -292,8 +268,6 @@ class HomeView extends GetView<HomeController> {
                       style: styletext(
                         fontsize: 18,
                         fontWeight: medium,
-                        fontFamily: 'poppins',
-                        fontStyle: FontStyle.normal,
                       ),
                     ),
                     Text(
@@ -301,8 +275,6 @@ class HomeView extends GetView<HomeController> {
                       style: styletext(
                         fontsize: 12,
                         fontWeight: light,
-                        fontFamily: 'poppins',
-                        fontStyle: FontStyle.normal,
                       ),
                     ),
                   ],
@@ -341,8 +313,6 @@ class HomeView extends GetView<HomeController> {
                       style: styletext(
                         fontsize: 18,
                         fontWeight: bold,
-                        fontFamily: 'poppins',
-                        fontStyle: FontStyle.normal,
                         color: primaryColor,
                       ),
                     ),
@@ -369,83 +339,76 @@ class HomeView extends GetView<HomeController> {
   // }
 
   Widget buildBeforeMainView() {
-    return GetBuilder(
-      init: HomeController(),
-      builder: (controller) => SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-        child: Column(
-          children: [
-            _alertContainer(),
-            SizedBox(height: 15),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return _menuContainer();
-              },
-              separatorBuilder: (context, index) => SizedBox(height: 10),
-            ),
-            SizedBox(height: 100),
-            Column(
-              children: [
-                Text(
-                  'Tambahkan lokasi acaramu untuk memuat lebih banyak...',
-                  style: styletext(
-                    fontsize: 12,
-                    fontWeight: light,
-                    fontFamily: 'montserrat',
-                    fontStyle: FontStyle.normal,
-                  ),
-                  textAlign: TextAlign.center,
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      child: Column(
+        children: [
+          _alertContainer(),
+          SizedBox(height: 15),
+          ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return _menuContainer();
+            },
+            separatorBuilder: (context, index) => SizedBox(height: 10),
+          ),
+          SizedBox(height: 100),
+          Column(
+            children: [
+              Text(
+                'Tambahkan lokasi acaramu untuk memuat lebih banyak...',
+                style: styletext(
+                  fontsize: 12,
+                  fontWeight: light,
+                  fontFamily: EnumFontFamily.montserrat,
                 ),
-              ],
-            ),
-          ],
-        ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
 
   Widget buildAfterMainView() {
-    return GetBuilder(
-      init: HomeController(),
-      builder: (controller) => SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-        child: Column(
-          children: [
-            // ListView.separated(
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   itemCount: 1,
-            //   itemBuilder: (context, index) {
-            //     return _menuContainer();
-            //   },
-            //   separatorBuilder: (context, index) => SizedBox(height: 10),
-            // ),
-            SizedBox(height: 15),
-            SharedCard(
-              profileImage: "images/monyet.jpg",
-              title: "Tim Jepretin",
-              subtitle: "Photographer",
-              mainImage: "images/content/mount.png",
-              likes: 18,
-              onLike: () {},
-              onOrder: () {},
-              isPortrait: false, // default
-            ),
-            SharedCard(
-              profileImage: "images/monyet.jpg",
-              title: "Diamond Pictora",
-              subtitle: "Photographer and Videographer",
-              mainImage: "images/content/wedding.png",
-              likes: 18,
-              onLike: () {},
-              onOrder: () {},
-              isPortrait: true, // ✅
-            ),
-          ],
-        ),
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      child: Column(
+        children: [
+          // ListView.separated(
+          //   shrinkWrap: true,
+          //   physics: NeverScrollableScrollPhysics(),
+          //   itemCount: 1,
+          //   itemBuilder: (context, index) {
+          //     return _menuContainer();
+          //   },
+          //   separatorBuilder: (context, index) => SizedBox(height: 10),
+          // ),
+          Spacer(),
+          SharedCard(
+            profileImage: "images/monyet.jpg",
+            title: "Tim Jepretin",
+            subtitle: "Photographer",
+            mainImage: "images/content/mount.png",
+            likes: 18,
+            onLike: () {},
+            onOrder: () {},
+            isPortrait: false, // defaultQ
+          ),
+          SharedCard(
+            profileImage: "images/monyet.jpg",
+            title: "Diamond Pictora",
+            subtitle: "Photographer and Videographer",
+            mainImage: "images/content/wedding.png",
+            likes: 18,
+            onLike: () {},
+            onOrder: () {},
+            isPortrait: true, // ✅
+          ),
+        ],
       ),
     );
   }

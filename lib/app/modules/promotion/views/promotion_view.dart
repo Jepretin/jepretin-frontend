@@ -25,32 +25,28 @@ class PromotionView extends GetView<PromotionController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SvgPicture.asset(
-                  'assets/icons/coupon.svg',
+                  'icons/coupon.svg',
                   width: 80,
                   height: 80,
-                  color: textInputColor,
+                  color: primaryColor,
                 ),
                 // SizedBox(height: 10),
                 Text(
-                    "Segera Hadir",
-                    style: styletext(
+                  "Segera Hadir",
+                  style: styletext(
                       fontsize: 10,
                       fontWeight: semibold,
-                      fontStyle: FontStyle.italic,
-                      fontFamily: 'poppins',
-                      color: disableColor
-                    ),
-                  ),
+                      fontStyle: EnumFontStyle.italic,
+                      color: disableColor),
+                ),
                 Text(
-                    "Promo eksklusif akan segera tersedia. Nantikan kejutan hematnya!",
-                    style: styletext(
+                  "Promo eksklusif akan segera tersedia. Nantikan kejutan hematnya!",
+                  style: styletext(
                       fontsize: 9,
                       fontWeight: light,
-                      fontStyle: FontStyle.italic,
-                      fontFamily: 'poppins',
-                      color: disableColor
-                    ),
-                  ),
+                      fontStyle: EnumFontStyle.italic,
+                      color: disableColor),
+                ),
               ],
             ),
           ),

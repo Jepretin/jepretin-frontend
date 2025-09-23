@@ -19,29 +19,35 @@ FontWeight medium = FontWeight.w500;
 FontWeight semibold = FontWeight.w600;
 FontWeight bold = FontWeight.w700;
 
+enum EnumFontFamily { montserrat, poppins }
+enum EnumFontStyle { normal, italic }
+
 TextStyle styletext({
   required double fontsize,
   required FontWeight fontWeight,
-  required fontStyle,
+  EnumFontStyle fontStyle = EnumFontStyle.normal,
+  EnumFontFamily fontFamily = EnumFontFamily.poppins,
   Color? color,
-  String fontFamily = 'poppins',
   double letterSpacing = 0.0,
 }) {
-  // return TextStyle(fontSize: fontsize, fontWeight: fontWeight, color: color ?? Colors.black);
-  switch (fontFamily.toLowerCase()) {
-    case 'montserrat':
+  FontStyle flutterFontStyle =
+      fontStyle == EnumFontStyle.italic ? FontStyle.italic : FontStyle.normal;
+
+  switch (fontFamily) {
+    case EnumFontFamily.montserrat:
       return GoogleFonts.montserrat(
         fontSize: fontsize,
         fontWeight: fontWeight,
-        fontStyle: fontStyle,
+        fontStyle: flutterFontStyle,
         color: color ?? Colors.black,
         letterSpacing: letterSpacing,
       );
+    case EnumFontFamily.poppins:
     default:
       return GoogleFonts.poppins(
         fontSize: fontsize,
         fontWeight: fontWeight,
-        fontStyle: fontStyle,
+        fontStyle: flutterFontStyle,
         color: color ?? Colors.black,
         letterSpacing: letterSpacing,
       );

@@ -174,6 +174,7 @@ CustomCardSingle({
 
 CustomCardMultiple({
   required List<Widget> children,
+  double spacing = 12, // default jarak antar item
 }) {
   return Card(
     color: Colors.white,
@@ -187,8 +188,14 @@ CustomCardMultiple({
       padding: const EdgeInsets.all(15), // biar gak mepet
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
+        children: [
+          for (int i = 0; i < children.length; i++) ...[
+            children[i],
+            if (i < children.length - 1) SizedBox(height: spacing), // kasih jarak
+          ],
+        ],
       ),
     ),
+    
   );
 }

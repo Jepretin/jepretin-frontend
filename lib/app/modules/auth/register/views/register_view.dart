@@ -26,8 +26,6 @@ class RegisterView extends GetView<RegisterController> {
                     style: styletext(
                       fontsize: 32,
                       fontWeight: bold,
-                      fontStyle: FontStyle.normal,
-                      fontFamily: 'poppins',
                     ),
                   ),
                 ],
@@ -37,7 +35,6 @@ class RegisterView extends GetView<RegisterController> {
                 input: CustomInput(
                   hintText: "Email",
                   controller: TextEditingController(),
-          
                 ),
               ),
               SizedBox(height: 10),
@@ -69,18 +66,17 @@ class RegisterView extends GetView<RegisterController> {
               ),
               SizedBox(height: 10),
               customAuthButton(
-                text: "Daftar", 
-              onTap: () => print("Anda menekan tombol masuk"),
-              backgroundColor: Colors.blue,
-              textColor: Colors.white,
+                text: "Daftar",
+                onTap: () => print("Anda menekan tombol masuk"),
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
               ),
-
               SizedBox(height: 10),
               customAuthButton(
-                text: "Daftar", 
-              onTap: () => print("Anda menekan tombol daftar"),
-              backgroundColor: const Color.fromARGB(255, 250, 250, 250),
-              textColor: Colors.blue,
+                text: "Daftar",
+                onTap: () => print("Anda menekan tombol daftar"),
+                backgroundColor: const Color.fromARGB(255, 250, 250, 250),
+                textColor: Colors.blue,
               ),
             ],
           ),

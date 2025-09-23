@@ -42,8 +42,6 @@ class CartView extends GetView<CartController> {
                                 style: styletext(
                                   fontsize: 15,
                                   fontWeight: semibold,
-                                  fontStyle: FontStyle.normal,
-                                  fontFamily: 'poppins',
                                   color: textInputColor,
                                 ),
                               ),
@@ -62,8 +60,6 @@ class CartView extends GetView<CartController> {
                             style: styletext(
                               fontsize: 10,
                               fontWeight: semibold,
-                              fontStyle: FontStyle.normal,
-                              fontFamily: 'poppins',
                               color: textInputColor,
                             ),
                           ),

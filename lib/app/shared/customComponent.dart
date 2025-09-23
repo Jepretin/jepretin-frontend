@@ -26,7 +26,6 @@ customAppbar({
       style: styletext(
         fontsize: 20,
         fontWeight: bold,
-        fontStyle: FontStyle.normal,
         color: isWhite ? primaryColor : whiteColor,
       ),
     ),
@@ -66,8 +65,6 @@ class CustomInput extends StatelessWidget {
           hintStyle: styletext(
             fontsize: 12,
             fontWeight: medium,
-            fontStyle: FontStyle.normal,
-            fontFamily: 'poppins',
             color: textInputColor.withOpacity(0.7),
           ),
           filled: true,
@@ -126,8 +123,6 @@ class _CustomInputAuthState extends State<CustomInputAuth> {
           hintStyle: styletext(
             fontsize: 12,
             fontWeight: medium,
-            fontStyle: FontStyle.normal,
-            fontFamily: 'poppins',
             color: textInputColor.withOpacity(0.7),
           ),
           filled: true,
@@ -208,8 +203,6 @@ class CustomAddressInput extends StatelessWidget {
               hintStyle: styletext(
                 fontsize: 12,
                 fontWeight: medium,
-                fontFamily: 'poppins',
-                fontStyle: FontStyle.normal,
                 color: textInputColor.withOpacity(0.7),
               ),
               filled: true,
@@ -272,8 +265,6 @@ class DateTimeInput extends StatelessWidget {
                     style: styletext(
                       fontsize: 13,
                       fontWeight: bold,
-                      fontFamily: 'poppins',
-                      fontStyle: FontStyle.normal,
                       color: textInputColor,
                     ),
                   ),
@@ -288,8 +279,6 @@ class DateTimeInput extends StatelessWidget {
                   hintStyle: styletext(
                     fontsize: 12,
                     fontWeight: medium,
-                    fontFamily: 'poppins',
-                    fontStyle: FontStyle.normal,
                     color: textInputColor.withOpacity(0.7),
                   ),
                   filled: true,
@@ -333,8 +322,6 @@ class DateTimeInput extends StatelessWidget {
                     style: styletext(
                       fontsize: 13,
                       fontWeight: bold,
-                      fontFamily: 'poppins',
-                      fontStyle: FontStyle.normal,
                       color: textInputColor,
                     ),
                   ),
@@ -349,8 +336,6 @@ class DateTimeInput extends StatelessWidget {
                   hintStyle: styletext(
                     fontsize: 12,
                     fontWeight: medium,
-                    fontFamily: 'poppins',
-                    fontStyle: FontStyle.normal,
                     color: textInputColor.withOpacity(0.7),
                   ),
                   filled: true,
@@ -429,8 +414,6 @@ class CustomProviderInput extends StatelessWidget {
               hintStyle: styletext(
                 fontsize: 12,
                 fontWeight: medium,
-                fontFamily: 'poppins',
-                fontStyle: FontStyle.normal,
                 color: textInputColor.withOpacity(0.7),
               ),
               filled: true,
@@ -487,8 +470,6 @@ class InputWithLabel extends StatelessWidget {
           style: styletext(
             fontsize: 13,
             fontWeight: bold,
-            fontStyle: FontStyle.normal,
-            fontFamily: 'poppins',
           ),
         ),
         const SizedBox(height: 6),
@@ -498,28 +479,36 @@ class InputWithLabel extends StatelessWidget {
   }
 }
 
-CustomMenu({
+Widget CustomMenu({
   required IconData leadingIcon,
   required String placeholder,
-  IconData? trailingIcon, // optional
+  IconData? trailingIcon,
+  VoidCallback? onTap,
+  EdgeInsetsGeometry padding = const EdgeInsets.symmetric(vertical: 12),
 }) {
-  return Row(
-    children: [
-      Icon(leadingIcon, color: textInputColor),
-      const SizedBox(width: 10),
-      Expanded(
-        child: Text(
-          placeholder,
-          style: styletext(
-              fontsize: 15,
-              fontWeight: regular,
-              fontStyle: FontStyle.normal,
-              fontFamily: 'poppins',
-              color: textInputColor),
-        ),
+  return InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(8),
+    child: Padding(
+      padding: padding,
+      child: Row(
+        children: [
+          Icon(leadingIcon, color: textInputColor),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              placeholder,
+              style: styletext(
+                fontsize: 15,
+                fontWeight: regular,
+                color: textInputColor,
+              ),
+            ),
+          ),
+          if (trailingIcon != null) Icon(trailingIcon, color: textInputColor),
+        ],
       ),
-      if (trailingIcon != null) Icon(trailingIcon, color: textInputColor),
-    ],
+    ),
   );
 }
 

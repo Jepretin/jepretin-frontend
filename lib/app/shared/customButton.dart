@@ -23,7 +23,6 @@ Widget customElevatedButton({
         style: styletext(
           fontsize: 18,
           fontWeight: medium,
-          fontStyle: FontStyle.normal,
           color: condition
               ? color
               : isOutlined
@@ -64,7 +63,6 @@ Widget customAuthButton({
             style: styletext(
               fontsize: 18,
               fontWeight: medium,
-              fontStyle: FontStyle.normal,
               color: enable ? fg : disableColor,
             ),
           ),
@@ -96,8 +94,6 @@ customButtonKecil({
         style: styletext(
           fontsize: 8,
           fontWeight: semibold,
-          fontStyle: FontStyle.normal,
-          fontFamily: 'poppins',
           color: whiteColor,
         ),
       ),
@@ -129,8 +125,6 @@ customButtonNormal({
         style: styletext(
           fontsize: 13,
           fontWeight: semibold,
-          fontStyle: FontStyle.normal,
-          fontFamily: 'poppins',
           color: whiteColor,
         ),
       ),
