@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:jepretin/app/themes/themes.dart';
-import 'package:jepretin/app/shared/customButton.dart';
+// import 'package:jepretin/app/shared/customButton.dart';
 import '../controllers/favorite_controller.dart';
 
 class FavoriteView extends GetView<FavoriteController> {
