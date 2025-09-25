@@ -55,7 +55,13 @@ class ProfileView extends GetView<ProfileController> {
                       ],
                     ),
                     Spacer(),
-                    Icon(Icons.edit),
+                    // Icon(Icons.edit),
+                    IconButton(
+                      onPressed: () {
+                        controller.goTo('/profile-edit');
+                      },
+                      icon: Icon(Icons.edit),
+                    ),
                   ],
                 ),
               ),
@@ -109,7 +115,7 @@ class ProfileView extends GetView<ProfileController> {
                       leadingIcon: Icons.settings,
                       placeholder: "Pengaturan"),
                   CustomMenu(
-                      onTap: () => controller.goTo('/logout'),
+                      onTap: () => controller.goTo('profile'),
                       leadingIcon: Icons.logout,
                       placeholder: "Keluar"),
                 ],

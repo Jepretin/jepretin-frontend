@@ -1,6 +1,7 @@
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 customAppbar({
@@ -38,9 +39,10 @@ class CustomInput extends StatelessWidget {
   final TextEditingController controller;
   final bool obscureText;
   final TextInputType keyboardType;
-  final IconData? suffixIcon;
   final VoidCallback? onIconTap;
   final TextStyle? hintStyle;
+  final String? prefixIcon;
+  final IconData? suffixIcon;
 
   const CustomInput({
     super.key,
@@ -48,43 +50,57 @@ class CustomInput extends StatelessWidget {
     required this.controller,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
-    this.suffixIcon,
     this.onIconTap,
     this.hintStyle,
+    this.suffixIcon,
+    this.prefixIcon,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: styletext(
-            fontsize: 12,
-            fontWeight: medium,
-            color: textInputColor.withOpacity(0.7),
+    return Column(
+      children: [
+        Container(
+          width: 301,
+          child: TextField(
+            controller: controller,
+            keyboardType: keyboardType,
+            decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle: styletext(
+                fontsize: 13,
+                fontWeight: regular,
+                color: hintInputAuth,
+              ),
+              filled: true,
+              fillColor: inputColorAuth,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 20,
+              ),
+              prefixIcon: prefixIcon != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 5),
+                      child: SvgPicture.asset(
+                        prefixIcon!,
+                        width: 20,
+                        height: 20,
+                        color: hintInputAuth,
+                      ))
+                  : null,
+              suffixIcon: suffixIcon != null
+                  ? IconButton(
+                      icon: Icon(suffixIcon, color: Colors.blueGrey, size: 21),
+                      onPressed: onIconTap,
+                    )
+                  : null,
+            ),
           ),
-          filled: true,
-          fillColor: inputColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 14,
-          ),
-          suffixIcon: suffixIcon != null
-              ? IconButton(
-                  icon: Icon(suffixIcon, color: Colors.blueGrey, size: 21),
-                  onPressed: onIconTap,
-                )
-              : null,
         ),
-      ),
+      ],
     );
   }
 }
@@ -93,7 +109,7 @@ class CustomInputAuth extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
-  final IconData? icon;
+  final String Icon;
   final TextStyle? hintStyle;
 
   const CustomInputAuth({
@@ -101,7 +117,7 @@ class CustomInputAuth extends StatefulWidget {
     required this.hintText,
     required this.controller,
     this.keyboardType = TextInputType.text,
-    this.icon,
+    required this.Icon,
     this.hintStyle,
   });
 
@@ -110,45 +126,52 @@ class CustomInputAuth extends StatefulWidget {
 }
 
 class _CustomInputAuthState extends State<CustomInputAuth> {
-  bool _obscureText = true; // bisa berubah
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: widget.controller,
-      obscureText: _obscureText,
-      keyboardType: widget.keyboardType,
-      decoration: InputDecoration(
-          hintText: widget.hintText,
-          hintStyle: styletext(
-            fontsize: 12,
-            fontWeight: medium,
-            color: textInputColor.withOpacity(0.7),
-          ),
-          filled: true,
-          fillColor: inputColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(100),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          prefixIcon: widget.icon != null
-              ? Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 5),
-                  child: Icon(widget.icon, color: Colors.blueGrey, size: 21),
-                )
-              : null,
-          suffixIcon: IconButton(
-              icon: Icon(
-                _obscureText ? Icons.visibility_off : Icons.visibility,
-                color: Colors.blueGrey,
-              ),
-              onPressed: () {
-                setState(() {
-                  _obscureText = !_obscureText;
-                });
-              })),
+    return Column(
+      children: [
+        Container(
+            width: 301,
+            child: TextField(
+              controller: widget.controller,
+              obscureText: _obscureText,
+              keyboardType: widget.keyboardType,
+              decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  hintStyle: styletext(
+                    fontsize: 12,
+                    fontWeight: medium,
+                    color: textInputColor.withOpacity(0.7),
+                  ),
+                  filled: true,
+                  fillColor: inputColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(100),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 20),
+                  prefixIcon: Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 5),
+                      child: SvgPicture.asset(
+                        widget.Icon,
+                        color: hintInputAuth,
+                        width: 21,
+                        height: 21,
+                      )),
+                  suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.blueGrey,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _obscureText = !_obscureText;
+                        });
+                      })),
+            ))
+      ],
     );
   }
 }

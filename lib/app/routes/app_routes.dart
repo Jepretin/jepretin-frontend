@@ -24,8 +24,8 @@ abstract class Routes {
   static const TERM = _Paths.TERM;
   static const REPORT = _Paths.REPORT;
   static const SETTINGS = _Paths.SETTINGS;
-  static const LOGOUT = _Paths.LOGOUT;
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
+  static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
 }
 
 abstract class _Paths {
@@ -51,6 +51,6 @@ abstract class _Paths {
   static const TERM = '/term';
   static const REPORT = '/report';
   static const SETTINGS = '/settings';
-  static const LOGOUT = '/logout';
   static const PROFILE_EDIT = '/profile-edit';
+  static const FORGOT_PASSWORD = '/forgot-password';
 }

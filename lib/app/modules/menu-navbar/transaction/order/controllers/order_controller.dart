@@ -1,4 +1,4 @@
-import 'package:jepretin/app/modules/transaction/order/views/order_view.dart';
+import 'package:jepretin/app/modules/menu-navbar/transaction/order/views/order_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_cli/common/utils/json_serialize/json_ast/utils/grapheme_splitter.dart';
