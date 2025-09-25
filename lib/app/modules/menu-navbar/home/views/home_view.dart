@@ -225,119 +225,6 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _menuContainer({
-    String? nama,
-    String? role,
-    String? subtitle,
-    String? pathGambar,
-  }) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(11),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 5,
-            spreadRadius: 0.2,
-            color: Colors.black.withOpacity(0.2),
-            offset: Offset(2, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        spacing: 10,
-        children: [
-          Row(
-            spacing: 10,
-            children: [
-              Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(shape: BoxShape.circle),
-                child: ClipOval(
-                  child: Image.asset('images/monyet.jpg', fit: BoxFit.cover),
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Tim Jepretin',
-                      style: styletext(
-                        fontsize: 18,
-                        fontWeight: medium,
-                      ),
-                    ),
-                    Text(
-                      'Fotographer',
-                      style: styletext(
-                        fontsize: 12,
-                        fontWeight: light,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Icon(Icons.more_vert),
-            ],
-          ),
-          Container(
-            height: 200,
-            child: Image.asset("images/monyet.jpg", fit: BoxFit.cover),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Row(
-                  spacing: 6,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        controller.isStar = !controller.isStar;
-                        controller.update();
-                      },
-                      child: Icon(
-                        controller.isStar
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: Colors.red,
-                        size: 24,
-                      ),
-                    ),
-                    Text(
-                      '18',
-                      style: styletext(
-                        fontsize: 18,
-                        fontWeight: bold,
-                        color: primaryColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              customElevatedButton(
-                condition: false,
-                isOutlined: true,
-                text: 'Pesan',
-                onTap: () {
-                  print('object');
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Widget locationSelection() {
-
-  // }
-
   Widget buildBeforeMainView() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -350,7 +237,17 @@ class HomeView extends GetView<HomeController> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: 1,
             itemBuilder: (context, index) {
-              return _menuContainer();
+              final item = dummyData[index];
+              return SharedCard(
+                profileImage: item["profileImage"],
+                title: item["title"],
+                subtitle: item["subtitle"],
+                mainImage: item["mainImage"],
+                likes: item["likes"],
+                onLike: () => print("Like ${item["title"]}"),
+                onOrder: () => print("Order ${item["title"]}"),
+                imageRatio: item["ratio"],
+              );
             },
             separatorBuilder: (context, index) => SizedBox(height: 10),
           ),
@@ -374,41 +271,24 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget buildAfterMainView() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-      child: Column(
-        children: [
-          // ListView.separated(
-          //   shrinkWrap: true,
-          //   physics: NeverScrollableScrollPhysics(),
-          //   itemCount: 1,
-          //   itemBuilder: (context, index) {
-          //     return _menuContainer();
-          //   },
-          //   separatorBuilder: (context, index) => SizedBox(height: 10),
-          // ),
-          Spacer(),
-          SharedCard(
-            profileImage: "images/monyet.jpg",
-            title: "Tim Jepretin",
-            subtitle: "Photographer",
-            mainImage: "images/content/mount.png",
-            likes: 18,
-            onLike: () {},
-            onOrder: () {},
-            isPortrait: false, // defaultQ
-          ),
-          SharedCard(
-            profileImage: "images/monyet.jpg",
-            title: "Diamond Pictora",
-            subtitle: "Photographer and Videographer",
-            mainImage: "images/content/wedding.png",
-            likes: 18,
-            onLike: () {},
-            onOrder: () {},
-            isPortrait: true, // ✅
-          ),
-        ],
+    return Scaffold(
+      body: ListView.separated(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+        itemCount: dummyData.length,
+        itemBuilder: (context, index) {
+          final item = dummyData[index];
+          return SharedCard(
+            profileImage: item["profileImage"],
+            title: item["title"],
+            subtitle: item["subtitle"],
+            mainImage: item["mainImage"],
+            likes: item["likes"],
+            onLike: () => print("Like ${item["title"]}"),
+            onOrder: () => print("Order ${item["title"]}"),
+            imageRatio: item["ratio"],
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(height: 12),
       ),
     );
   }

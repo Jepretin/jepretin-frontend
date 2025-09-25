@@ -34,48 +34,52 @@ Widget customElevatedButton({
   );
 }
 
-Widget customAuthButton({
-  required String text,
-  bool enable = true,
-  Color? backgroundColor,
-  Color? textColor,
-  bool isOutlined = false,
-  required VoidCallback onTap,
-}) {
-  Color bg = backgroundColor ?? (isOutlined ? whiteColor : primaryColor);
+Widget customAuthButton(
+    {required String text,
+    bool enable = true,
+    Color? textColor,
+    bool isOutlined = false,
+    required VoidCallback onTap,
+    double fillOpacity = 1.0}) {
   Color fg = textColor ?? (isOutlined ? primaryColor : whiteColor);
-  Color borderCol = enable ? fg : disableColor;
 
-  return GestureDetector(
-      onTap: enable ? onTap : null,
-      child: Opacity(
-        opacity: enable ? 1.0 : 0.6,
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-          decoration: BoxDecoration(
-            color: isOutlined ? whiteColor : bg,
-            borderRadius: BorderRadius.circular(24),
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            style: styletext(
-              fontsize: 18,
-              fontWeight: medium,
-              color: enable ? fg : disableColor,
+  return Center(
+    child: Container(
+      width: 301,
+      height: 56,
+      child: GestureDetector(
+        onTap: enable ? onTap : null,
+        child: Opacity(
+          opacity: enable ? 1.0 : 0.6,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+            decoration: BoxDecoration(
+              color: primaryColor.withOpacity(fillOpacity),
+              borderRadius: BorderRadius.circular(30),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: styletext(
+                fontsize: 13,
+                fontWeight: bold,
+                color: enable ? fg : whiteColor,
+              ),
             ),
           ),
         ),
-      ));
+      ),
+    ),
+  );
 }
 
 customButtonKecil({
   required String text,
   required VoidCallback onTap,
   bool enable = true,
-  double? width, 
-  double? height, 
+  double? width,
+  double? height,
 }) {
   return GestureDetector(
     onTap: enable ? onTap : null,
@@ -105,8 +109,8 @@ customButtonNormal({
   required String text,
   required VoidCallback onTap,
   bool enable = true,
-  double? width, 
-  double? height, 
+  double? width,
+  double? height,
 }) {
   return GestureDetector(
     onTap: enable ? onTap : null,

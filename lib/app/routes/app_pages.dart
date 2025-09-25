@@ -1,35 +1,35 @@
 import 'package:get/get.dart';
 
+import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
+import '../modules/auth/forgot_password/views/forgot_password_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
 import '../modules/auth/otp/bindings/otp_binding.dart';
 import '../modules/auth/otp/views/otp_view.dart';
 import '../modules/auth/register/bindings/register_binding.dart';
 import '../modules/auth/register/views/register_view.dart';
-import '../modules/help/bindings/help_binding.dart';
-import '../modules/help/views/help_view.dart';
-import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
-import '../modules/promotion/bindings/promotion_binding.dart';
-import '../modules/promotion/views/promotion_view.dart';
-import '../modules/transaction/cart/bindings/cart_binding.dart';
-import '../modules/transaction/cart/views/cart_view.dart';
-import '../modules/transaction/confirm_pembayaran/bindings/confirm_pembayaran_binding.dart';
-import '../modules/transaction/confirm_pembayaran/views/confirm_pembayaran_view.dart';
-import '../modules/transaction/history_transaction/bindings/history_transaction_binding.dart';
-import '../modules/transaction/history_transaction/views/history_transaction_view.dart';
-import '../modules/transaction/metode_pembayaran/bindings/metode_pembayaran_binding.dart';
-import '../modules/transaction/metode_pembayaran/views/metode_pembayaran_view.dart';
-import '../modules/transaction/order/bindings/order_binding.dart';
-import '../modules/transaction/order/views/order_view.dart';
+import '../modules/menu-navbar/help/bindings/help_binding.dart';
+import '../modules/menu-navbar/help/views/help_view.dart';
+import '../modules/menu-navbar/home/bindings/home_binding.dart';
+import '../modules/menu-navbar/home/views/home_view.dart';
+import '../modules/menu-navbar/promotion/bindings/promotion_binding.dart';
+import '../modules/menu-navbar/promotion/views/promotion_view.dart';
+import '../modules/menu-navbar/transaction/cart/bindings/cart_binding.dart';
+import '../modules/menu-navbar/transaction/cart/views/cart_view.dart';
+import '../modules/menu-navbar/transaction/confirm_pembayaran/bindings/confirm_pembayaran_binding.dart';
+import '../modules/menu-navbar/transaction/confirm_pembayaran/views/confirm_pembayaran_view.dart';
+import '../modules/menu-navbar/transaction/history_transaction/bindings/history_transaction_binding.dart';
+import '../modules/menu-navbar/transaction/history_transaction/views/history_transaction_view.dart';
+import '../modules/menu-navbar/transaction/metode_pembayaran/bindings/metode_pembayaran_binding.dart';
+import '../modules/menu-navbar/transaction/metode_pembayaran/views/metode_pembayaran_view.dart';
+import '../modules/menu-navbar/transaction/order/bindings/order_binding.dart';
+import '../modules/menu-navbar/transaction/order/views/order_view.dart';
 import '../modules/user/customer/menu_profile/address/bindings/address_binding.dart';
 import '../modules/user/customer/menu_profile/address/views/address_view.dart';
 import '../modules/user/customer/menu_profile/favorite/bindings/favorite_binding.dart';
 import '../modules/user/customer/menu_profile/favorite/views/favorite_view.dart';
-import '../modules/user/customer/menu_profile/logout/bindings/logout_binding.dart';
-import '../modules/user/customer/menu_profile/logout/views/logout_view.dart';
 import '../modules/user/customer/menu_profile/notification/bindings/notification_binding.dart';
 import '../modules/user/customer/menu_profile/notification/views/notification_view.dart';
 import '../modules/user/customer/menu_profile/policy/bindings/policy_binding.dart';
@@ -153,14 +153,14 @@ class AppPages {
       binding: SettingsBinding(),
     ),
     GetPage(
-      name: _Paths.LOGOUT,
-      page: () => const LogoutView(),
-      binding: LogoutBinding(),
-    ),
-    GetPage(
       name: _Paths.PROFILE_EDIT,
       page: () => const ProfileEditView(),
       binding: ProfileEditBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => const ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
     ),
   ];
 }

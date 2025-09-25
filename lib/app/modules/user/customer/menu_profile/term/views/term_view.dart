@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/term_controller.dart';
+import 'package:jepretin/app/shared/customCardContent.dart';
+import 'package:jepretin/app/shared/customComponent.dart';
+import 'package:jepretin/app/themes/themes.dart';
 
 class TermView extends GetView<TermController> {
   const TermView({super.key});
@@ -10,13 +13,41 @@ class TermView extends GetView<TermController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TermView'),
+        title: const Text('Syarat dan ketentuan'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'TermView is working',
-          style: TextStyle(fontSize: 20),
+      body: GetBuilder(
+        init: TermController(),
+        builder: (controller) => SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+          child: Column(
+            children: [
+              InputWithLabel(
+                  label: 'Syarat',
+                  input: CustomCardSingle(
+                      child: Row(
+                    children: [
+                      Text(
+                        "Syarat\n\n"
+                        "1. Syarat penggunaan.\n"
+                        "2. Syarat penggunaan.\n",
+                      )
+                    ],
+                  ))),
+              InputWithLabel(
+                label: 'Ketentuan',
+                input: CustomCardSingle(
+                  child: Row(
+                    children: [
+                      Text("Ketentuan\n\n"
+                          "1. Ketentuan penggunaan.\n"
+                          "2. Ketentuan penggunaan.\n")
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
