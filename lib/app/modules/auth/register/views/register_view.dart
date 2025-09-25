@@ -30,6 +30,7 @@ class RegisterView extends GetView<RegisterController> {
               InputWithLabel(
                 label: "",
                 input: CustomInput(
+                  width: 301,
                   hintText: "Email",
                   controller: TextEditingController(),
                   prefixIcon: 'icons/email.svg',
@@ -38,6 +39,7 @@ class RegisterView extends GetView<RegisterController> {
               InputWithLabel(
                 label: "",
                 input: CustomInput(
+                  width: 301,
                     hintText: "Nama Lengkap",
                     controller: TextEditingController(),
                     prefixIcon: 'icons/user.svg'),

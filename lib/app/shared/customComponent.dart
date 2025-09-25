@@ -43,6 +43,8 @@ class CustomInput extends StatelessWidget {
   final TextStyle? hintStyle;
   final String? prefixIcon;
   final IconData? suffixIcon;
+  final double? width;
+  final double? height;
 
   const CustomInput({
     super.key,
@@ -54,6 +56,8 @@ class CustomInput extends StatelessWidget {
     this.hintStyle,
     this.suffixIcon,
     this.prefixIcon,
+    this.width,
+    this.height,
   });
 
   @override
@@ -61,7 +65,8 @@ class CustomInput extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 301,
+          width: width,
+          height: height,
           child: TextField(
             controller: controller,
             keyboardType: keyboardType,

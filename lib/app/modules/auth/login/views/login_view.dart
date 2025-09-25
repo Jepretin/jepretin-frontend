@@ -28,6 +28,7 @@ class LoginView extends GetView<LoginController> {
                     InputWithLabel(
                       label: "",
                       input: CustomInput(
+                        width: 301,
                         hintText: "Email",
                         controller: TextEditingController(),
                         onIconTap: () => {print("Hit")},
