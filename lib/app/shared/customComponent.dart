@@ -138,44 +138,47 @@ class _CustomInputAuthState extends State<CustomInputAuth> {
     return Column(
       children: [
         Container(
-            width: 301,
-            child: TextField(
-              controller: widget.controller,
-              obscureText: _obscureText,
-              keyboardType: widget.keyboardType,
-              decoration: InputDecoration(
-                  hintText: widget.hintText,
-                  hintStyle: styletext(
-                    fontsize: 12,
-                    fontWeight: medium,
-                    color: textInputColor.withOpacity(0.7),
+          width: 301,
+          child: TextField(
+            controller: widget.controller,
+            obscureText: _obscureText,
+            keyboardType: widget.keyboardType,
+            decoration: InputDecoration(
+              hintText: widget.hintText,
+              hintStyle: styletext(
+                fontsize: 12,
+                fontWeight: medium,
+                color: textInputColor.withOpacity(0.7),
+              ),
+              filled: true,
+              fillColor: inputColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(100),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(vertical: 20),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 5),
+                child: SvgPicture.asset(
+                  widget.Icon,
+                  color: hintInputAuth,
+                  width: 21,
+                  height: 21,
+                ),
+              ),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.blueGrey,
                   ),
-                  filled: true,
-                  fillColor: inputColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 20),
-                  prefixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 5),
-                      child: SvgPicture.asset(
-                        widget.Icon,
-                        color: hintInputAuth,
-                        width: 21,
-                        height: 21,
-                      )),
-                  suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                        color: Colors.blueGrey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      })),
-            ))
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  }),
+            ),
+          ),
+        ),
       ],
     );
   }
