@@ -226,7 +226,7 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget buildBeforeMainView() {
-    return Container(
+    return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       child: Column(
         children: [
@@ -271,24 +271,29 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget buildAfterMainView() {
-    return Scaffold(
-      body: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        itemCount: dummyData.length,
-        itemBuilder: (context, index) {
-          final item = dummyData[index];
-          return SharedCard(
-            profileImage: item["profileImage"],
-            title: item["title"],
-            subtitle: item["subtitle"],
-            mainImage: item["mainImage"],
-            likes: item["likes"],
-            onLike: () => print("Like ${item["title"]}"),
-            onOrder: () => print("Order ${item["title"]}"),
-            imageRatio: item["ratio"],
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(height: 12),
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      child: Column(
+        children: [
+          ListView.separated(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            itemCount: dummyData.length,
+            itemBuilder: (context, index) {
+              final item = dummyData[index];
+              return SharedCard(
+                profileImage: item["profileImage"],
+                title: item["title"],
+                subtitle: item["subtitle"],
+                mainImage: item["mainImage"],
+                likes: item["likes"],
+                onLike: () => print("Like ${item["title"]}"),
+                onOrder: () => print("Order ${item["title"]}"),
+                imageRatio: item["ratio"],
+              );
+            },
+            separatorBuilder: (context, index) => const SizedBox(height: 12),
+          ),
+        ],
       ),
     );
   }
