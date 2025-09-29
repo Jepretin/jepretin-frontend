@@ -30,41 +30,47 @@ class RegisterView extends GetView<RegisterController> {
               InputWithLabel(
                 label: "",
                 input: CustomInput(
-                  width: 301,
-                  hintText: "Email",
-                  controller: TextEditingController(),
-                  prefixIcon: 'icons/email.svg',
-                ),
+                    width: 301,
+                    hintText: "Nama Lengkap",
+                    controller: controller.nameController,
+                    prefixIcon: 'icons/user.svg'),
               ),
               InputWithLabel(
                 label: "",
                 input: CustomInput(
                   width: 301,
-                    hintText: "Nama Lengkap",
-                    controller: TextEditingController(),
-                    prefixIcon: 'icons/user.svg'),
-              ),
-              InputWithLabel(
-                label: "",
-                input: CustomInputAuth(
-                  hintText: "Kata Sandi",
-                  controller: TextEditingController(),
-                  Icon: 'icons/lock_key.svg',
+                  hintText: "Email",
+                  controller: controller.emailController,
+                  prefixIcon: 'icons/email.svg',
                 ),
               ),
               InputWithLabel(
                 label: "",
                 input: CustomInputAuth(
                   hintText: "Konfirmasi Kata Sandi",
-                  controller: TextEditingController(),
+                  controller: controller.passwordController,
                   Icon: 'icons/lock_key.svg',
                 ),
               ),
+              InputWithLabel(
+                label: "",
+                input: CustomInput(
+                  width: 301,
+                  hintText: "Phone Number",
+                  controller: controller.phoneController,
+                  prefixIcon: 'icons/user.svg',
+                ),
+              ),
               SizedBox(height: 44),
-              customAuthButton(
-                text: "Daftar",
-                onTap: () => print("Anda menekan tombol masuk"),
-                textColor: whiteColor,
+                 Obx(
+                () => customAuthButton(
+                  text: controller.isLoading.value ? "Loading" : "Daftar",
+                  onTap: () {
+                    controller.register();
+                    print("Menekan Tombol Daftar");
+                  },
+                  textColor: whiteColor,
+                ),
               ),
               SizedBox(height: 27),
               Row(

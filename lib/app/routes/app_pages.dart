@@ -45,7 +45,6 @@ import '../modules/user/customer/menu_profile/settings/views/settings_view.dart'
 import '../modules/user/customer/menu_profile/term/bindings/term_binding.dart';
 import '../modules/user/customer/menu_profile/term/views/term_view.dart';
 import '../modules/user/customer/profile/bindings/profile_binding.dart';
-import '../modules/user/customer/profile/controllers/profile_controller.dart';
 import '../modules/user/customer/profile/views/profile_view.dart';
 
 part 'app_routes.dart';

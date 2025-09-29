@@ -128,6 +128,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "dartz",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/dartz-0.10.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "dcli",
       "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/dcli-6.1.2",
       "packageUri": "lib/",
@@ -150,6 +156,18 @@
       "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/dcli_terminal-6.1.2",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "dio",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.9.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "dio_web_adapter",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/dio_web_adapter-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "equatable",
@@ -186,6 +204,12 @@
       "rootUri": "file:///C:/src/flutter/3.29.0/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.7"
+    },
+    {
+      "name": "flutter_dotenv",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_dotenv-5.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_keyboard_visibility",
@@ -722,7 +746,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-09-16T09:28:21.303671Z",
+  "generated": "2025-09-29T08:03:39.659040Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///C:/src/flutter/3.29.0",
