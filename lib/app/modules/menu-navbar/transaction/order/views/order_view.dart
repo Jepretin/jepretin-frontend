@@ -18,77 +18,6 @@ class OrderView extends GetView<OrderController> {
       ),
       body: GetBuilder(
         init: OrderController(),
-<<<<<<< HEAD:lib/app/modules/transaction/order/views/order_view.dart
-        builder:
-            (controller) => SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
-              child: Column(
-                children: [
-                  InputWithLabel(
-                    label: "Nama Lengkap",
-                    input: CustomInput(
-                      hintText: "Masukkan Nama Lengkapmu",
-                      controller: TextEditingController(),
-                      prefixIcon: "icons/lock_key.svg",
-                      // suffixIcon: Icons.edit,
-                      // // ✏️ icon di kanan
-                      onIconTap: () {
-                        print("Icon edit diklik");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  InputWithLabel(
-                    label: "Alamat",
-                    input: CustomAddressInput(
-                      hintText: "Pilih Domisili kamu saat ini",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.location_city,
-                      onIconTap: () {
-                        print("Icon edit diklik");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  InputWithLabel(
-                    label: "Detail Alamat",
-                    input: CustomInput(
-                      hintText: "Lengkapi detail alamat kamu",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.edit, // ✏️ icon di kanan
-                      onIconTap: () {
-                        print("Icon edit diklik");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  DateTimeInput(),
-                  SizedBox(height: 14),
-                  InputWithLabel(
-                    label: "Pilih rovider",
-                    input: CustomProviderInput(
-                      hintText: "Pilih disini",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.edit,
-                      onIconTap: () {
-                        print("Hit");
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  InputWithLabel(
-                    label: "Pilih Produk Jasa",
-                    input: CustomProviderInput(
-                      hintText: "Pilih provider terlebih dahulu",
-                      controller: TextEditingController(),
-                      suffixIcon: Icons.edit,
-                      onIconTap: () {
-                        print("Hit");
-                      },
-                    ),
-                  ),
-                ],
-=======
         builder: (controller) => SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
           child: Column(
@@ -103,7 +32,6 @@ class OrderView extends GetView<OrderController> {
                     print("Icon edit diklik");
                   },
                 ),
->>>>>>> 19c9dd29b37c73c3f2ab3f0e53cb0136750f9b74:lib/app/modules/menu-navbar/transaction/order/views/order_view.dart
               ),
               SizedBox(height: 14),
               InputWithLabel(

@@ -1,6 +1,7 @@
 class ApiEndpoint {
+  static String login = "auth/login";
   static String register = "auth/register";
-  static const String verifyOtp = "/auth/otp/verify";
+  static String verifyOtp = "/auth/otp/verify";
 
   // Contoh untuk penggunaan id dan page
   // static String userRegister({required String id}) => "tiket/mountain/$id/detail";

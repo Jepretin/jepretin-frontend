@@ -33,7 +33,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                 child: Column(
                   children: [
                     Text(
-                      "Kirim Kode",
+                      "Masukan Email",
                       style: styletext(
                           fontsize: 32, fontWeight: bold, color: primaryColor),
                     ),
@@ -41,7 +41,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                       padding: EdgeInsets.only(top: 15),
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
-                        "Silahkan masukkan akun email anda untuk mengirimkan tautan atur ulang kata sandi",
+                        "Silahkan masukan akun email anda untuk mengirimkan tautan atur ulang kata sandi",
                         textAlign: TextAlign.center,
                         style: styletext(
                             fontsize: 12,

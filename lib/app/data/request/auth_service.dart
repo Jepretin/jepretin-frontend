@@ -7,6 +7,21 @@ import 'package:jepretin/app/data/services/dio_service.dart';
 import 'package:jepretin/app/data/services/header_client.dart';
 
 class AuthService {
+  static Future<Either<ExceptionResponse, BaseResponse<LoginRequest>>>
+      loginUser(LoginRequest request) async {
+    return await ApiClient.instance.request(
+      HttpMethod.post,
+      path: ApiEndpoint.login, // misalnya "auth/login"
+      dio: DioClient.instance.initInstance(),
+      headers: HeaderClient.setHeaderBearer(),
+      body:request.toJson(),
+      responseConverter: (body) => BaseResponse<LoginRequest>.fromJson(
+        body,
+        (body) => LoginRequest.fromJson(body),
+      ),
+    );
+  }
+
   static Future<Either<ExceptionResponse, BaseResponse<VerifyOTPResponse>>>
       registerUser(RegisterRequest request) async {
     // yang ini jangan kau hapus {
