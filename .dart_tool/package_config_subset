@@ -78,6 +78,10 @@ dart_style
 3.0
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dart_style-2.3.8/
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dart_style-2.3.8/lib/
+dartz
+2.12
+file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dartz-0.10.1/
+file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dartz-0.10.1/lib/
 dcli
 3.3
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dcli-6.1.2/
@@ -94,6 +98,14 @@ dcli_terminal
 3.0
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dcli_terminal-6.1.2/
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dcli_terminal-6.1.2/lib/
+dio
+2.18
+file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.9.0/
+file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.9.0/lib/
+dio_web_adapter
+3.3
+file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dio_web_adapter-2.1.1/
+file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/dio_web_adapter-2.1.1/lib/
 equatable
 2.12
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/equatable-2.0.7/
@@ -114,6 +126,10 @@ fixnum
 3.1
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.1/
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.1/lib/
+flutter_dotenv
+2.12
+file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_dotenv-5.2.1/
+file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_dotenv-5.2.1/lib/
 flutter_keyboard_visibility
 2.12
 file:///C:/Users/kecil/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_keyboard_visibility-6.0.0/

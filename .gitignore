@@ -46,7 +46,8 @@ app.*.map.json
 
 .vscode/templates
 
-# env files
+
+# Env files
 .env
 *.env
 assets/config/.env

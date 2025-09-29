@@ -22,11 +22,7 @@ class RegisterView extends GetView<RegisterController> {
                   Text(
                     "Daftar",
                     style: styletext(
-                        fontsize: 32,
-                        fontWeight: bold,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'poppins',
-                        color: primaryColor),
+                        fontsize: 32, fontWeight: bold, color: primaryColor),
                   ),
                 ],
               ),
@@ -34,39 +30,47 @@ class RegisterView extends GetView<RegisterController> {
               InputWithLabel(
                 label: "",
                 input: CustomInput(
-                  hintText: "Email",
-                  controller: TextEditingController(),
-                  prefixIcon: 'icons/email.svg',
-                ),
-              ),
-              InputWithLabel(
-                label: "",
-                input: CustomInput(
+                    width: 301,
                     hintText: "Nama Lengkap",
-                    controller: TextEditingController(),
+                    controller: controller.nameController,
                     prefixIcon: 'icons/user.svg'),
               ),
               InputWithLabel(
                 label: "",
-                input: CustomInputAuth(
-                  hintText: "Kata Sandi",
-                  controller: TextEditingController(),
-                  Icon: 'icons/lock_key.svg',
+                input: CustomInput(
+                  width: 301,
+                  hintText: "Email",
+                  controller: controller.emailController,
+                  prefixIcon: 'icons/email.svg',
                 ),
               ),
               InputWithLabel(
                 label: "",
                 input: CustomInputAuth(
                   hintText: "Konfirmasi Kata Sandi",
-                  controller: TextEditingController(),
+                  controller: controller.passwordController,
                   Icon: 'icons/lock_key.svg',
                 ),
               ),
+              InputWithLabel(
+                label: "",
+                input: CustomInput(
+                  width: 301,
+                  hintText: "Phone Number",
+                  controller: controller.phoneController,
+                  prefixIcon: 'icons/user.svg',
+                ),
+              ),
               SizedBox(height: 44),
-              customAuthButton(
-                text: "Daftar",
-                onTap: () => print("Anda menekan tombol masuk"),
-                textColor: whiteColor,
+                 Obx(
+                () => customAuthButton(
+                  text: controller.isLoading.value ? "Loading" : "Daftar",
+                  onTap: () {
+                    controller.register();
+                    print("Menekan Tombol Daftar");
+                  },
+                  textColor: whiteColor,
+                ),
               ),
               SizedBox(height: 27),
               Row(
@@ -77,8 +81,6 @@ class RegisterView extends GetView<RegisterController> {
                     style: styletext(
                       fontsize: 13,
                       fontWeight: regular,
-                      fontStyle: FontStyle.normal,
-                      fontFamily: 'poppins',
                       color: hintInputAuth,
                     ),
                   ),
@@ -88,11 +90,13 @@ class RegisterView extends GetView<RegisterController> {
                       style: styletext(
                         fontsize: 13,
                         fontWeight: regular,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'poppins',
                         color: primaryColor,
                       ),
                     ),
+                    onTap: () => {
+                      Get.toNamed('/login'),
+                      print("Anda menekan 'Sudah memiliki akun? Masuk'"),
+                    },
                   ),
                 ],
               ),

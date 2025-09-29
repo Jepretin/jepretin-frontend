@@ -1,5 +1,50 @@
+import 'dart:async' show Completer;
 import 'package:flutter/material.dart';
 import 'package:jepretin/app/themes/themes.dart';
+
+enum CardImageRatio { portrait, landscape }
+
+Future<CardImageRatio> getImageRatio(String url) async {
+  final completer = Completer<ImageInfo>();
+  final image = NetworkImage(url);
+
+  image.resolve(const ImageConfiguration()).addListener(
+        ImageStreamListener((info, _) => completer.complete(info)),
+      );
+
+  final imageInfo = await completer.future;
+  final width = imageInfo.image.width;
+  final height = imageInfo.image.height;
+
+  return height > width ? CardImageRatio.portrait : CardImageRatio.landscape;
+}
+
+final List<Map<String, dynamic>> dummyData = [
+  {
+    "profileImage": "images/monyet.jpg",
+    "title": "Tim Jepretin",
+    "subtitle": "Photographer",
+    "mainImage": "images/content/mount.png",
+    "likes": 18,
+    "ratio": CardImageRatio.landscape,
+  },
+  {
+    "profileImage": "images/monyet.jpg",
+    "title": "Diamond Pictora",
+    "subtitle": "Photographer & Videographer",
+    "mainImage": "images/content/wedding.png",
+    "likes": 27,
+    "ratio": CardImageRatio.portrait,
+  },
+  {
+    "profileImage": "images/monyet.jpg",
+    "title": "Sky Lens",
+    "subtitle": "Drone Specialist",
+    "mainImage": "images/content/drone.png",
+    "likes": 45,
+    "ratio": CardImageRatio.landscape,
+  },
+];
 
 class SharedCard extends StatelessWidget {
   final String profileImage;
@@ -9,7 +54,7 @@ class SharedCard extends StatelessWidget {
   final int likes;
   final VoidCallback onLike;
   final VoidCallback onOrder;
-  final bool isPortrait; // ✅ tambahan
+  final CardImageRatio imageRatio;
 
   const SharedCard({
     super.key,
@@ -20,13 +65,17 @@ class SharedCard extends StatelessWidget {
     required this.likes,
     required this.onLike,
     required this.onOrder,
-    this.isPortrait = false, // default = layout awal (4:3)
+    this.imageRatio = CardImageRatio.landscape, // default landscape
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(11)),
+      color: whiteColor,
+      shadowColor: primaryColor.withOpacity(0.6),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       elevation: 2,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
       child: Padding(
@@ -45,20 +94,12 @@ class SharedCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
+                    Text(title,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14)),
+                    Text(subtitle,
+                        style:
+                            const TextStyle(fontSize: 12, color: Colors.grey)),
                   ],
                 ),
                 const Spacer(),
@@ -70,18 +111,18 @@ class SharedCard extends StatelessWidget {
             // Main Image
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
-              child: isPortrait
+              child: imageRatio == CardImageRatio.portrait
                   ? Image.asset(
                       mainImage,
                       fit: BoxFit.cover,
-                      width: double.infinity, // ✅ lebar penuh card
+                      width: double.infinity,
                     )
                   : AspectRatio(
                       aspectRatio: 4 / 3,
                       child: Image.asset(
                         mainImage,
                         fit: BoxFit.cover,
-                        width: double.infinity, // biar tetap full juga
+                        width: double.infinity,
                       ),
                     ),
             ),
@@ -99,10 +140,8 @@ class SharedCard extends StatelessWidget {
                       child: const Icon(Icons.favorite, color: Colors.red),
                     ),
                     const SizedBox(width: 6),
-                    Text(
-                      "$likes",
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    Text("$likes",
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 ),
                 OutlinedButton(
@@ -174,6 +213,7 @@ CustomCardSingle({
 
 CustomCardMultiple({
   required List<Widget> children,
+  double spacing = 12, // default jarak antar item
 }) {
   return Card(
     color: Colors.white,
@@ -187,7 +227,13 @@ CustomCardMultiple({
       padding: const EdgeInsets.all(15), // biar gak mepet
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
+        children: [
+          for (int i = 0; i < children.length; i++) ...[
+            children[i],
+            if (i < children.length - 1)
+              SizedBox(height: spacing), // kasih jarak
+          ],
+        ],
       ),
     ),
   );

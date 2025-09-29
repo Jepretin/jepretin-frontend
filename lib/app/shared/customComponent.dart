@@ -2,6 +2,7 @@ import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/material.dart';
 
 customAppbar({
   required VoidCallback backButton,
@@ -26,7 +27,6 @@ customAppbar({
       style: styletext(
         fontsize: 20,
         fontWeight: bold,
-        fontStyle: FontStyle.normal,
         color: isWhite ? primaryColor : whiteColor,
       ),
     ),
@@ -43,6 +43,8 @@ class CustomInput extends StatelessWidget {
   final TextStyle? hintStyle;
   final String? prefixIcon;
   final IconData? suffixIcon;
+  final double? width;
+  final double? height;
 
   const CustomInput({
     super.key,
@@ -54,6 +56,8 @@ class CustomInput extends StatelessWidget {
     this.hintStyle,
     this.suffixIcon,
     this.prefixIcon,
+    this.width,
+    this.height,
   });
 
   @override
@@ -61,7 +65,8 @@ class CustomInput extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 301,
+          width: width,
+          height: height,
           child: TextField(
             controller: controller,
             keyboardType: keyboardType,
@@ -70,8 +75,6 @@ class CustomInput extends StatelessWidget {
               hintStyle: styletext(
                 fontsize: 13,
                 fontWeight: regular,
-                fontStyle: FontStyle.normal,
-                fontFamily: 'poppins',
                 color: hintInputAuth,
               ),
               filled: true,
@@ -102,7 +105,6 @@ class CustomInput extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10)
       ],
     );
   }
@@ -136,47 +138,47 @@ class _CustomInputAuthState extends State<CustomInputAuth> {
     return Column(
       children: [
         Container(
-            width: 301,
-            child: TextField(
-              controller: widget.controller,
-              obscureText: _obscureText,
-              keyboardType: widget.keyboardType,
-              decoration: InputDecoration(
-                  hintText: widget.hintText,
-                  hintStyle: styletext(
-                    fontsize: 12,
-                    fontWeight: medium,
-                    fontStyle: FontStyle.normal,
-                    fontFamily: 'poppins',
-                    color: textInputColor.withOpacity(0.7),
+          width: 301,
+          child: TextField(
+            controller: widget.controller,
+            obscureText: _obscureText,
+            keyboardType: widget.keyboardType,
+            decoration: InputDecoration(
+              hintText: widget.hintText,
+              hintStyle: styletext(
+                fontsize: 12,
+                fontWeight: medium,
+                color: textInputColor.withOpacity(0.7),
+              ),
+              filled: true,
+              fillColor: inputColor,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(100),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(vertical: 20),
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 5),
+                child: SvgPicture.asset(
+                  widget.Icon,
+                  color: hintInputAuth,
+                  width: 21,
+                  height: 21,
+                ),
+              ),
+              suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.blueGrey,
                   ),
-                  filled: true,
-                  fillColor: inputColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(100),
-                    borderSide: BorderSide.none,
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 20),
-                  prefixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 5),
-                      child: SvgPicture.asset(
-                        widget.Icon,
-                        color: hintInputAuth,
-                        width: 21,
-                        height: 21,
-                      )),
-                  suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureText ? Icons.visibility_off : Icons.visibility,
-                        color: Colors.blueGrey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureText = !_obscureText;
-                        });
-                      })),
-            ))
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  }),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -232,8 +234,6 @@ class CustomAddressInput extends StatelessWidget {
               hintStyle: styletext(
                 fontsize: 12,
                 fontWeight: medium,
-                fontFamily: 'poppins',
-                fontStyle: FontStyle.normal,
                 color: textInputColor.withOpacity(0.7),
               ),
               filled: true,
@@ -296,8 +296,6 @@ class DateTimeInput extends StatelessWidget {
                     style: styletext(
                       fontsize: 13,
                       fontWeight: bold,
-                      fontFamily: 'poppins',
-                      fontStyle: FontStyle.normal,
                       color: textInputColor,
                     ),
                   ),
@@ -312,8 +310,6 @@ class DateTimeInput extends StatelessWidget {
                   hintStyle: styletext(
                     fontsize: 12,
                     fontWeight: medium,
-                    fontFamily: 'poppins',
-                    fontStyle: FontStyle.normal,
                     color: textInputColor.withOpacity(0.7),
                   ),
                   filled: true,
@@ -357,8 +353,6 @@ class DateTimeInput extends StatelessWidget {
                     style: styletext(
                       fontsize: 13,
                       fontWeight: bold,
-                      fontFamily: 'poppins',
-                      fontStyle: FontStyle.normal,
                       color: textInputColor,
                     ),
                   ),
@@ -373,8 +367,6 @@ class DateTimeInput extends StatelessWidget {
                   hintStyle: styletext(
                     fontsize: 12,
                     fontWeight: medium,
-                    fontFamily: 'poppins',
-                    fontStyle: FontStyle.normal,
                     color: textInputColor.withOpacity(0.7),
                   ),
                   filled: true,
@@ -453,8 +445,6 @@ class CustomProviderInput extends StatelessWidget {
               hintStyle: styletext(
                 fontsize: 12,
                 fontWeight: medium,
-                fontFamily: 'poppins',
-                fontStyle: FontStyle.normal,
                 color: textInputColor.withOpacity(0.7),
               ),
               filled: true,
@@ -511,8 +501,6 @@ class InputWithLabel extends StatelessWidget {
           style: styletext(
             fontsize: 13,
             fontWeight: bold,
-            fontStyle: FontStyle.normal,
-            fontFamily: 'poppins',
           ),
         ),
         // const SizedBox(height: 6),
@@ -522,27 +510,79 @@ class InputWithLabel extends StatelessWidget {
   }
 }
 
-CustomMenu({
+Widget CustomMenu({
   required IconData leadingIcon,
   required String placeholder,
-  IconData? trailingIcon, // optional
+  IconData? trailingIcon,
+  VoidCallback? onTap,
+  EdgeInsetsGeometry padding = const EdgeInsets.symmetric(vertical: 12),
 }) {
-  return Row(
-    children: [
-      Icon(leadingIcon, color: textInputColor),
-      const SizedBox(width: 10),
-      Expanded(
-        child: Text(
-          placeholder,
-          style: styletext(
-              fontsize: 15,
-              fontWeight: regular,
-              fontStyle: FontStyle.normal,
-              fontFamily: 'poppins',
-              color: textInputColor),
-        ),
+  return InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(8),
+    child: Padding(
+      padding: padding,
+      child: Row(
+        children: [
+          Icon(leadingIcon, color: textInputColor),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              placeholder,
+              style: styletext(
+                fontsize: 15,
+                fontWeight: regular,
+                color: textInputColor,
+              ),
+            ),
+          ),
+          if (trailingIcon != null) Icon(trailingIcon, color: textInputColor),
+        ],
       ),
-      if (trailingIcon != null) Icon(trailingIcon, color: textInputColor),
-    ],
+    ),
   );
+}
+
+class SharedDraggableSheet extends StatelessWidget {
+  final List<Widget> children; // isi sheet biar fleksibel
+  final double initialSize;
+  final double minSize;
+  final double maxSize;
+
+  const SharedDraggableSheet({
+    super.key,
+    required this.children,
+    this.initialSize = 0.2,
+    this.minSize = 0.1,
+    this.maxSize = 0.7,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DraggableScrollableSheet(
+      initialChildSize: initialSize,
+      minChildSize: minSize,
+      maxChildSize: maxSize,
+      builder: (context, scrollController) {
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 10,
+                offset: Offset(0, -2),
+              )
+            ],
+          ),
+          child: ListView(
+            controller: scrollController,
+            children: children,
+          ),
+        );
+      },
+    );
+  }
 }

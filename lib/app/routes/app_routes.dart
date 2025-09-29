@@ -14,17 +14,18 @@ abstract class Routes {
   static const PROMOTION = _Paths.PROMOTION;
   static const PROFILE = _Paths.PROFILE;
   static const HELP = _Paths.HELP;
+  static const CONFIRM_PEMBAYARAN = _Paths.CONFIRM_PEMBAYARAN;
+  static const METODE_PEMBAYARAN = _Paths.METODE_PEMBAYARAN;
   static const FAVORITE = _Paths.FAVORITE;
+  static const ADDRESS = _Paths.ADDRESS;
+  static const NOTIFICATION = _Paths.NOTIFICATION;
+  static const REGIS_PROVIDER = _Paths.REGIS_PROVIDER;
+  static const POLICY = _Paths.POLICY;
+  static const TERM = _Paths.TERM;
+  static const REPORT = _Paths.REPORT;
+  static const SETTINGS = _Paths.SETTINGS;
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
-  static const PROFILE_USERNAME = _Paths.PROFILE_USERNAME;
-  static const PROFILE_ADDRESS = _Paths.PROFILE_ADDRESS;
-  static const PROFILE_POLICY = _Paths.PROFILE_POLICY;
-  static const PROFILE_TERM = _Paths.PROFILE_TERM;
-  static const PROFILE_REPORT = _Paths.PROFILE_REPORT;
-  static const PROFILE_SETTINGS = _Paths.PROFILE_SETTINGS;
-  static const PROFILE_PASSWORD = _Paths.PROFILE_PASSWORD;
-  static const PROFILE_NOTIFICATION =  _Paths.PROFILE_NOTIFICATION;
-  static const PROFILE_EMAIL =  _Paths.PROFILE_EMAIL;
+  static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
 }
 
 abstract class _Paths {
@@ -40,15 +41,16 @@ abstract class _Paths {
   static const PROMOTION = '/promotion';
   static const PROFILE = '/profile';
   static const HELP = '/help';
+  static const CONFIRM_PEMBAYARAN = '/confirm-pembayaran';
+  static const METODE_PEMBAYARAN = '/metode-pembayaran';
   static const FAVORITE = '/favorite';
+  static const ADDRESS = '/address';
+  static const NOTIFICATION = '/notification';
+  static const REGIS_PROVIDER = '/regis-provider';
+  static const POLICY = '/policy';
+  static const TERM = '/term';
+  static const REPORT = '/report';
+  static const SETTINGS = '/settings';
   static const PROFILE_EDIT = '/profile-edit';
-  static const PROFILE_USERNAME = '/profile-username';
-  static const PROFILE_ADDRESS = '/profile-address';
-  static const PROFILE_POLICY = '/profile-policy';
-  static const PROFILE_TERM = '/profile-term';
-  static const PROFILE_REPORT = '/profile-report';
-  static const PROFILE_SETTINGS = '/profile-settings';
-  static const PROFILE_PASSWORD = '/profile-password';
-  static const PROFILE_NOTIFICATION = '/profile-notification';
-  static const PROFILE_EMAIL = '/profile-email';
+  static const FORGOT_PASSWORD = '/forgot-password';
 }

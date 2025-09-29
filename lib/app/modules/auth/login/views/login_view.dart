@@ -16,36 +16,34 @@ class LoginView extends GetView<LoginController> {
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
           child: Column(
             children: [
-              SizedBox(height: 58),
-              Column(
-                children: [
-                  Text(
-                    "Masuk",
-                    style: styletext(
-                        fontsize: 32,
-                        fontWeight: bold,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'poppins',
-                        color: primaryColor),
-                  ),
-                ],
-              ),
-              SizedBox(height: 58),
-              InputWithLabel(
-                label: "",
-                input: CustomInput(
-                  hintText: "Email",
-                  controller: TextEditingController(),
-                  onIconTap: () => {print("Hit")},
-                  prefixIcon: 'icons/email.svg',
-                ),
-              ),
-              InputWithLabel(
-                label: "",
-                input: CustomInputAuth(
-                  hintText: "Password",
-                  controller: TextEditingController(),
-                  Icon: 'icons/lock_key.svg',
+              Padding(
+                padding: EdgeInsets.only(top: 69, bottom: 15),
+                child: Column(
+                  children: [
+                    Text(
+                      "Masuk",
+                      style: styletext(
+                          fontsize: 32, fontWeight: bold, color: primaryColor),
+                    ),
+                    InputWithLabel(
+                      label: "",
+                      input: CustomInput(
+                        width: 301,
+                        hintText: "Email",
+                        controller: TextEditingController(),
+                        onIconTap: () => {print("Hit")},
+                        prefixIcon: 'icons/email.svg',
+                      ),
+                    ),
+                    InputWithLabel(
+                      label: "",
+                      input: CustomInputAuth(
+                        hintText: "Password",
+                        controller: TextEditingController(),
+                        Icon: 'icons/lock_key.svg',
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -58,26 +56,37 @@ class LoginView extends GetView<LoginController> {
                       style: styletext(
                         fontsize: 13,
                         fontWeight: regular,
-                        fontStyle: FontStyle.normal,
-                        fontFamily: 'poppins',
                         color: primaryColor,
                       ),
                     ),
+                    onTap: () => {
+                      Get.toNamed('/forgot-password'),
+                      print("Anda menekan 'Lupa kata sandi?'"),
+                    },
                   ),
                 ),
               ),
-              SizedBox(height: 85),
-              customAuthButton(
-                text: "Masuk",
-                onTap: () => print("Anda menekan tombol masuk"),
-                textColor: whiteColor,
-              ),
-              SizedBox(height: 10),
-              customAuthButton(
-                  text: "Daftar",
-                  onTap: () => print("Anda menekan tombol daftar"),
-                  textColor: primaryColor,
-                  fillOpacity: 0.18),
+              Padding(
+                padding: EdgeInsets.only(top: 85),
+                child: Column(
+                  children: [
+                    customAuthButton(
+                      text: "Masuk",
+                      onTap: () => print("Anda menekan tombol masuk"),
+                      textColor: whiteColor,
+                    ),
+                    SizedBox(height: 15),
+                    customAuthButton(
+                        text: "Daftar",
+                        onTap: () => {
+                              Get.toNamed('/register'),
+                              print("Anda menekan tombol daftar"),
+                            },
+                        textColor: primaryColor,
+                        fillOpacity: 0.18),
+                  ],
+                ),
+              )
             ],
           ),
         ),
