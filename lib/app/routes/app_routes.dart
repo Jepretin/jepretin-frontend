@@ -26,6 +26,7 @@ abstract class Routes {
   static const SETTINGS = _Paths.SETTINGS;
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
+  static const ULASAN = _Paths.ULASAN;
 }
 
 abstract class _Paths {
@@ -53,4 +54,5 @@ abstract class _Paths {
   static const SETTINGS = '/settings';
   static const PROFILE_EDIT = '/profile-edit';
   static const FORGOT_PASSWORD = '/forgot-password';
+  static const ULASAN = '/ulasan';
 }

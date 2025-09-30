@@ -84,6 +84,7 @@ class ConfirmPembayaranView extends GetView<ConfirmPembayaranController> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
         // padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
         child: Column(children: [
           customButtonNormal(

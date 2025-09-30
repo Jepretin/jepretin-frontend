@@ -30,7 +30,7 @@ class LoginView extends GetView<LoginController> {
                       input: CustomInput(
                         width: 301,
                         hintText: "Email",
-                        controller: TextEditingController(),
+                        controller: controller.emailController,
                         onIconTap: () => {print("Hit")},
                         prefixIcon: 'icons/email.svg',
                       ),
@@ -39,7 +39,7 @@ class LoginView extends GetView<LoginController> {
                       label: "",
                       input: CustomInputAuth(
                         hintText: "Password",
-                        controller: TextEditingController(),
+                        controller: controller.passwordController,
                         Icon: 'icons/lock_key.svg',
                       ),
                     ),
@@ -72,7 +72,10 @@ class LoginView extends GetView<LoginController> {
                   children: [
                     customAuthButton(
                       text: "Masuk",
-                      onTap: () => print("Anda menekan tombol masuk"),
+                      onTap: () {
+                        controller.login();
+                        print("Anda menekan tombol masuk");
+                      },
                       textColor: whiteColor,
                     ),
                     SizedBox(height: 15),

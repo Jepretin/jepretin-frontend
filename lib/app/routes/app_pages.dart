@@ -26,6 +26,8 @@ import '../modules/menu-navbar/transaction/metode_pembayaran/bindings/metode_pem
 import '../modules/menu-navbar/transaction/metode_pembayaran/views/metode_pembayaran_view.dart';
 import '../modules/menu-navbar/transaction/order/bindings/order_binding.dart';
 import '../modules/menu-navbar/transaction/order/views/order_view.dart';
+import '../modules/menu-navbar/transaction/ulasan/bindings/ulasan_binding.dart';
+import '../modules/menu-navbar/transaction/ulasan/views/ulasan_view.dart';
 import '../modules/user/customer/menu_profile/address/bindings/address_binding.dart';
 import '../modules/user/customer/menu_profile/address/views/address_view.dart';
 import '../modules/user/customer/menu_profile/favorite/bindings/favorite_binding.dart';
@@ -75,6 +77,11 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => const RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.OTP,
+      page: () => const OtpView(),
+      binding: OtpBinding(),
     ),
     GetPage(
       name: _Paths.ORDER,
@@ -160,6 +167,11 @@ class AppPages {
       name: _Paths.FORGOT_PASSWORD,
       page: () => const ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.ULASAN,
+      page: () => const UlasanView(),
+      binding: UlasanBinding(),
     ),
   ];
 }
