@@ -15,6 +15,10 @@ class DioClient {
       receiveDataWhenStatusError: true,
       baseUrl: dotenv.env['BASE_URL'] ?? '',
       connectTimeout: const Duration(seconds: 60),
+      validateStatus: (status) {
+        return status != null && status >= 200 && status < 300;
+      },
+
       // validateStatus: (status) => (status != null && (status < 403 || status == 412)),
     ));
 
@@ -32,7 +36,8 @@ class ApiInterceptor extends InterceptorsWrapper {
   ApiInterceptor({required this.requestRetrier});
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     options.contentType = Headers.jsonContentType;
 
     dev.log('======================\n');

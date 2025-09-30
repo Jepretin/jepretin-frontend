@@ -10,7 +10,11 @@ class ApiClient {
   ApiClient._internal();
   static ApiClient get instance => _instance = ApiClient._internal();
 
-  bool isSuccess(Response? response) => response?.statusCode == 200;
+  // bool isSuccess(Response? response) => response?.statusCode == 200;
+  bool isSuccess(Response? response) {
+    final code = response?.statusCode ?? 0;
+    return code >= 200 && code < 300; // ✅ semua 2xx dianggap sukses
+  }
 
   Future<Either<ExceptionResponse, T>> request<T>(HttpMethod httpMethod,
       {required String? path,
@@ -25,7 +29,8 @@ class ApiClient {
         //http request with request method GET
         case HttpMethod.get:
           response = await dio.get("/$path",
-              options: Options(receiveDataWhenStatusError: true, headers: headers));
+              options:
+                  Options(receiveDataWhenStatusError: true, headers: headers));
           break;
 
         // http request with request method POST and dynamic body payload
@@ -49,12 +54,14 @@ class ApiClient {
 
         // http request with request method PATCH and dynamic body payload
         case HttpMethod.patch:
-          response = await dio.patch("/$path", data: body, options: Options(headers: headers));
+          response = await dio.patch("/$path",
+              data: body, options: Options(headers: headers));
           break;
 
         // http request with request method DELETE and dynamic body payload
         case HttpMethod.delete:
-          response = await dio.delete("/$path", options: Options(headers: headers));
+          response =
+              await dio.delete("/$path", options: Options(headers: headers));
           break;
 
         default:
@@ -70,7 +77,9 @@ class ApiClient {
             ));
     } on DioException catch (e) {
       ExceptionResponse test = ExceptionResponse(
-          message: e.message, statusCode: e.response?.statusCode, path: e.requestOptions.path);
+          message: e.message,
+          statusCode: e.response?.statusCode,
+          path: e.requestOptions.path);
       switch (e.type) {
         case DioExceptionType.connectionTimeout:
         case DioExceptionType.receiveTimeout:
@@ -84,15 +93,21 @@ class ApiClient {
         case DioExceptionType.badResponse:
         case DioExceptionType.cancel:
           test = ExceptionResponse(
-              message: e.message, statusCode: e.response?.statusCode, path: e.requestOptions.path);
+              message: e.message,
+              statusCode: e.response?.statusCode,
+              path: e.requestOptions.path);
           break;
         case DioExceptionType.unknown:
           test = ExceptionResponse(
-              message: e.error.toString(), statusCode: 0, path: e.requestOptions.path);
+              message: e.error.toString(),
+              statusCode: 0,
+              path: e.requestOptions.path);
           break;
         case DioExceptionType.connectionError:
           test = ExceptionResponse(
-              message: 'No Internet', statusCode: 1000, path: e.requestOptions.path);
+              message: 'No Internet',
+              statusCode: 1000,
+              path: e.requestOptions.path);
           break;
       }
 

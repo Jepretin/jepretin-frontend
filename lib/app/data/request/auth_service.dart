@@ -7,37 +7,51 @@ import 'package:jepretin/app/data/services/dio_service.dart';
 import 'package:jepretin/app/data/services/header_client.dart';
 
 class AuthService {
-  static Future<Either<ExceptionResponse, BaseResponse<VerifyOTPResponse>>>
-      registerUser(RegisterRequest request) async {
-    // yang ini jangan kau hapus {
-    // print("➡️ Request Body: ${request.toJson()}");
-    // print("➡️ Endpoint: ${ApiEndpoint.register}");
-    // print("➡️ BaseURL (RegisterView): ${dotenv.env['BASE_URL']}");
-    // }
+  //   // contoh debug {
+  //   // print("➡️ Request Body: ${request.toJson()}");
+  //   // print("➡️ Endpoint: ${ApiEndpoint.register}");
+  //   // print("➡️ BaseURL (RegisterView): ${dotenv.env['BASE_URL']}");
+  //   // }
+
+  static Future<Either<ExceptionResponse, BaseResponse<LoginResponse>>>
+      loginUser(LoginRequest request) async {
     return await ApiClient.instance.request(
       HttpMethod.post,
-      path: ApiEndpoint.register, // misalnya "auth/register"
+      path: ApiEndpoint.login, // misalnya "auth/login"
       dio: DioClient.instance.initInstance(),
       headers: HeaderClient.setHeaderBearer(),
       body: request.toJson(),
-      responseConverter: (body) => BaseResponse<VerifyOTPResponse>.fromJson(
-          body, (body) => VerifyOTPResponse.fromJson(body)),
+      responseConverter: (body) => BaseResponse<LoginResponse>.fromJson(
+        body,
+        (body) => LoginResponse.fromJson(body),
+      ),
     );
   }
 
-  static Future<Either<ExceptionResponse, BaseResponse<VerifyOTPResponse>>>
-      verifyOtp({required String email, required String otp}) async {
+  static Future<Either<ExceptionResponse, RegisterResponse>> registerUser(
+      RegisterRequest request) async {
     return await ApiClient.instance.request(
       HttpMethod.post,
-      path: ApiEndpoint.verifyOtp, // misalnya "auth/verify-otp"
+      path: ApiEndpoint.register,
       dio: DioClient.instance.initInstance(),
       headers: HeaderClient.setHeaderBearer(),
-      body: {
-        "email": email,
-        "otp": otp,
-      },
-      responseConverter: (body) => BaseResponse<VerifyOTPResponse>.fromJson(
-          body, (body) => VerifyOTPResponse.fromJson(body)),
+      body: request.toJson(),
+      responseConverter: (body) => RegisterResponse.fromJson(body),
+    );
+  }
+
+  static Future<Either<ExceptionResponse, BaseResponse<OtpResponse>>>
+      verifyOtpUser(VerifyOtpRequest request) async {
+    return await ApiClient.instance.request(
+      HttpMethod.post,
+      path: ApiEndpoint.verifyOtp, // misal: "auth/verify-otp"
+      dio: DioClient.instance.initInstance(),
+      headers: HeaderClient.setHeaderBearer(),
+      body: request.toJson(),
+      responseConverter: (body) => BaseResponse<OtpResponse>.fromJson(
+        body,
+        (body) => OtpResponse.fromJson(body),
+      ),
     );
   }
 }

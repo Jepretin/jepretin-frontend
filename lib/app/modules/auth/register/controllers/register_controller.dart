@@ -20,21 +20,30 @@ class RegisterController extends GetxController {
     final request = RegisterRequest(
       name: nameController.text,
       email: emailController.text,
-      phone: phoneController.text,
       password: passwordController.text,
+      phone: phoneController.text,
     );
 
     final res = await AuthService.registerUser(request);
 
     res.fold(
-      (error) {
-        Get.snackbar("Register Gagal", error.message ?? "Terjadi kesalahan");
+      (l) {
+        if (l.statusCode == 409) {
+          Get.snackbar(
+              "Register Gagal", "Email sudah terdaftar, silakan login.");
+        } else {
+          print("❌ ERROR: ${l.statusCode} - ${l.message}");
+          Get.snackbar("Register Gagal", l.message ?? "Terjadi kesalahan");
+        }
       },
-      (response) {
-        Get.snackbar(
-            "Sukses", "OTP sudah dikirim ke email ${response.data?.email}");
-        // Simpan email untuk nanti verify OTP
-        Get.toNamed('/otp', arguments: response.data?.email);
+      (r) {
+        final userEmail = r.data?.user?.email ?? "";
+        print("📩 Email dari register: $userEmail");
+  
+
+        print("✅ SUKSES: ${r.data?.user?.email}");
+        Get.snackbar("Sukses", "OTP sudah dikirim ke ${r.data?.user?.email}");
+        Get.toNamed('/otp', arguments: userEmail);
       },
     );
 

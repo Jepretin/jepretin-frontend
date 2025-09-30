@@ -1,3 +1,4 @@
+import 'package:flutter_svg/svg.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,13 @@ class MainView extends GetView<MainController> {
               backgroundColor: primaryColor,
               onPressed: () => controller.goTo('/order'),
               shape: const CircleBorder(),
-              child: Icon(Icons.send, color: Colors.white, size: 28),
+              // child: Icon(Icons.send, color: Colors.white, size: 28),
+              child: SizedBox(
+                width: 55,
+                height: 32,
+                child: SvgPicture.asset('/icons/pesan.svg',
+                    height: 36, width: 36, color: whiteColor),
+              ),
             ),
           ),
         ),
@@ -40,11 +47,11 @@ class MainView extends GetView<MainController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _navBarIcon(controller, 0, Icons.home),
-                  _navBarIcon(controller, 1, Icons.credit_card_rounded),
+                  _navBarIcon(controller, 0, "/icons/home.svg"),
+                  _navBarIcon(controller, 1, "/icons/transaction.svg"),
                   const SizedBox(width: 40),
-                  _navBarIcon(controller, 2, Icons.notifications),
-                  _navBarIcon(controller, 3, Icons.person),
+                  _navBarIcon(controller, 2, "/icons/promo.svg"),
+                  _navBarIcon(controller, 3, "/icons/help.svg"),
                 ],
               ),
             ),
@@ -55,12 +62,13 @@ class MainView extends GetView<MainController> {
     );
   }
 
-  Widget _navBarIcon(MainController controller, int index, IconData icons) {
+  Widget _navBarIcon(MainController controller, int index, String assetName) {
     return IconButton(
-      icon: Icon(
-        icons,
+      icon: SvgPicture.asset(
+        assetName,
         color: index == controller.selectedNavbar ? primaryColor : disableColor,
-        size: 32,
+        width: 32,
+        height: 32,
       ),
       onPressed: () {
         controller.onChangeIndex(index);
