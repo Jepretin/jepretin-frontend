@@ -587,3 +587,69 @@ class SharedDraggableSheet extends StatelessWidget {
   }
 }
 
+class CustomDropdown extends StatefulWidget {
+  final String title;               // Judul di baris utama
+  final List<Widget> children;      // Isi dropdown (bisa list widget custom)
+  final TextStyle? titleStyle;
+
+  const CustomDropdown({
+    super.key,
+    required this.title,
+    this.children = const [],
+    this.titleStyle,
+  });
+
+  @override
+  State<CustomDropdown> createState() => _CustomDropdownState();
+}
+
+class _CustomDropdownState extends State<CustomDropdown> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Header
+        Container(
+          height: 56,
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: primaryColor)),
+          ),
+          child: Row(
+            children: [
+              Text(
+                widget.title,
+                style: widget.titleStyle ??
+                    TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: primaryColor),
+              ),
+              Spacer(),
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isExpanded = !_isExpanded;
+                  });
+                },
+                icon: Icon(
+                  _isExpanded ? Icons.expand_more : Icons.chevron_right,
+                  color: primaryColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Dropdown Content
+        if (_isExpanded)
+          Container(
+            padding: EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widget.children,
+            ),
+          ),
+      ],
+    );
+  }
+}
