@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jepretin/app/themes/themes.dart';
 
 import '../controllers/notification_controller.dart';
 import 'package:jepretin/app/shared/customCardContent.dart';
@@ -25,16 +26,40 @@ class NotificationView extends GetView<NotificationController> {
                 label: 'Notifikasi',
                 input: CustomCardSingle(
                     child: Row(
-                  children: [Text('Email'), Spacer(), Icon(Icons.radio)],
+                  children: [
+                    Text('Email'),
+                    Spacer(),
+                    Switch(
+                      value: true, 
+                      onChanged: (_) {},
+                      activeColor: primaryColor, 
+                    ),
+                  ],
                 )),
               ),
               CustomCardSingle(
                   child: Row(
-                children: [Text('Promosi'), Spacer(), Icon(Icons.radio)],
+                children: [
+                  Text('Promosi'),
+                  Spacer(),
+                  Switch(
+                    value: true, 
+                    onChanged: (_) {},
+                    activeColor: primaryColor,
+                  ),
+                ],
               )),
               CustomCardSingle(
                   child: Row(
-                children: [Text('Status Pesanan'), Spacer(), Icon(Icons.radio)],
+                children: [
+                  Text('Status Pesanan'),
+                  Spacer(),
+                  Switch(
+                    value: true,
+                    onChanged: (_) {},
+                    activeColor: primaryColor, 
+                  ),
+                ],
               )),
             ],
           ),

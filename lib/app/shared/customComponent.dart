@@ -588,8 +588,8 @@ class SharedDraggableSheet extends StatelessWidget {
 }
 
 class CustomDropdown extends StatefulWidget {
-  final String title;               // Judul di baris utama
-  final List<Widget> children;      // Isi dropdown (bisa list widget custom)
+  final String title;               
+  final List<Widget> children;      
   final TextStyle? titleStyle;
 
   const CustomDropdown({
