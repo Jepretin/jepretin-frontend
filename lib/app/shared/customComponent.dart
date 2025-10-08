@@ -749,3 +749,53 @@ class _ResendCountdownState extends State<ResendCountdown> {
     );
   }
 }
+
+class StatusBadge extends StatelessWidget {
+  final OrderStatus status;
+
+  const StatusBadge({
+    super.key,
+    required this.status,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Color bgColor;
+    Color textColor;
+    String displayText;
+
+    switch (status) {
+      case OrderStatus.complete:
+        bgColor = Complete;
+        textColor = FontComplete;
+        displayText = "Complete";
+        break;
+      case OrderStatus.pending:
+        bgColor = Pending;
+        textColor = FontPending;
+        displayText = "Pending";
+        break;
+      case OrderStatus.cancel:
+        bgColor = Cancel;
+        textColor = FontCancel;
+        displayText = "Cancel";
+        break;
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        displayText,
+        style: TextStyle(
+          color: textColor,
+          fontSize: 7,
+          fontWeight: semibold,
+        ),
+      ),
+    );
+  }
+}
