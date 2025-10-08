@@ -37,6 +37,7 @@ class ProfileEditView extends GetView<ProfileEditController> {
                       CustomMenu(
                           leadingIcon: Icons.email,
                           placeholder: 'email***@gmail.com',
+                          onTap: (){} ,
                           trailingIcon: Icons.chevron_right),
                       SizedBox(height: 20),
                     ]),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-
+import 'package:jepretin/app/themes/themes.dart';
 import '../controllers/settings_controller.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/shared/customCardContent.dart';
@@ -54,7 +54,15 @@ class SettingsView extends GetView<SettingsController> {
                       SizedBox(width: 25),
                       Text('Mode Gelap'),
                       Spacer(),
-                      Icon(Icons.radio)
+                      SizedBox(
+                        height: 32,
+                        width: 32,
+                        child: Switch(
+                          value: true,
+                          onChanged: (_) {},
+                          activeColor: primaryColor,
+                        ),
+                      ),
                     ],
                   ))),
             ],

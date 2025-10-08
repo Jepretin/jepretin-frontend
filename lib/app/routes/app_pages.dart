@@ -32,6 +32,8 @@ import '../modules/user/customer/menu_profile/favorite/bindings/favorite_binding
 import '../modules/user/customer/menu_profile/favorite/views/favorite_view.dart';
 import '../modules/user/customer/menu_profile/notification/bindings/notification_binding.dart';
 import '../modules/user/customer/menu_profile/notification/views/notification_view.dart';
+import '../modules/user/customer/menu_profile/password_edit/bindings/password_edit_binding.dart';
+import '../modules/user/customer/menu_profile/password_edit/views/password_edit_view.dart';
 import '../modules/user/customer/menu_profile/policy/bindings/policy_binding.dart';
 import '../modules/user/customer/menu_profile/policy/views/policy_view.dart';
 import '../modules/user/customer/menu_profile/profile_edit/bindings/profile_edit_binding.dart';
@@ -46,6 +48,7 @@ import '../modules/user/customer/menu_profile/term/bindings/term_binding.dart';
 import '../modules/user/customer/menu_profile/term/views/term_view.dart';
 import '../modules/user/customer/profile/bindings/profile_binding.dart';
 import '../modules/user/customer/profile/views/profile_view.dart';
+
 // import '../modules/user/customer/profile_address/bindings/profile_address_binding.dart';
 // import '../modules/user/customer/profile_address/views/profile_address_view.dart';
 // import '../modules/user/customer/profile_edit/bindings/profile_edit_binding.dart';
@@ -180,6 +183,11 @@ class AppPages {
       name: _Paths.FORGOT_PASSWORD,
       page: () => const ForgotPasswordView(),
       binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.PASSWORD_EDIT,
+      page: () => const PasswordEditView(),
+      binding: PasswordEditBinding(),
     ),
   ];
 }

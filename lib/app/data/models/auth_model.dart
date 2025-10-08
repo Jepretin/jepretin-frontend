@@ -91,3 +91,19 @@ class OTPResponse {
     );
   }
 }
+
+class forgotPasswordRequest {
+  final String? email;
+
+
+  forgotPasswordRequest({this.email});
+
+  factory forgotPasswordRequest.fromJson(Map<String, dynamic> json) {
+    return forgotPasswordRequest(
+      email: json["email"],
+    );
+  }
+
+  toJson() {}
+}
+

@@ -130,7 +130,6 @@ class OrderView extends GetView<OrderController> {
               ],
             ),
             const SizedBox(height: 12),
-
             // Baris kedua: Icon + Button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

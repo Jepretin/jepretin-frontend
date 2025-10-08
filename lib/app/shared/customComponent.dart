@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 customAppbar({
   required VoidCallback backButton,
@@ -588,8 +589,8 @@ class SharedDraggableSheet extends StatelessWidget {
 }
 
 class CustomDropdown extends StatefulWidget {
-  final String title;               
-  final List<Widget> children;      
+  final String title;
+  final List<Widget> children;
   final TextStyle? titleStyle;
 
   const CustomDropdown({
@@ -622,7 +623,10 @@ class _CustomDropdownState extends State<CustomDropdown> {
               Text(
                 widget.title,
                 style: widget.titleStyle ??
-                    TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: primaryColor),
+                    TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: primaryColor),
               ),
               Spacer(),
               IconButton(
@@ -650,6 +654,98 @@ class _CustomDropdownState extends State<CustomDropdown> {
             ),
           ),
       ],
+    );
+  }
+}
+
+class ResendCountdown extends StatefulWidget {
+  final String message;
+  final int countdown;
+  final bool autoStart;
+  final VoidCallback? onFInished;
+
+  const ResendCountdown({
+    super.key,
+    required this.message,
+    this.countdown = 60,
+    this.onFInished,
+    this.autoStart = false,
+  });
+
+  @override
+  State<ResendCountdown> createState() => _ResendCountdownState();
+}
+
+class _ResendCountdownState extends State<ResendCountdown> {
+  int _seconds = 0;
+  Timer? _timer;
+
+  void _startCountdown() {
+    setState(() {
+      _seconds = widget.countdown;
+    });
+
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_seconds == 0) {
+        timer.cancel();
+        if (widget.onFInished != null) {
+          widget.onFInished!();
+        }
+        setState(() {}); // biar rebuild balik ke "Kirim ulang"
+      } else {
+        setState(() {
+          _seconds--;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  String _formatTime(int seconds) {
+    final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
+    final secs = (seconds % 60).toString().padLeft(2, '0');
+    return "$minutes:$secs";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: _seconds == 0
+          // kondisi awal
+          ? GestureDetector(
+              onTap: _startCountdown,
+              child: Text(
+                "Kirim ulang",
+                style: TextStyle(
+                  color: primaryColor,
+                  fontSize: 12,
+                ),
+              ),
+            )
+
+          // kondisi lagi countdown
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "${widget.message} Kirim ulang dalam ",
+                  style: TextStyle(color: hintInputAuth, fontSize: 12),
+                ),
+                Text(
+                  _formatTime(_seconds),
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }
