@@ -80,15 +80,16 @@ class CustomInput extends StatelessWidget {
               filled: true,
               fillColor: inputColorAuth,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(25),
                 borderSide: BorderSide.none,
               ),
               contentPadding: const EdgeInsets.symmetric(
-                vertical: 20,
+                horizontal: 20, // jarak kiri-kanan hintText
+                vertical: 18, // jarak atas-bawah hintText
               ),
               prefixIcon: prefixIcon != null
                   ? Padding(
-                      padding: const EdgeInsets.only(left: 15, right: 5),
+                      padding: const EdgeInsets.only(left: 18, right: 10),
                       child: SvgPicture.asset(
                         prefixIcon!,
                         width: 20,
@@ -487,28 +488,65 @@ class CustomProviderInput extends StatelessWidget {
 class InputWithLabel extends StatelessWidget {
   final String label;
   final Widget input;
+  final double maxWidth;
 
-  const InputWithLabel({super.key, required this.label, required this.input});
+  const InputWithLabel({
+    super.key,
+    required this.label,
+    required this.input,
+    this.maxWidth = 500, // default lebar maksimal
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          textAlign: TextAlign.start,
-          style: styletext(
-            fontsize: 13,
-            fontWeight: bold,
-          ),
+    return Center(
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxWidth),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              textAlign: TextAlign.start,
+              style: styletext(
+                fontsize: 13,
+                fontWeight: bold,
+              ),
+            ),
+            const SizedBox(height: 6),
+            input,
+          ],
         ),
-        const SizedBox(height: 6),
-        input,
-      ],
+      ),
     );
   }
 }
+
+// class InputWithLabel extends StatelessWidget {
+//   final String label;
+//   final Widget input;
+
+//   const InputWithLabel({super.key, required this.label, required this.input});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Text(
+//           label,
+//           textAlign: TextAlign.start,
+//           style: styletext(
+//             fontsize: 13,
+//             fontWeight: bold,
+//           ),
+//         ),
+//         const SizedBox(height: 6),
+//         input,
+//       ],
+//     );
+//   }
+// }
 
 Widget CustomMenu({
   required IconData leadingIcon,
@@ -583,6 +621,56 @@ class SharedDraggableSheet extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class StatusBadge extends StatelessWidget {
+  final OrderStatus status;
+
+  const StatusBadge({
+    super.key,
+    required this.status,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Color bgColor;
+    Color textColor;
+    String displayText;
+
+    switch (status) {
+      case OrderStatus.complete:
+        bgColor = complete;
+        textColor = fontComplete;
+        displayText = "Complete";
+        break;
+      case OrderStatus.pending:
+        bgColor = pending;
+        textColor = fontPending;
+        displayText = "Pending";
+        break;
+      case OrderStatus.cancel:
+        bgColor = cancel;
+        textColor = fontCancel;
+        displayText = "Cancel";
+        break;
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        displayText,
+        style: TextStyle(
+          color: textColor,
+          fontSize: 7,
+          fontWeight: semibold,
+        ),
+      ),
     );
   }
 }

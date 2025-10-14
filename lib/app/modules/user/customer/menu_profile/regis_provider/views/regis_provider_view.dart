@@ -34,7 +34,7 @@ class RegisProviderView extends GetView<RegisProviderController> {
                 label: "Nama Lengkap",
                 input: CustomInput(
                   hintText: "Masukkan Nama Lengkapmu",
-                  controller: TextEditingController(),
+                  controller: controller.nameController,
                   suffixIcon: Icons.edit, // ✏️ icon di kanan
                   onIconTap: () {
                     print("Icon edit diklik");
@@ -47,7 +47,7 @@ class RegisProviderView extends GetView<RegisProviderController> {
                 input: CustomInput(
                   // width: 401,
                   hintText: "Lengkapi detail alamat kamu",
-                  controller: TextEditingController(),
+                  controller: controller.phoneController,
                   suffixIcon: Icons.edit, // ✏️ icon di kanan
                   onIconTap: () {
                     print("Icon edit diklik");
@@ -57,10 +57,13 @@ class RegisProviderView extends GetView<RegisProviderController> {
               SizedBox(height: 14),
               InputWithLabel(
                 label: "Pilih Role Kamu",
-                input: CustomInput(
-                  hintText: "",
-                  controller: TextEditingController(),
+                input: RoleSelector(
+                  availableRoles: ["Photography", "Videography", "MUA"],
+                  selectedRoles: controller.selectedRoles,
+                  onToggle: (role) => controller.toggleRole(role),
+                  minWidth: 120, // 👉 Atur lebar kiri-kanannya
                 ),
+                maxWidth: 400,
               ),
               SizedBox(height: 14),
               InputWithLabel(
@@ -68,7 +71,7 @@ class RegisProviderView extends GetView<RegisProviderController> {
                 input: CustomInput(
                   // width: 401,
                   hintText: "Berupa Link Drive",
-                  controller: TextEditingController(),
+                  controller: controller.driveLinkController,
                   suffixIcon: Icons.edit, // ✏️ icon di kanan
                   onIconTap: () {
                     print("Icon edit diklik");
@@ -86,31 +89,17 @@ class RegisProviderView extends GetView<RegisProviderController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ElevatedButton(
-              onPressed: () {
-                // aksi pesan
-              },
+              onPressed: controller.isLoading.value
+                  ? null
+                  : controller.registerProvider,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF03314B),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 180,
-                  vertical: 14,
-                ),
+                backgroundColor: Colors.blueAccent,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               ),
-              child: Column(
-                children: [
-                  Text(
-                    "Pesan",
-                    style: styletext(
-                      fontsize: 13,
-                      fontWeight: semibold,
-                      color: whiteColor,
-                    ),
-                  ),
-                ],
-              ),
+              child: Obx(() => controller.isLoading.value
+                  ? const CircularProgressIndicator(color: Colors.white)
+                  : const Text("Daftar Sekarang")),
             ),
           ],
         ),
@@ -119,13 +108,20 @@ class RegisProviderView extends GetView<RegisProviderController> {
   }
 }
 
+Widget ValidasionProvider() {
+  return Padding(
+    padding: EdgeInsets.all(1),
+  );
+}
 
-Widget ValidasionProvider (){
-  return Padding(padding: EdgeInsets.all(1),);
+Widget ValidasionProviderComplated() {
+  return Padding(
+    padding: EdgeInsets.all(1),
+  );
 }
-Widget ValidasionProviderComplated (){
-  return Padding(padding: EdgeInsets.all(1),);
-}
-Widget ValidasionProviderRejected (){
-  return Padding(padding: EdgeInsets.all(1),);
+
+Widget ValidasionProviderRejected() {
+  return Padding(
+    padding: EdgeInsets.all(1),
+  );
 }

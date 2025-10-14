@@ -27,6 +27,13 @@ abstract class Routes {
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const ULASAN = _Paths.ULASAN;
+  static const DASHBOARD = _Paths.DASHBOARD;
+  static const DASHBOARD_PROVIDER = _Paths.DASHBOARD_PROVIDER;
+  static const MAINP = _Paths.MAINP;
+  static const PESANAN = _Paths.PESANAN;
+  static const UNGGAH_PORTO = _Paths.UNGGAH_PORTO;
+  static const JASA = _Paths.JASA;
+  static const PROFILE_PROVIDER = _Paths.PROFILE_PROVIDER;
 }
 
 abstract class _Paths {
@@ -55,4 +62,11 @@ abstract class _Paths {
   static const PROFILE_EDIT = '/profile-edit';
   static const FORGOT_PASSWORD = '/forgot-password';
   static const ULASAN = '/ulasan';
+  static const DASHBOARD = '/dashboard';
+  static const DASHBOARD_PROVIDER = '/dashboard-provider';
+  static const MAINP = '/mainp';
+  static const PESANAN = '/pesanan';
+  static const UNGGAH_PORTO = '/unggah-porto';
+  static const JASA = '/jasa';
+  static const PROFILE_PROVIDER = '/profile-provider';
 }

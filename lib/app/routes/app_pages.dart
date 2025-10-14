@@ -48,6 +48,18 @@ import '../modules/user/customer/menu_profile/term/bindings/term_binding.dart';
 import '../modules/user/customer/menu_profile/term/views/term_view.dart';
 import '../modules/user/customer/profile/bindings/profile_binding.dart';
 import '../modules/user/customer/profile/views/profile_view.dart';
+import '../modules/user/provider/dashboard_provider/bindings/dashboard_provider_binding.dart';
+import '../modules/user/provider/dashboard_provider/views/dashboard_provider_view.dart';
+import '../modules/user/provider/jasa/bindings/jasa_binding.dart';
+import '../modules/user/provider/jasa/views/jasa_view.dart';
+import '../modules/user/provider/main/bindings/main_provider_binding.dart';
+import '../modules/user/provider/main/views/main_provider_view.dart';
+import '../modules/user/provider/pesanan/bindings/pesanan_binding.dart';
+import '../modules/user/provider/pesanan/views/pesanan_view.dart';
+import '../modules/user/provider/profile-provider/bindings/profile_provider_binding.dart';
+import '../modules/user/provider/profile-provider/views/profile_provider_view.dart';
+import '../modules/user/provider/unggah_porto/bindings/unggah_porto_binding.dart';
+import '../modules/user/provider/unggah_porto/views/unggah_porto_view.dart';
 
 part 'app_routes.dart';
 
@@ -67,6 +79,11 @@ class AppPages {
       name: _Paths.MAIN,
       page: () => const MainView(),
       binding: MainBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAINP,
+      page: () => const MainProviderView(),
+      binding: MainProviderBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
@@ -172,6 +189,31 @@ class AppPages {
       name: _Paths.ULASAN,
       page: () => const UlasanView(),
       binding: UlasanBinding(),
+    ),
+    GetPage(
+      name: _Paths.DASHBOARD_PROVIDER,
+      page: () => const DashboardProviderView(),
+      binding: DashboardProviderBinding(),
+    ),
+    GetPage(
+      name: _Paths.PESANAN,
+      page: () => const PesananView(),
+      binding: PesananBinding(),
+    ),
+    GetPage(
+      name: _Paths.UNGGAH_PORTO,
+      page: () => const UnggahPortoView(),
+      binding: UnggahPortoBinding(),
+    ),
+    GetPage(
+      name: _Paths.JASA,
+      page: () => const JasaView(),
+      binding: JasaBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE_PROVIDER,
+      page: () => const ProfileProviderView(),
+      binding: ProfileProviderBinding(),
     ),
   ];
 }

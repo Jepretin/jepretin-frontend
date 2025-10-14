@@ -11,16 +11,18 @@ class DioClient {
   static DioClient get instance => _instance = DioClient._internal();
 
   Dio initInstance() {
-    final Dio dio = Dio(BaseOptions(
-      receiveDataWhenStatusError: true,
-      baseUrl: dotenv.env['BASE_URL'] ?? '',
-      connectTimeout: const Duration(seconds: 60),
-      validateStatus: (status) {
-        return status != null && status >= 200 && status < 300;
-      },
+    final Dio dio = Dio(
+      BaseOptions(
+        receiveDataWhenStatusError: true,
+        baseUrl: dotenv.env['BASE_URL'] ?? '',
+        connectTimeout: const Duration(seconds: 60),
+        validateStatus: (status) {
+          return status != null && status >= 200 && status < 300;
+        },
 
-      // validateStatus: (status) => (status != null && (status < 403 || status == 412)),
-    ));
+        // validateStatus: (status) => (status != null && (status < 403 || status == 412)),
+      ),
+    );
 
     dio.interceptors.add(
       ApiInterceptor(requestRetrier: DioConnectivityRequestRetrier(dio: dio)),

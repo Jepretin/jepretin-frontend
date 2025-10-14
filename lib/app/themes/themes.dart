@@ -14,6 +14,12 @@ Color textInputColor = const Color(0xff03314B);
 Color inputColorAuth = const Color(0xffEBEDF0);
 Color hintInputAuth = const Color(0xff6C6868);
 Color alertComponentColor = const Color(0xffF66868);
+Color complete = const Color(0xffC7F5D6);
+Color pending = const Color(0xffF5F5C7);
+Color cancel = const Color(0xffFCB9B9);
+Color fontComplete = const Color(0xff00C741);
+Color fontPending = const Color(0xffC0C000);
+Color fontCancel = const Color(0xffE20000);
 
 FontWeight light = FontWeight.w300;
 FontWeight regular = FontWeight.w400;
@@ -23,6 +29,7 @@ FontWeight bold = FontWeight.w700;
 
 enum EnumFontFamily { montserrat, poppins }
 enum EnumFontStyle { normal, italic }
+enum OrderStatus { complete, pending, cancel }
 
 TextStyle styletext({
   required double fontsize,

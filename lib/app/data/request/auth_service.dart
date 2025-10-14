@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:jepretin/app/data/models/auth_model.dart';
 import 'package:jepretin/app/data/services/api_endpoint.dart';
 import 'package:jepretin/app/data/services/api_service.dart';
@@ -21,10 +22,17 @@ class AuthService {
       dio: DioClient.instance.initInstance(),
       headers: HeaderClient.setHeaderBearer(),
       body: request.toJson(),
-      responseConverter: (body) => BaseResponse<LoginResponse>.fromJson(
-        body,
-        (body) => LoginResponse.fromJson(body),
-      ),
+      responseConverter: (body) {
+        print("🐛 BODY di responseConverter: $body");
+        return BaseResponse<LoginResponse>.fromJson(
+          body,
+          (json) => LoginResponse.fromJson(json),
+        );
+      },
+      // (body) => BaseResponse<LoginResponse>.fromJson(
+      //   body,
+      //   (body) => LoginResponse.fromJson(body),
+      // ),
     );
   }
 
@@ -54,4 +62,19 @@ class AuthService {
       ),
     );
   }
+
+  // static Future<void> logout() async {
+  //   final box = GetStorage();
+
+  //   // Hapus token yang disimpan
+  //   await box.remove("token");
+
+  //   await ApiClient.instance.request(
+  //     HttpMethod.post,
+  //     path: ApiEndpoint.logout,
+  //     dio: DioClient.instance.initInstance(),
+  //     headers: HeaderClient.setHeaderBearer(),
+  //     responseConverter: (body) {},
+  //   );
+  // }
 }

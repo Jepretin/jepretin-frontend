@@ -1,6 +1,7 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:jepretin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -10,8 +11,15 @@ class HomeController extends GetxController {
   final isLocation = false.obs;
   // final selectedLocation = "".obs;
 
+  final box = GetStorage();
+
   bool isStar = false;
   int index = 0;
+
+  bool isLoggedIn() {
+    return box.read("token") != null && box.read("token") != "";
+  }
+  
 
   List aboutJepretin = [
     {'image': Icons.privacy_tip_outlined, 'title': 'Kebijakan', 'ontap': () {}},

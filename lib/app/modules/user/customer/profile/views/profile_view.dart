@@ -16,113 +16,119 @@ class ProfileView extends GetView<ProfileController> {
         title: const Text('ProfileView'),
         centerTitle: true,
       ),
-      body: GetBuilder(
-        init: ProfileController(),
-        builder: (controller) => SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
-          child: Column(
-            children: [
-              CustomCardProfile(
-                profileImage: "images/monyet.jpg",
-                child: Row(
+      body: Obx(
+        () {
+          final user = controller.user.value;
+          if (user == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 25),
+            child: Column(
+              children: [
+                CustomCardProfile(
+                  profileImage: "images/monyet.jpg",
+                  child: Row(
+                    children: [
+                      // SizedBox(width: 15),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              Text(
+                                "${user.name}",
+                                style: styletext(
+                                    fontsize: 15,
+                                    fontWeight: regular,
+                                    color: textInputColor),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "${user.email}",
+                                style: styletext(
+                                    fontsize: 15,
+                                    fontWeight: regular,
+                                    color: textInputColor),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Spacer(),
+                      // Icon(Icons.edit),
+                      IconButton(
+                        onPressed: () {
+                          controller.goTo('/profile-edit');
+                        },
+                        icon: Icon(Icons.edit),
+                      ),
+                    ],
+                  ),
+                ),
+                CustomCardMultiple(
                   children: [
-                    // SizedBox(width: 15),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          children: [
-                            Text(
-                              "Nama User",
-                              style: styletext(
-                                  fontsize: 15,
-                                  fontWeight: regular,
-                                  color: textInputColor),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              "email@gmail.com",
-                              style: styletext(
-                                  fontsize: 15,
-                                  fontWeight: regular,
-                                  color: textInputColor),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Spacer(),
-                    // Icon(Icons.edit),
-                    IconButton(
-                      onPressed: () {
-                        controller.goTo('/profile-edit');
-                      },
-                      icon: Icon(Icons.edit),
-                    ),
+                    CustomMenu(
+                        onTap: () => controller.goTo('/address'),
+                        leadingIcon: Icons.location_on_outlined,
+                        placeholder: "Alamat",
+                        trailingIcon: Icons.chevron_right),
+                    CustomMenu(
+                        onTap: () => controller.goTo('/favorite'),
+                        leadingIcon: Icons.favorite_border_outlined,
+                        placeholder: "Favorite",
+                        trailingIcon: Icons.chevron_right),
+                    CustomMenu(
+                        onTap: () => controller.goTo('/notification'),
+                        leadingIcon: Icons.notifications,
+                        placeholder: "Notifikasi",
+                        trailingIcon: Icons.chevron_right),
+                    CustomMenu(
+                        onTap: () => controller.goTo('/regis-provider'),
+                        leadingIcon: Icons.person_add,
+                        placeholder: "Daftar Sebagai Provider",
+                        trailingIcon: Icons.chevron_right),
                   ],
                 ),
-              ),
-              CustomCardMultiple(
-                children: [
-                  CustomMenu(
-                      onTap: () => controller.goTo('/address'),
-                      leadingIcon: Icons.location_on_outlined,
-                      placeholder: "Alamat",
-                      trailingIcon: Icons.chevron_right),
-                  CustomMenu(
-                      onTap: () => controller.goTo('/favorite'),
-                      leadingIcon: Icons.favorite_border_outlined,
-                      placeholder: "Favorite",
-                      trailingIcon: Icons.chevron_right),
-                  CustomMenu(
-                      onTap: () => controller.goTo('/notification'),
-                      leadingIcon: Icons.notifications,
-                      placeholder: "Notifikasi",
-                      trailingIcon: Icons.chevron_right),
-                  CustomMenu(
-                      onTap: () => controller.goTo('/regis-provider'),
-                      leadingIcon: Icons.person_add,
-                      placeholder: "Daftar Sebagai Provider",
-                      trailingIcon: Icons.chevron_right),
-                ],
-              ),
-              CustomCardMultiple(
-                children: [
-                  CustomMenu(
-                      onTap: () => controller.goTo('/policy'),
-                      leadingIcon: Icons.privacy_tip_outlined,
-                      placeholder: "Kebijakan",
-                      trailingIcon: Icons.chevron_right),
-                  CustomMenu(
-                      onTap: () => controller.goTo('/term'),
-                      leadingIcon: Icons.check_circle_outline,
-                      placeholder: "Syarat & Ketentuan",
-                      trailingIcon: Icons.chevron_right),
-                  CustomMenu(
-                      onTap: () => controller.goTo('/report'),
-                      leadingIcon: Icons.info_outline_rounded,
-                      placeholder: "Laporkan",
-                      trailingIcon: Icons.chevron_right),
-                ],
-              ),
-              CustomCardMultiple(
-                children: [
-                  CustomMenu(
-                      onTap: () => controller.goTo('/settings'),
-                      leadingIcon: Icons.settings,
-                      placeholder: "Pengaturan"),
-                  CustomMenu(
-                      onTap: () => controller.goTo('profile'),
-                      leadingIcon: Icons.logout,
-                      placeholder: "Keluar"),
-                ],
-              ),
-            ],
-          ),
-        ),
+                CustomCardMultiple(
+                  children: [
+                    CustomMenu(
+                        onTap: () => controller.goTo('/policy'),
+                        leadingIcon: Icons.privacy_tip_outlined,
+                        placeholder: "Kebijakan",
+                        trailingIcon: Icons.chevron_right),
+                    CustomMenu(
+                        onTap: () => controller.goTo('/term'),
+                        leadingIcon: Icons.check_circle_outline,
+                        placeholder: "Syarat & Ketentuan",
+                        trailingIcon: Icons.chevron_right),
+                    CustomMenu(
+                        onTap: () => controller.goTo('/report'),
+                        leadingIcon: Icons.info_outline_rounded,
+                        placeholder: "Laporkan",
+                        trailingIcon: Icons.chevron_right),
+                  ],
+                ),
+                CustomCardMultiple(
+                  children: [
+                    CustomMenu(
+                        onTap: () => controller.goTo('/settings'),
+                        leadingIcon: Icons.settings,
+                        placeholder: "Pengaturan"),
+                    CustomMenu(
+                        onTap: () => controller.logout(),
+                        leadingIcon: Icons.logout,
+                        placeholder: "Keluar"),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

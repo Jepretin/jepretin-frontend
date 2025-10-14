@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/widgets.dart';
 
@@ -134,4 +136,74 @@ customButtonNormal({
       ),
     ),
   );
+}
+
+class RoleSelector extends StatefulWidget {
+  final List<String> availableRoles;
+  final RxList<String> selectedRoles;
+  final Function(String role) onToggle;
+  final double minWidth; // 🔥 Tambahan parameter
+  final EdgeInsetsGeometry? margin; // opsional biar bisa atur jarak luar
+
+  const RoleSelector({
+    super.key,
+    required this.availableRoles,
+    required this.selectedRoles,
+    required this.onToggle,
+    this.minWidth = 110, // default lebar minimal tombol
+    this.margin,
+  });
+
+  @override
+  State<RoleSelector> createState() => _RoleSelectorState();
+}
+
+class _RoleSelectorState extends State<RoleSelector> {
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => Wrap(
+        spacing: 12,
+        runSpacing: 10,
+        children: widget.availableRoles.map((role) {
+          final isSelected = widget.selectedRoles.contains(role);
+
+          return GestureDetector(
+            onTap: () => widget.onToggle(role),
+            child: Container(
+              constraints: BoxConstraints(
+                minWidth: widget.minWidth, // 🔥 diatur di sini
+              ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 10,
+              ),
+              margin: widget.margin,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? Colors.blueAccent.withOpacity(0.1)
+                    : Colors.grey[200],
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color:
+                      isSelected ? Colors.blueAccent : Colors.grey.shade400,
+                  width: 1.5,
+                ),
+              ),
+              child: Text(
+                role,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: isSelected ? Colors.blueAccent : Colors.black87,
+                  fontWeight:
+                      isSelected ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
 }

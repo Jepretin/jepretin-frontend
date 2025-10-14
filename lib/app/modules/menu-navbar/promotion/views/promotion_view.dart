@@ -21,33 +21,36 @@ class PromotionView extends GetView<PromotionController> {
           padding: EdgeInsets.symmetric(horizontal: 45, vertical: 25),
           child: Container(
             alignment: Alignment.center,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  'icons/coupon.svg',
-                  width: 80,
-                  height: 80,
-                  color: primaryColor,
-                ),
-                // SizedBox(height: 10),
-                Text(
-                  "Segera Hadir",
-                  style: styletext(
-                      fontsize: 10,
-                      fontWeight: semibold,
-                      fontStyle: EnumFontStyle.italic,
-                      color: disableColor),
-                ),
-                Text(
-                  "Promo eksklusif akan segera tersedia. Nantikan kejutan hematnya!",
-                  style: styletext(
-                      fontsize: 9,
-                      fontWeight: light,
-                      fontStyle: EnumFontStyle.italic,
-                      color: disableColor),
-                ),
-              ],
+            child: Padding(
+              padding: EdgeInsets.only(top: 250),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    'icons/promotion.svg',
+                    width: 80,
+                    height: 80,
+                    color: primaryColor.withOpacity(0.46),
+                  ),
+                  // SizedBox(height: 10),
+                  Text(
+                    "Segera Hadir",
+                    style: styletext(
+                        fontsize: 10,
+                        fontWeight: semibold,
+                        fontStyle: EnumFontStyle.italic,
+                        color: disableColor),
+                  ),
+                  Text(
+                    "Promo eksklusif akan segera tersedia. Nantikan kejutan hematnya!",
+                    style: styletext(
+                        fontsize: 9,
+                        fontWeight: light,
+                        fontStyle: EnumFontStyle.italic,
+                        color: disableColor),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
