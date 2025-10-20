@@ -14,7 +14,7 @@ class ProviderService {
       HttpMethod.get,
       path: ApiEndpoint.getProvider,
       dio: DioClient.instance.initInstance(),
-      headers: HeaderClient.setHeaderBearer(),
+      headers: await HeaderClient.setHeaderBearer(),
       responseConverter: (body) {
         return BaseResponse<RegisProviderResponse>.fromJson(
           body,
@@ -24,19 +24,35 @@ class ProviderService {
     );
   }
 
-  /// ✅ POST Provider (daftar sebagai provider baru)
   static Future<Either<ExceptionResponse, BaseResponse<RegisProviderResponse>>>
       registerProvider(RegisProviderRequest request) async {
     return await ApiClient.instance.request(
       HttpMethod.post,
       path: ApiEndpoint.postProvider,
       dio: DioClient.instance.initInstance(),
-      headers: HeaderClient.setHeaderBearer(),
+      headers: await HeaderClient.setHeaderBearer(),
       body: request.toJson(),
       responseConverter: (body) {
         return BaseResponse<RegisProviderResponse>.fromJson(
           body,
           (json) => RegisProviderResponse.fromJson(json),
+        );
+      },
+    );
+  }
+
+  static Future<Either<ExceptionResponse, BaseResponse<PortfolioRequest>>>
+      uploadPortfolio(PortfolioRequest request) async {
+    return await ApiClient.instance.request(
+      HttpMethod.post,
+      path: ApiEndpoint.postPortofolioProvider, // ganti sesuai nama endpoint di constant
+      dio: DioClient.instance.initInstance(),
+      headers: await HeaderClient.setHeaderBearer(),
+      body: request.toJson(),
+      responseConverter: (body) {
+        return BaseResponse<PortfolioRequest>.fromJson(
+          body,
+          (json) => PortfolioRequest.fromJson(json),
         );
       },
     );

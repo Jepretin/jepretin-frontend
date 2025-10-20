@@ -1,4 +1,5 @@
 import 'package:flutter_svg/svg.dart';
+import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,8 @@ class MainView extends GetView<MainController> {
               child: SizedBox(
                 width: 55,
                 height: 32,
-                child: SvgPicture.asset('/icons/pesan.svg',
+                child: SvgPicture.network(
+                    ImagekitEndpoint.icon("pesan.svg"),
                     height: 36, width: 36, color: whiteColor),
               ),
             ),
@@ -47,11 +49,11 @@ class MainView extends GetView<MainController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _navBarIcon(controller, 0, "/icons/home.svg"),
-                  _navBarIcon(controller, 1, "/icons/transaction.svg"),
+                  _navBarIcon(controller, 0, "home.svg"),
+                  _navBarIcon(controller, 1, "transaction.svg"),
                   const SizedBox(width: 40),
-                  _navBarIcon(controller, 2, "/icons/promo.svg"),
-                  _navBarIcon(controller, 3, "/icons/help.svg"),
+                  _navBarIcon(controller, 2, "promo.svg"),
+                  _navBarIcon(controller, 3, "help.svg"),
                 ],
               ),
             ),
@@ -64,8 +66,9 @@ class MainView extends GetView<MainController> {
 
   Widget _navBarIcon(MainController controller, int index, String assetName) {
     return IconButton(
-      icon: SvgPicture.asset(
-        assetName,
+      icon: SvgPicture.network(
+        // assetName,
+        ImagekitEndpoint.icon(assetName),
         color: index == controller.selectedNavbar ? primaryColor : disableColor,
         width: 32,
         height: 32,

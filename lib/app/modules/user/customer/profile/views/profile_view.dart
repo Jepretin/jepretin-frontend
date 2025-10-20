@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jepretin/app/data/models/user_model.dart';
+import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/shared/customCardContent.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/themes/themes.dart';
@@ -18,9 +20,15 @@ class ProfileView extends GetView<ProfileController> {
       ),
       body: Obx(
         () {
-          final user = controller.user.value;
-          if (user == null) {
+          final tes = controller.user.value;
+          // final user = controller.user.value;
+
+          if (controller.isLoading.value) {
             return const Center(child: CircularProgressIndicator());
+          }
+
+          if (tes == null) {
+            return const Center(child: Text("Belum ada data user"));
           }
 
           return SingleChildScrollView(
@@ -28,7 +36,7 @@ class ProfileView extends GetView<ProfileController> {
             child: Column(
               children: [
                 CustomCardProfile(
-                  profileImage: "images/monyet.jpg",
+                  profileImage: ImagekitEndpoint.images("monyet.jpg"),
                   child: Row(
                     children: [
                       // SizedBox(width: 15),
@@ -38,7 +46,10 @@ class ProfileView extends GetView<ProfileController> {
                           Column(
                             children: [
                               Text(
-                                "${user.name}",
+                                (tes.name?.isNotEmpty ?? false)
+                                    ? tes.name!
+                                    : (tes.email?.split('@').first ??
+                                        "Tanpa Nama"),
                                 style: styletext(
                                     fontsize: 15,
                                     fontWeight: regular,
@@ -49,7 +60,7 @@ class ProfileView extends GetView<ProfileController> {
                           Column(
                             children: [
                               Text(
-                                "${user.email}",
+                                tes.email ?? "Tanpa Email",
                                 style: styletext(
                                     fontsize: 15,
                                     fontWeight: regular,

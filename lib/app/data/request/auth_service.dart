@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:jepretin/app/data/models/auth_model.dart';
 import 'package:jepretin/app/data/services/api_endpoint.dart';
 import 'package:jepretin/app/data/services/api_service.dart';
@@ -20,7 +19,7 @@ class AuthService {
       HttpMethod.post,
       path: ApiEndpoint.login, // misalnya "auth/login"
       dio: DioClient.instance.initInstance(),
-      headers: HeaderClient.setHeaderBearer(),
+      headers: HeaderClient.basic(),
       body: request.toJson(),
       responseConverter: (body) {
         print("🐛 BODY di responseConverter: $body");
@@ -42,7 +41,7 @@ class AuthService {
       HttpMethod.post,
       path: ApiEndpoint.register,
       dio: DioClient.instance.initInstance(),
-      headers: HeaderClient.setHeaderBearer(),
+      headers: HeaderClient.basic(),
       body: request.toJson(),
       responseConverter: (body) => RegisterResponse.fromJson(body),
     );
@@ -54,7 +53,7 @@ class AuthService {
       HttpMethod.post,
       path: ApiEndpoint.verifyOtp, // misal: "auth/verify-otp"
       dio: DioClient.instance.initInstance(),
-      headers: HeaderClient.setHeaderBearer(),
+      headers: HeaderClient.basic(),
       body: request.toJson(),
       responseConverter: (body) => BaseResponse<OtpResponse>.fromJson(
         body,

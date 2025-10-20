@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/themes/themes.dart';
 
 import '../controllers/promotion_controller.dart';
@@ -26,8 +27,9 @@ class PromotionView extends GetView<PromotionController> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    'icons/promotion.svg',
+                  SvgPicture.network(
+                    // 'icons/promotion.svg',
+                    ImagekitEndpoint.icon("promotion.svg"),
                     width: 80,
                     height: 80,
                     color: primaryColor.withOpacity(0.46),

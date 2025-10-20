@@ -32,7 +32,7 @@ class LoginView extends GetView<LoginController> {
                         hintText: "Email",
                         controller: controller.emailController,
                         onIconTap: () => {print("Hit")},
-                        prefixIcon: 'icons/email.svg',
+                        prefixIcon: 'email.svg',
                       ),
                     ),
                     InputWithLabel(
@@ -40,7 +40,7 @@ class LoginView extends GetView<LoginController> {
                       input: CustomInputAuth(
                         hintText: "Password",
                         controller: controller.passwordController,
-                        Icon: 'icons/lock_key.svg',
+                        iconName: 'lock_key.svg',
                       ),
                     ),
                   ],

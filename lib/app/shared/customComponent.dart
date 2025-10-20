@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 
 customAppbar({
   required VoidCallback backButton,
@@ -90,16 +91,27 @@ class CustomInput extends StatelessWidget {
               prefixIcon: prefixIcon != null
                   ? Padding(
                       padding: const EdgeInsets.only(left: 18, right: 10),
-                      child: SvgPicture.asset(
-                        prefixIcon!,
+                      child: SvgPicture.network(
+                        ImagekitEndpoint.icon(
+                            prefixIcon!), // memanggil file dari ImageKit
                         width: 20,
                         height: 20,
                         color: hintInputAuth,
-                      ))
+                        placeholderBuilder: (context) => const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 1.5),
+                        ),
+                      ),
+                    )
                   : null,
               suffixIcon: suffixIcon != null
                   ? IconButton(
-                      icon: Icon(suffixIcon, color: Colors.blueGrey, size: 21),
+                      icon: Icon(
+                        suffixIcon,
+                        color: Colors.blueGrey,
+                        size: 21,
+                      ),
                       onPressed: onIconTap,
                     )
                   : null,
@@ -115,7 +127,7 @@ class CustomInputAuth extends StatefulWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
-  final String Icon;
+  final String? iconName;
   final TextStyle? hintStyle;
 
   const CustomInputAuth({
@@ -123,7 +135,7 @@ class CustomInputAuth extends StatefulWidget {
     required this.hintText,
     required this.controller,
     this.keyboardType = TextInputType.text,
-    required this.Icon,
+    this.iconName,
     this.hintStyle,
   });
 
@@ -158,15 +170,22 @@ class _CustomInputAuthState extends State<CustomInputAuth> {
                 borderSide: BorderSide.none,
               ),
               contentPadding: const EdgeInsets.symmetric(vertical: 20),
-              prefixIcon: Padding(
-                padding: const EdgeInsets.only(left: 15, right: 5),
-                child: SvgPicture.asset(
-                  widget.Icon,
-                  color: hintInputAuth,
-                  width: 21,
-                  height: 21,
-                ),
-              ),
+              prefixIcon: widget.iconName != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 15, right: 5),
+                      child: SvgPicture.network(
+                        ImagekitEndpoint.icon(widget.iconName!),
+                        color: hintInputAuth,
+                        width: 21,
+                        height: 21,
+                        placeholderBuilder: (context) => const SizedBox(
+                          width: 21,
+                          height: 21,
+                          child: CircularProgressIndicator(strokeWidth: 1.5),
+                        ),
+                      ),
+                    )
+                  : null,
               suffixIcon: IconButton(
                   icon: Icon(
                     _obscureText ? Icons.visibility_off : Icons.visibility,
@@ -521,32 +540,6 @@ class InputWithLabel extends StatelessWidget {
     );
   }
 }
-
-// class InputWithLabel extends StatelessWidget {
-//   final String label;
-//   final Widget input;
-
-//   const InputWithLabel({super.key, required this.label, required this.input});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Text(
-//           label,
-//           textAlign: TextAlign.start,
-//           style: styletext(
-//             fontsize: 13,
-//             fontWeight: bold,
-//           ),
-//         ),
-//         const SizedBox(height: 6),
-//         input,
-//       ],
-//     );
-//   }
-// }
 
 Widget CustomMenu({
   required IconData leadingIcon,

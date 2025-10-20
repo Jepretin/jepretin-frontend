@@ -39,19 +39,16 @@ class RegisProviderModel {
 
 class RegisProviderRequest {
   final String experience;
-  final String status;
   final List<String> roles;
 
   RegisProviderRequest({
     required this.experience,
-    required this.status,
     required this.roles,
   });
 
   Map<String, dynamic> toJson() {
     return {
       "experience": experience,
-      "status": status,
       "roles": roles,
     };
   }
@@ -59,7 +56,6 @@ class RegisProviderRequest {
   factory RegisProviderRequest.fromJson(Map<String, dynamic> json) {
     return RegisProviderRequest(
       experience: json["experience"] ?? '',
-      status: json["status"] ?? '',
       roles: List<String>.from(json["roles"] ?? []),
     );
   }
@@ -86,4 +82,26 @@ class RegisProviderResponse {
         "message": message,
         "data": data?.toJson(),
       };
+}
+
+class PortfolioRequest {
+  final List<String> media;
+  final String? mediaType;
+
+  PortfolioRequest({
+    required this.media,
+    this.mediaType,
+  });
+
+  Map<String, dynamic> toJson() => {
+        "media": media,
+        if (mediaType != null) "mediaType": mediaType,
+      };
+
+  factory PortfolioRequest.fromJson(Map<String, dynamic> json) {
+    return PortfolioRequest(
+      media: List<String>.from(json['media'] ?? []),
+      mediaType: json['mediaType'],
+    );
+  }
 }

@@ -1,20 +1,25 @@
-import 'package:get_storage/get_storage.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:jepretin/app/data/core/helper/token_manager.dart';
 
 class HeaderClient {
-  // static Map<String, dynamic> setHeaderBearer() {
-  //   Map<String, dynamic> header = {
-  //     "Content-Type": 'application/json',
-  //     "Accept": 'application/json',
-  //   };
-  //   return header;
-  // }
-  static Map<String, String> setHeaderBearer() {
-    final box = GetStorage();
-    final token = box.read("token") ?? "";
+  // static const token = FlutterSecureStorage();
+
+  // Header dengan Bearer Token
+  static Future<Map<String, String>> setHeaderBearer() async {
+    final token = await TokenManager.getToken();
+
     return {
       "Content-Type": "application/json",
       "Accept": "application/json",
-      if (token.isNotEmpty) "Authorization": "Bearer $token",
+      if (token != null && token.isNotEmpty) "Authorization": "Bearer $token",
+    };
+  }
+
+  // Header tanpa Token (misalnya untuk login/register)
+  static Map<String, String> basic() {
+    return {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
     };
   }
 

@@ -1,5 +1,6 @@
 import 'dart:async' show Completer;
 import 'package:flutter/material.dart';
+import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/themes/themes.dart';
 
 enum CardImageRatio { portrait, landscape }
@@ -21,26 +22,26 @@ Future<CardImageRatio> getImageRatio(String url) async {
 
 final List<Map<String, dynamic>> dummyData = [
   {
-    "profileImage": "images/monyet.jpg",
+    "profileImage": ImagekitEndpoint.images("monyet.jpg"),
     "title": "Tim Jepretin",
     "subtitle": "Photographer",
-    "mainImage": "images/content/mount.png",
+    "mainImage": ImagekitEndpoint.feed("mount.png"),
     "likes": 18,
     "ratio": CardImageRatio.landscape,
   },
   {
-    "profileImage": "images/monyet.jpg",
+    "profileImage": ImagekitEndpoint.images("monyet.jpg"),
     "title": "Diamond Pictora",
     "subtitle": "Photographer & Videographer",
-    "mainImage": "images/content/wedding.png",
+    "mainImage": ImagekitEndpoint.feed("wedding.png"),
     "likes": 27,
     "ratio": CardImageRatio.portrait,
   },
   {
-    "profileImage": "images/monyet.jpg",
+    "profileImage": ImagekitEndpoint.images("monyet.jpg"),
     "title": "Sky Lens",
     "subtitle": "Drone Specialist",
-    "mainImage": "images/content/drone.png",
+    "mainImage": ImagekitEndpoint.feed("buthak.jpg"),
     "likes": 45,
     "ratio": CardImageRatio.landscape,
   },
@@ -87,7 +88,7 @@ class SharedCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(profileImage),
+                  backgroundImage: NetworkImage(profileImage),
                   radius: 20,
                 ),
                 const SizedBox(width: 10),
@@ -112,14 +113,14 @@ class SharedCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: imageRatio == CardImageRatio.portrait
-                  ? Image.asset(
+                  ? Image.network(
                       mainImage,
                       fit: BoxFit.cover,
                       width: double.infinity,
                     )
                   : AspectRatio(
                       aspectRatio: 4 / 3,
-                      child: Image.asset(
+                      child: Image.network(
                         mainImage,
                         fit: BoxFit.cover,
                         width: double.infinity,
@@ -181,7 +182,7 @@ CustomCardProfile({
         children: [
           // Foto profil
           CircleAvatar(
-            backgroundImage: AssetImage(profileImage),
+            backgroundImage: NetworkImage(profileImage),
             radius: 28,
           ),
           const SizedBox(width: 15),

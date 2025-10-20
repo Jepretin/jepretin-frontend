@@ -2,22 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:get_storage/get_storage.dart'; 
+import 'package:jepretin/app/data/core/helper/token_manager.dart';
+import 'package:jepretin/app/modules/main/controllers/main_controller.dart';
 import 'app/routes/app_pages.dart';
 import 'package:jepretin/app/themes/themes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await TokenManager.init();
+
   // Load file .env
-  await dotenv.load(fileName: "config/.env");
-  await GetStorage.init();
+  await dotenv.load(fileName: ".env");
+  // await dotenv.load(fileName: "config/.env");
+
+  final isProvider = await TokenManager.isProvider();
+  final isAdmin = await TokenManager.isAdmin();
+
+  String initialRoute;
+
+  if (isProvider) {
+    initialRoute = '/dasboard-provider';
+  } if (isAdmin) {
+    initialRoute = '';
+  } else {
+    initialRoute = '/main';
+  }
 
   runApp(
     SafeArea(
       child: GetMaterialApp(
-        title: "Application",
-        initialRoute: Routes.MAIN,
+        title: "Jepretin",
+        debugShowCheckedModeBanner: false,
+        initialRoute: initialRoute,
         getPages: AppPages.routes,
         theme: ThemeData(
           scaffoldBackgroundColor: Colors.white, //background global

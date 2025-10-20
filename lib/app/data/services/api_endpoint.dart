@@ -7,8 +7,10 @@ class ApiEndpoint {
   static String getUser = "user/get-user";
   static String putProfileUser = "user/update-user";
 
+  static String getRole = "provider/roles";
   static String getProvider = "providers/get-provider";
   static String postProvider = "provider/provider";
+  static String postPortofolioProvider = "provider/portofolio";
 
   // Contoh untuk penggunaan id dan page
   // static String userRegister({required String id}) => "tiket/mountain/$id/detail";

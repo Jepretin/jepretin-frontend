@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:jepretin/app/data/core/helper/token_manager.dart';
+import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/modules/auth/login/views/login_view.dart';
 import 'package:jepretin/app/modules/auth/register/views/register_view.dart';
 // import 'package:jepretin/app/routes/app_pages.dart';
@@ -15,11 +16,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../controllers/home_controller.dart';
 
-final box = GetStorage();
-
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
-  bool get isLoggedIn => box.read("token") != null && box.read("token") != "";
 
   @override
   Widget build(BuildContext context) {
@@ -58,49 +56,50 @@ class HomeView extends GetView<HomeController> {
                       onTap: () => controller.goToCart(),
                       icon: Icons.shopping_cart_outlined,
                     ),
-                    isLoggedIn
-                        ? _topIconComponent(
-                            onTap: () => controller.goToProfile(),
-                            icon: Icons.person_2_outlined,
-                          )
-                        : PopupMenuButton<String>(
-                            offset: const Offset(0, 70),
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 10),
-                              decoration: BoxDecoration(
-                                color: whiteColor,
-                                shape: BoxShape.circle,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 10,
-                                    color: blackColor.withOpacity(0.2),
-                                    spreadRadius: 0.5,
-                                    offset: Offset(0, 0),
-                                  ),
-                                ],
+                    Obx(() => controller.isLoggedIn.value
+                          ? _topIconComponent(
+                              onTap: () => controller.goToProfile(),
+                              icon: Icons.person_2_outlined,
+                            )
+                          : PopupMenuButton<String>(
+                              offset: const Offset(0, 70),
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.all(10),
+                                margin: const EdgeInsets.only(left: 10),
+                                decoration: BoxDecoration(
+                                  color: whiteColor,
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 10,
+                                      color: blackColor.withOpacity(0.2),
+                                      spreadRadius: 0.5,
+                                      offset: const Offset(0, 0),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.person_2_outlined),
                               ),
-                              child: Icon(Icons.person_2_outlined),
+                              onSelected: (value) {
+                                if (value == "login") {
+                                  Get.to(() => const LoginView());
+                                } else if (value == "register") {
+                                  Get.to(() => const RegisterView());
+                                }
+                              },
+                              itemBuilder: (context) => const [
+                                PopupMenuItem(
+                                  value: "login",
+                                  child: Text("Login"),
+                                ),
+                                PopupMenuItem(
+                                  value: "register",
+                                  child: Text("Register"),
+                                ),
+                              ],
                             ),
-                            onSelected: (value) {
-                              if (value == "login") {
-                                Get.to(() => const LoginView());
-                              } else if (value == "register") {
-                                Get.to(() => const RegisterView());
-                              }
-                            },
-                            itemBuilder: (context) => [
-                              const PopupMenuItem(
-                                value: "login",
-                                child: Text("Login"),
-                              ),
-                              const PopupMenuItem(
-                                value: "register",
-                                child: Text("Register"),
-                              ),
-                            ],
-                          ),
+                    ),
                   ],
                 ),
               ),
@@ -164,8 +163,8 @@ class HomeView extends GetView<HomeController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                'icons/ads.svg',
+              SvgPicture.network(
+                ImagekitEndpoint.icon("ads.svg"),
                 width: 41,
                 height: 41,
                 color: whiteColor,

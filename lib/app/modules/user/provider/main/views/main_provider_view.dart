@@ -1,4 +1,5 @@
 import 'package:flutter_svg/svg.dart';
+import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,12 @@ class MainProviderView extends GetView<MainProviderController> {
               shape: const CircleBorder(),
               // child: Icon(Icons.send, color: Colors.white, size: 28),
               child: SizedBox(
-                child: SvgPicture.asset('/icons/add-image.svg',
-                    height: 26, width: 26, color: whiteColor),
+                child: SvgPicture.network(
+                    // '/icons/add-image.svg',
+                    ImagekitEndpoint.icon("add-image.svg"),
+                    height: 26,
+                    width: 26,
+                    color: whiteColor),
               ),
             ),
           ),
@@ -45,11 +50,11 @@ class MainProviderView extends GetView<MainProviderController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _navBarIcon(controller, 0, "/icons/home.svg"),
-                  _navBarIcon(controller, 1, "/icons/order-dashboard-provider.svg"),
+                  _navBarIcon(controller, 0, "home.svg"),
+                  _navBarIcon(controller, 1, "order-dashboard-provider.svg"),
                   const SizedBox(width: 40),
-                  _navBarIcon(controller, 2, "/icons/jasa-before.svg"),
-                  _navBarIcon(controller, 3, "/icons/profile-provider-before.svg"),
+                  _navBarIcon(controller, 2, "jasa-before.svg"),
+                  _navBarIcon(controller, 3, "profile-provider-before.svg"),
                 ],
               ),
             ),
@@ -60,10 +65,12 @@ class MainProviderView extends GetView<MainProviderController> {
     );
   }
 
-  Widget _navBarIcon(MainProviderController controller, int index, String assetName) {
+  Widget _navBarIcon(
+      MainProviderController controller, int index, String assetName) {
     return IconButton(
-      icon: SvgPicture.asset(
-        assetName,
+      icon: SvgPicture.network(
+        // assetName,
+        ImagekitEndpoint.icon(assetName),
         color: index == controller.selectedNavbar ? primaryColor : disableColor,
         width: 32,
         height: 32,
