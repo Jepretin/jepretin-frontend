@@ -14,7 +14,7 @@ class MainController extends GetxController {
   List<Widget> page = [
     HomeView(),
     HistoryTransactionView(),
-    HistoryTransactionView(),
+    PromotionView(),
     HelpView()
   ];
 

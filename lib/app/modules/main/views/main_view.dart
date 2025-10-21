@@ -1,7 +1,8 @@
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../controllers/main_controller.dart';
@@ -43,7 +44,7 @@ class MainView extends GetView<MainController> {
                   _navBarIcon(controller, 0, Icons.home),
                   _navBarIcon(controller, 1, Icons.credit_card_rounded),
                   const SizedBox(width: 40),
-                  _navBarIcon(controller, 2, Icons.notifications),
+                  _navBarIcon(controller, 2, Icons.card_giftcard_outlined),
                   _navBarIcon(controller, 3, Icons.person),
                 ],
               ),

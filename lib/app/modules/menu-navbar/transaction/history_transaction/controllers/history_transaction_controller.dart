@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
 
 class HistoryTransactionController extends GetxController {
-  //TODO: Implement HistoryTransactionController
-
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +16,17 @@ class HistoryTransactionController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  var isVisible = false.obs;
+
+  void toggle() {
+    isVisible.value = !isVisible.value;
+  }
+  void show() {
+    isVisible.value = true;
+  }
+  void hide() {
+    isVisible.value = false;
+  }
+
+
 }
