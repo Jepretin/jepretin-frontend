@@ -85,23 +85,56 @@ class RegisProviderResponse {
 }
 
 class PortfolioRequest {
-  final List<String> media;
-  final String? mediaType;
+  final List<String> media; // path lokal file
+  final String mediaType;   // wajib
+  final String? description;
 
   PortfolioRequest({
     required this.media,
-    this.mediaType,
+    required this.mediaType,
+    this.description,
+  });
+}
+
+class PortfolioResponse {
+  final String id;
+  final String providerId;
+  final String providerName;
+  final String mediaUrl;
+  final String mediaType;
+  final String? description;
+  final String createdAt;
+
+  PortfolioResponse({
+    required this.id,
+    required this.providerId,
+    required this.providerName,
+    required this.mediaUrl,
+    required this.mediaType,
+    this.description,
+    required this.createdAt,
   });
 
-  Map<String, dynamic> toJson() => {
-        "media": media,
-        if (mediaType != null) "mediaType": mediaType,
-      };
-
-  factory PortfolioRequest.fromJson(Map<String, dynamic> json) {
-    return PortfolioRequest(
-      media: List<String>.from(json['media'] ?? []),
-      mediaType: json['mediaType'],
+  factory PortfolioResponse.fromJson(Map<String, dynamic> json) {
+    return PortfolioResponse(
+      id: json['id'] ?? '',
+      providerId: json['providerId'] ?? '',
+      providerName: json['providerName'] ?? '',
+      mediaUrl: json['mediaUrl'] ?? '',
+      mediaType: json['mediaType'] ?? '',
+      description: json['description'],
+      createdAt: json['createdAt'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'providerId': providerId,
+        'providerName': providerName,
+        'mediaUrl': mediaUrl,
+        'mediaType': mediaType,
+        if (description != null) 'description': description,
+        'createdAt': createdAt,
+      };
 }
+

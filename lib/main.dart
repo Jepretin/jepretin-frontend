@@ -22,11 +22,11 @@ Future<void> main() async {
   String initialRoute;
 
   if (isProvider) {
-    initialRoute = '/dasboard-provider';
+    initialRoute = 'mainp';
   } if (isAdmin) {
     initialRoute = '';
   } else {
-    initialRoute = '/main';
+    initialRoute = 'main';
   }
 
   runApp(

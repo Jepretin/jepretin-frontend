@@ -8,16 +8,18 @@ import 'package:jepretin/app/data/request/provider_service.dart';
 class UnggahPortoController extends GetxController {
   final RxList<File> selectedMedia = <File>[].obs;
   final RxBool isLoading = false.obs;
+  final RxString description = ''.obs;
+  final RxString selectedType = 'image'.obs; // ✨ default: image
   final picker = ImagePicker();
 
-  Future<void> pickMedia({bool isVideo = false}) async {
-    if (isVideo) {
+  Future<void> pickMedia() async {
+    if (selectedType.value == 'video') {
       final XFile? video = await picker.pickVideo(source: ImageSource.gallery);
-      if (video != null) selectedMedia.add(File(video.path));
+      if (video != null) selectedMedia.assign([File(video.path)] as File);
     } else {
-      final List<XFile>? images = await picker.pickMultiImage();
-      if (images != null && images.isNotEmpty) {
-        selectedMedia.assignAll(images.map((e) => File(e.path)));
+      final List<XFile>? image = await picker.pickMultiImage();
+      if (image != null && image.isNotEmpty) {
+        selectedMedia.assignAll(image.map((e) => File(e.path)));
       }
     }
   }
@@ -28,13 +30,18 @@ class UnggahPortoController extends GetxController {
       return;
     }
 
+    if (description.value.isEmpty) {
+      Get.snackbar("Gagal", "Deskripsi tidak boleh kosong");
+      return;
+    }
+
     try {
       isLoading.value = true;
 
-      // 🔥 Kirim path file saja ke BE — nanti BE yang handle ke ImageKit
       final request = PortfolioRequest(
         media: selectedMedia.map((e) => e.path).toList(),
-        mediaType: "Portfolio Photography",
+        mediaType: selectedType.value, // 🧠 kirim tipe media
+        description: description.value,
       );
 
       final res = await ProviderService.uploadPortfolio(request);
@@ -47,6 +54,8 @@ class UnggahPortoController extends GetxController {
         (r) {
           Get.snackbar("Sukses", "Portofolio berhasil diupload ✅");
           print("✅ Response: ${r.data}");
+          description.value = '';
+          selectedMedia.clear();
         },
       );
     } catch (e) {
