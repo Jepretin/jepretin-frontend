@@ -1,3 +1,6 @@
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:jepretin/app/modules/menu-navbar/home/controllers/home_controller.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -287,6 +290,15 @@ class CustomAddressInput extends StatelessWidget {
         },
         onSelected: (datacity) {
           controller.text = datacity.city;
+
+          // Kalau kamu mau langsung jalankan selectLocation setelah memilih kota:
+          final homeController = Get.find<HomeController>();
+          homeController.selectLocation(
+            // province: datacity.province,
+            city: datacity.city,
+            // district: '',
+            // village: '',
+          );
         },
       ),
     );

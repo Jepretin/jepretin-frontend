@@ -56,7 +56,8 @@ class HomeView extends GetView<HomeController> {
                       onTap: () => controller.goToCart(),
                       icon: Icons.shopping_cart_outlined,
                     ),
-                    Obx(() => controller.isLoggedIn.value
+                    Obx(
+                      () => controller.isLoggedIn.value
                           ? _topIconComponent(
                               onTap: () => controller.goToProfile(),
                               icon: Icons.person_2_outlined,
@@ -189,7 +190,12 @@ class HomeView extends GetView<HomeController> {
                         canPop: true,
                         onPopInvokedWithResult: (didPop, result) {
                           if (didPop) {
-                            controller.selectLocation();
+                            controller.selectLocation(
+                              // province: controller.selectedProvince.value,
+                              city: controller.selectedCity.value,
+                              // district: controller.selectedDistrict.value,
+                              // village: controller.selectedVillage.value,
+                            );
                           }
                         },
                         child: AlertDialog(
@@ -219,7 +225,7 @@ class HomeView extends GetView<HomeController> {
                                     fontWeight: medium,
                                     color: textInputColor,
                                   ),
-                                  controller: TextEditingController(),
+                                  controller: controller.addressController,
                                 ),
                               ),
                               const SizedBox(height: 15),
@@ -241,7 +247,12 @@ class HomeView extends GetView<HomeController> {
                             customElevatedButton(
                               text: "Pilih",
                               onTap: () {
-                                controller.selectLocation(); // ✅ ubah state
+                                controller.selectLocation(
+                                  // province: controller.selectedProvince.value,
+                                  city: controller.selectedCity.value,
+                                  // district: controller.selectedDistrict.value,
+                                  // village: controller.selectedVillage.value,
+                                );
                                 Get.back(); // tutup popup
                               },
                             )
@@ -282,7 +293,7 @@ class HomeView extends GetView<HomeController> {
             physics: NeverScrollableScrollPhysics(),
             itemCount: 1,
             itemBuilder: (context, index) {
-              final item = dummyData[index];
+              final item = controller.providerList[index];
               return SharedCard(
                 profileImage: item["profileImage"],
                 title: item["title"],
@@ -321,10 +332,20 @@ class HomeView extends GetView<HomeController> {
       child: Column(
         children: [
           ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            itemCount: dummyData.length,
+            itemCount: controller.providerList.length,
             itemBuilder: (context, index) {
-              final item = dummyData[index];
+              final item = controller.providerList[index];
+              if (controller.providerList.isEmpty) {
+                return Center(
+                  child: Text(
+                    "Belum ada provider di area ini 😔",
+                    style: styletext(fontsize: 14, fontWeight: medium),
+                  ),
+                );
+              }
               return SharedCard(
                 profileImage: item["profileImage"],
                 title: item["title"],

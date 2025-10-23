@@ -1,6 +1,5 @@
 import 'dart:async' show Completer;
 import 'package:flutter/material.dart';
-import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/themes/themes.dart';
 
 enum CardImageRatio { portrait, landscape }
@@ -20,32 +19,32 @@ Future<CardImageRatio> getImageRatio(String url) async {
   return height > width ? CardImageRatio.portrait : CardImageRatio.landscape;
 }
 
-final List<Map<String, dynamic>> dummyData = [
-  {
-    "profileImage": ImagekitEndpoint.images("monyet.jpg"),
-    "title": "Tim Jepretin",
-    "subtitle": "Photographer",
-    "mainImage": ImagekitEndpoint.feed("mount.png"),
-    "likes": 18,
-    "ratio": CardImageRatio.landscape,
-  },
-  {
-    "profileImage": ImagekitEndpoint.images("monyet.jpg"),
-    "title": "Diamond Pictora",
-    "subtitle": "Photographer & Videographer",
-    "mainImage": ImagekitEndpoint.feed("wedding.png"),
-    "likes": 27,
-    "ratio": CardImageRatio.portrait,
-  },
-  {
-    "profileImage": ImagekitEndpoint.images("monyet.jpg"),
-    "title": "Sky Lens",
-    "subtitle": "Drone Specialist",
-    "mainImage": ImagekitEndpoint.feed("buthak.jpg"),
-    "likes": 45,
-    "ratio": CardImageRatio.landscape,
-  },
-];
+// final List<Map<String, dynamic>> dummyData = [
+  // {
+  //   "profileImage": ImagekitEndpoint.images("monyet.jpg"),
+  //   "title": "Tim Jepretin",
+  //   "subtitle": "Photographer",
+  //   "mainImage": ImagekitEndpoint.feed("mount.png"),
+  //   "likes": 18,
+  //   "ratio": CardImageRatio.landscape,
+  // },
+  // {
+  //   "profileImage": ImagekitEndpoint.images("monyet.jpg"),
+  //   "title": "Diamond Pictora",
+  //   "subtitle": "Photographer & Videographer",
+  //   "mainImage": ImagekitEndpoint.feed("wedding.png"),
+  //   "likes": 27,
+  //   "ratio": CardImageRatio.portrait,
+  // },
+  // {
+  //   "profileImage": ImagekitEndpoint.images("monyet.jpg"),
+  //   "title": "Sky Lens",
+  //   "subtitle": "Drone Specialist",
+  //   "mainImage": ImagekitEndpoint.feed("buthak.jpg"),
+  //   "likes": 45,
+  //   "ratio": CardImageRatio.landscape,
+  // },
+// ];
 
 class SharedCard extends StatelessWidget {
   final String profileImage;
