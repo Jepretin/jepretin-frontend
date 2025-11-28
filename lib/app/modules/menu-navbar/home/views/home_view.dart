@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:jepretin/app/data/core/helper/token_manager.dart';
+import 'package:jepretin/app/data/core/helper/address_helper.dart';
 import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/modules/auth/login/views/login_view.dart';
 import 'package:jepretin/app/modules/auth/register/views/register_view.dart';
@@ -110,7 +111,7 @@ class HomeView extends GetView<HomeController> {
         ),
       ),
       body: Obx(() {
-        return controller.isLocation.value
+        return controller.isCoverage.value
             ? buildAfterMainView()
             : buildBeforeMainView();
       }),
@@ -159,121 +160,168 @@ class HomeView extends GetView<HomeController> {
           ),
         ],
       ),
-      child: Column(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          SvgPicture.network(
+            ImagekitEndpoint.icon("ads.svg"),
+            width: 41,
+            height: 41,
+            color: whiteColor,
+          ),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SvgPicture.network(
-                ImagekitEndpoint.icon("ads.svg"),
-                width: 41,
-                height: 41,
-                color: whiteColor,
+              Text(
+                "Ingin menampilkan Portofolio Tim kami? klik",
+                style: styletext(
+                  fontsize: 12,
+                  fontWeight: medium,
+                  fontStyle: EnumFontStyle.italic,
+                  fontFamily: EnumFontFamily.montserrat,
+                  color: whiteColor,
+                ),
               ),
-              const SizedBox(width: 10),
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(
-                  "Ingin menampilkan Portofolio Tim kami? klik",
-                  softWrap: true,
+              GestureDetector(
+                onTap: () {
+                  Get.dialog(
+                    PopScope(
+                      canPop: true,
+                      onPopInvokedWithResult: (didPop, result) {
+                        if (didPop) {
+                          // Setelah popup ditutup
+                          // controller.selectLocation(
+                          //   city: controller.selectedCity.value,
+                          // );
+                        }
+                      },
+                      child: AlertDialog(
+                        backgroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(11),
+                        ),
+                        title: Center(
+                          child: Text(
+                            "Pilih Lokasi",
+                            style: styletext(
+                              fontsize: 19,
+                              fontWeight: semibold,
+                              color: textInputColor,
+                            ),
+                          ),
+                        ),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // PROVINCE
+                            InputWithLabel(
+                              label: "Provinsi",
+                              input: CustomAddressInput(
+                                level: AddressLevel.province,
+                                hintText: "Pilih Provinsi",
+                                handler: Get.find<HomeController>(),
+                                hintStyle: styletext(
+                                  fontsize: 10,
+                                  fontWeight: medium,
+                                  color: textInputColor,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 12),
+
+                            // KABUPATEN/KOTA
+                            InputWithLabel(
+                              label: "Kabupaten/Kota",
+                              input: CustomAddressInput(
+                                level: AddressLevel.regency,
+                                hintText: "Pilih Kabupaten",
+                                handler: Get.find<HomeController>(),
+                                hintStyle: styletext(
+                                  fontsize: 10,
+                                  fontWeight: medium,
+                                  color: textInputColor,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 12),
+
+                            // DISTRICT
+                            InputWithLabel(
+                              label: "Kecamatan",
+                              input: CustomAddressInput(
+                                level: AddressLevel.district,
+                                hintText: "Pilih Kecamatan",
+                                handler: Get.find<HomeController>(),
+                                hintStyle: styletext(
+                                  fontsize: 10,
+                                  fontWeight: medium,
+                                  color: textInputColor,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 12),
+
+                            // VILLAGE
+                            InputWithLabel(
+                              label: "Desa/Kelurahan",
+                              input: CustomAddressInput(
+                                level: AddressLevel.village,
+                                hintText: "Pilih Desa",
+                                handler: Get.find<HomeController>(),
+                                hintStyle: styletext(
+                                  fontsize: 10,
+                                  fontWeight: medium,
+                                  color: textInputColor,
+                                ),
+                              ),
+                            ),
+
+                            const SizedBox(height: 15),
+
+                            // DETAIL ADDRESS INPUT
+                            InputWithLabel(
+                              label: "Detail Alamat",
+                              input: CustomInput(
+                                hintText: "",
+                                hintStyle: styletext(
+                                  fontsize: 10,
+                                  fontWeight: medium,
+                                  color: textInputColor,
+                                ),
+                                controller: controller.addressDetailController,
+                              ),
+                            ),
+                          ],
+                        ),
+                        actions: [
+                          customElevatedButton(
+                            text: "Pilih",
+                            onTap: () {
+                              controller.addAddress();
+                              Get.back();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  controller.isCoverage.value
+                      ? "Lokasi sudah dipilih"
+                      : "Klik untuk menambahkan lokasi",
                   style: styletext(
                     fontsize: 12,
                     fontWeight: medium,
-                    fontStyle: EnumFontStyle.italic,
                     fontFamily: EnumFontFamily.montserrat,
                     color: whiteColor,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Get.dialog(
-                      PopScope(
-                        canPop: true,
-                        onPopInvokedWithResult: (didPop, result) {
-                          if (didPop) {
-                            controller.selectLocation(
-                              // province: controller.selectedProvince.value,
-                              city: controller.selectedCity.value,
-                              // district: controller.selectedDistrict.value,
-                              // village: controller.selectedVillage.value,
-                            );
-                          }
-                        },
-                        child: AlertDialog(
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(11),
-                          ),
-                          title: Center(
-                            child: Text(
-                              "Pilih Lokasi",
-                              style: styletext(
-                                fontsize: 19,
-                                fontWeight: semibold,
-                                color: textInputColor,
-                              ),
-                            ),
-                          ),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              InputWithLabel(
-                                label: "Alamat",
-                                input: CustomAddressInput(
-                                  hintText: "Isi alamat sesuai acara",
-                                  hintStyle: styletext(
-                                    fontsize: 10,
-                                    fontWeight: medium,
-                                    color: textInputColor,
-                                  ),
-                                  controller: controller.addressController,
-                                ),
-                              ),
-                              const SizedBox(height: 15),
-                              InputWithLabel(
-                                label: "Koordinat",
-                                input: CustomInput(
-                                  hintText: "Isi koordinat lokasi",
-                                  hintStyle: styletext(
-                                    fontsize: 10,
-                                    fontWeight: medium,
-                                    color: textInputColor,
-                                  ),
-                                  controller: TextEditingController(),
-                                ),
-                              ),
-                            ],
-                          ),
-                          actions: [
-                            customElevatedButton(
-                              text: "Pilih",
-                              onTap: () {
-                                controller.selectLocation(
-                                  // province: controller.selectedProvince.value,
-                                  city: controller.selectedCity.value,
-                                  // district: controller.selectedDistrict.value,
-                                  // village: controller.selectedVillage.value,
-                                );
-                                Get.back(); // tutup popup
-                              },
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    controller.isLocation.value
-                        ? "Lokasi sudah dipilih"
-                        : "Klik untuk menambahkan lokasi",
-                    style: styletext(
-                      fontsize: 12,
-                      fontWeight: medium,
-                      fontFamily: EnumFontFamily.montserrat,
-                      color: whiteColor,
-                    ),
-                  ),
-                ),
-              ]),
+              ),
             ],
           ),
         ],
@@ -288,25 +336,25 @@ class HomeView extends GetView<HomeController> {
         children: [
           _alertContainer(),
           SizedBox(height: 15),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              final item = controller.providerList[index];
-              return SharedCard(
-                profileImage: item["profileImage"],
-                title: item["title"],
-                subtitle: item["subtitle"],
-                mainImage: item["mainImage"],
-                likes: item["likes"],
-                onLike: () => print("Like ${item["title"]}"),
-                onOrder: () => print("Order ${item["title"]}"),
-                imageRatio: item["ratio"],
-              );
-            },
-            separatorBuilder: (context, index) => SizedBox(height: 10),
-          ),
+          // ListView.separated(
+          //   shrinkWrap: true,
+          //   physics: NeverScrollableScrollPhysics(),
+          //   itemCount: 1,
+          //   itemBuilder: (context, index) {
+          //     final item = controller.providerList[index];
+          //     return SharedCard(
+          //       profileImage: item["profileImage"],
+          //       title: item["title"],
+          //       subtitle: item["subtitle"],
+          //       mainImage: item["mainImage"],
+          //       likes: item["likes"],
+          //       onLike: () => print("Like ${item["title"]}"),
+          //       onOrder: () => print("Order ${item["title"]}"),
+          //       imageRatio: item["ratio"],
+          //     );
+          //   },
+          //   separatorBuilder: (context, index) => SizedBox(height: 10),
+          // ),
           SizedBox(height: 100),
           Column(
             children: [

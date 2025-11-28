@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:jepretin/app/data/core/helper/token_manager.dart';
 import 'package:jepretin/app/data/models/auth_model.dart';
 import 'package:jepretin/app/data/request/auth_service.dart';
+import 'package:jepretin/app/modules/menu-navbar/home/controllers/home_controller.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController();
@@ -41,8 +42,12 @@ class LoginController extends GetxController {
 
           // Simpan ke secure storage
           await TokenManager.saveToken(token);
-          // await TokenManager.saveRole(role);
-          // await TokenManager.saveUserId(userId);
+          await TokenManager.saveUserId(userId);
+
+          // ✅ Tambahkan ini supaya HomeController langsung tahu user sudah login
+          final homeController = Get.find<HomeController>();
+          homeController.checkLoginStatus();
+
           // Navigasi berdasarkan role
           if (role == "provider") {
             Get.offAllNamed("/dashboard-provider");
@@ -55,6 +60,28 @@ class LoginController extends GetxController {
         } else {
           Get.snackbar("Login Gagal", "Token kosong, cek API response");
         }
+
+        // if (token.isNotEmpty) {
+        //   Get.snackbar("Sukses", "Login berhasil untuk $userEmail");
+        //   final role = r.data?.user?.role ?? "user";
+        //   final userId = r.data?.user?.id ?? "";
+
+        //   // Simpan ke secure storage
+        //   await TokenManager.saveToken(token);
+        //   // await TokenManager.saveRole(role);
+        //   // await TokenManager.saveUserId(userId);
+        //   // Navigasi berdasarkan role
+        //   if (role == "provider") {
+        //     Get.offAllNamed("/dashboard-provider");
+        //   } else {
+        //     Get.offAllNamed("/main");
+        //   }
+
+        //   print("🔑 Token tersimpan: $token");
+        //   print("🧩 Role: $role | User ID: $userId");
+        // } else {
+        //   Get.snackbar("Login Gagal", "Token kosong, cek API response");
+        // }
       },
     );
 

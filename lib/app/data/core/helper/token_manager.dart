@@ -7,6 +7,8 @@ class TokenManager {
 
   static const _keyToken = 'auth_token';
   static const _keyUser = 'user_data'; // ✅ ini kunci untuk user model JSON
+  static const _keyAddress = "user_addresses";
+  static const _keyAddressId = "address_id";
 
   // ========================
   // 🔑 TOKEN SECTION
@@ -70,6 +72,33 @@ class TokenManager {
   static Future<bool> isAdmin() async {
     final role = await getUserRole();
     return role == "ADMIN";
+  }
+
+  // Address Section
+
+  // Simpan Address
+  static Future<void> saveUserAddresses(List<dynamic> addresses) async {
+    final jsonString = jsonEncode(addresses);
+    await _storage.write(key: _keyAddress, value: jsonString);
+  }
+
+  // Ambil Address
+  static Future<List<dynamic>> getUserAddresses() async {
+    final jsonString = await _storage.read(key: _keyAddress);
+    if (jsonString == null) return [];
+    return jsonDecode(jsonString);
+  }
+
+  static Future<void> saveAddressId(String id) async {
+    await _storage.write(key: _keyAddressId, value: id);
+  }
+
+  static Future<String?> getAddressesId() async {
+    return await _storage.read(key: 'address_id');
+  }
+
+  static Future<void> clearAddressId() async {
+    await _storage.delete(key: _keyAddressId);
   }
 
   // ========================

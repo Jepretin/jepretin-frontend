@@ -387,7 +387,7 @@
     },
     {
       "name": "google_fonts",
-      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-6.3.1",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-6.3.2",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -441,9 +441,9 @@
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.11.0",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_platform_interface-2.11.1",
       "packageUri": "lib/",
-      "languageVersion": "3.6"
+      "languageVersion": "3.7"
     },
     {
       "name": "image_picker_windows",
@@ -579,7 +579,7 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.18",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.19",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -759,7 +759,7 @@
     },
     {
       "name": "system_info2",
-      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/system_info2-4.0.0",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/system_info2-4.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -795,9 +795,9 @@
     },
     {
       "name": "validators2",
-      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/validators2-5.0.0",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/validators2-5.1.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "vector_graphics",
@@ -837,7 +837,7 @@
     },
     {
       "name": "watcher",
-      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/watcher-1.1.3",
+      "rootUri": "file:///C:/Users/adity/AppData/Local/Pub/Cache/hosted/pub.dev/watcher-1.1.4",
       "packageUri": "lib/",
       "languageVersion": "3.1"
     },
@@ -878,7 +878,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-10-21T02:40:01.085927Z",
+  "generated": "2025-10-29T00:49:08.592308Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///C:/src/flutter/3.29.0",

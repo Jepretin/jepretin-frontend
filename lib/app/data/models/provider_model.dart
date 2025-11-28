@@ -1,3 +1,5 @@
+import 'package:jepretin/app/data/models/territory_model.dart';
+
 class RegisProviderModel {
   final String id;
   final String experience;
@@ -138,3 +140,24 @@ class PortfolioResponse {
       };
 }
 
+class CoverageModel {
+  final String providerName;
+  final List<String> providerRoles;
+  final DistrictModel district;
+
+  CoverageModel({
+    required this.providerName,
+    required this.providerRoles,
+    required this.district,
+  });
+
+  factory CoverageModel.fromJson(Map<String, dynamic> json) {
+    return CoverageModel(
+      providerName: json["providerName"] ?? "",
+      providerRoles:
+          (json["providerRoles"] as List?)?.map((e) => e.toString()).toList() ??
+              [],
+      district: DistrictModel.fromJson(json["district"] ?? {}),
+    );
+  }
+}

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:jepretin/app/routes/app_pages.dart';
 import 'package:jepretin/app/data/core/helper/token_manager.dart';
 import 'package:jepretin/app/data/models/user_model.dart';
 import 'package:jepretin/app/data/request/user_service.dart';
-import 'package:jepretin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
@@ -58,29 +58,6 @@ class ProfileController extends GetxController {
 
     isLoading.value = false;
   }
-
-  // Future<void> getUserProfile() async {
-  //   final token = await TokenManager.getToken();
-  //     if (token == null || token.isEmpty) {
-  //       Get.snackbar("Akses Ditolak", "Silakan login terlebih dahulu");
-  //       Get.offAllNamed("/login");
-  //       return;
-  //     }
-
-  //   // final res = await UserService.getProfile();
-  //   final res = await UserService.getProfile(token);
-  //     user.value = res.data; // Pastikan modelnya benar
-  //     print("✅ Profile berhasil dimuat: ${user.value?.name}");
-
-  //   res.fold(
-  //     (l) => Get.snackbar("Error", l.message ?? "Gagal ambil user"),
-  //     (r) {
-  //       user.value = r.data; // langsung UserModel
-  //       print("Token user: $token");
-  //       print("👤 User Profile: ${user.value?.toJson()}");
-  //     },
-  //   );
-  // }
 
   void checkToken() async {
     final token = await TokenManager.getToken();

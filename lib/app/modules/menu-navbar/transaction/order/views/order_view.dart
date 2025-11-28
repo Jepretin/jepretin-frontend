@@ -34,17 +34,17 @@ class OrderView extends GetView<OrderController> {
                 ),
               ),
               SizedBox(height: 14),
-              InputWithLabel(
-                label: "Alamat",
-                input: CustomAddressInput(
-                  hintText: "Pilih Domisili kamu saat ini",
-                  controller: TextEditingController(),
-                  suffixIcon: Icons.location_city,
-                  onIconTap: () {
-                    print("Icon edit diklik");
-                  },
-                ),
-              ),
+              // InputWithLabel(
+              //   label: "Alamat",
+              //   input: CustomAddressInput(
+              //     hintText: "Pilih Domisili kamu saat ini",
+              //     controller: TextEditingController(),
+              //     suffixIcon: Icons.location_city,
+              //     onIconTap: () {
+              //       print("Icon edit diklik");
+              //     },
+              //   ),
+              // ),
               SizedBox(height: 14),
               InputWithLabel(
                 label: "Detail Alamat",

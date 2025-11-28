@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:jepretin/app/data/models/user_model.dart';
 import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 import 'package:jepretin/app/shared/customCardContent.dart';
 import 'package:jepretin/app/shared/customComponent.dart';

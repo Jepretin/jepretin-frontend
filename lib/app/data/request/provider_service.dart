@@ -94,56 +94,32 @@ class ProviderService {
     );
   }
 
-  // static Future<Either<ExceptionResponse, BaseResponse<PortfolioResponse>>>
-  //     uploadPortfolio(PortfolioRequest request) async {
-  //   try {
-  //     // ✅ Buat form-data sesuai format Node.js
-  //     final formData = dio.FormData.fromMap({
-  //       'mediaType': request.mediaType,
-  //       if (request.description != null) 'description': request.description,
-  //       'media': await Future.wait(
-  //         request.media.map(
-  //           (path) async => await dio.MultipartFile.fromFile(
-  //             path,
-  //             filename: path.split('/').last,
-  //           ),
-  //         ),
-  //       ),
-  //     });
+  static Future<Either<ExceptionResponse, ApiResponse<List<T>>>>
+      _fetchTerritory<T>({
+    required String endpoint,
+    required T Function(Map<String, dynamic>) fromJsonT,
+  }) async {
+    return await ApiClient.instance.request(
+      HttpMethod.get,
+      path: endpoint,
+      dio: DioClient.instance.initInstance(),
+      headers: await HeaderClient.setHeaderBearer(),
+      responseConverter: (body) {
+        return ApiResponse<List<T>>.fromJson(
+          body,
+          (data) => (data as List)
+              .map((item) => fromJsonT(item as Map<String, dynamic>))
+              .toList(),
+        );
+      },
+    );
+  }
 
-  //     // ✅ Kirim ke API
-  //     return await ApiClient.instance.request(
-  //       HttpMethod.post,
-  //       path: ApiEndpoint.postPortofolioProvider, // pastikan ini sesuai endpoint kamu
-  //       dio: DioClient.instance.initInstance(),
-  //       headers: await HeaderClient.setHeaderBearer(),
-  //       body: formData,
-  //       responseConverter: (body) {
-  //         return BaseResponse<PortfolioResponse>.fromJson(
-  //           body,
-  //           (json) => PortfolioResponse.fromJson(json),
-  //         );
-  //       },
-  //     );
-  //   } catch (e) {
-  //     return Left(ExceptionResponse(message: e.toString()));
-  //   }
-  // }
-
-  // static Future<Either<ExceptionResponse, BaseResponse<PortfolioRequest>>>
-  //     uploadPortfolio(PortfolioRequest request) async {
-  //   return await ApiClient.instance.request(
-  //     HttpMethod.post,
-  //     path: ApiEndpoint.postPortofolioProvider, // ganti sesuai nama endpoint di constant
-  //     dio: DioClient.instance.initInstance(),
-  //     headers: HeaderClient.setHeaderMultipart(),
-  //     body: request.toJson(),
-  //     responseConverter: (body) {
-  //       return BaseResponse<PortfolioRequest>.fromJson(
-  //         body,
-  //         (json) => PortfolioRequest.fromJson(json),
-  //       );
-  //     },
-  //   );
-  // }
+  static Future<Either<ExceptionResponse, ApiResponse<List<CoverageModel>>>>
+      getCoverageByDistrict(String districtId) async {
+    return _fetchTerritory<CoverageModel>(
+      endpoint: ApiEndpoint.getCoverage(districtId: districtId),
+      fromJsonT: CoverageModel.fromJson,
+    );
+  }
 }

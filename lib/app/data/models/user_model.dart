@@ -35,8 +35,8 @@ class UserProfileModel {
   final String? avatar;
   final bool? isActive;
   final bool? isVerified;
-  final String? createdAt;
-  final String? updatedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   UserProfileModel({
     this.id,
@@ -51,58 +51,95 @@ class UserProfileModel {
     this.updatedAt,
   });
 
+  // Membuat JSON hanya dengan field yang valid (tidak null atau kosong)
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+
+    if (id != null && id!.isNotEmpty) data['id'] = id;
+    if (name != null && name!.isNotEmpty) data['name'] = name;
+    if (email != null && email!.isNotEmpty) data['email'] = email;
+    if (role != null && role!.isNotEmpty) data['role'] = role;
+    if (phone != null && phone!.isNotEmpty) data['phone'] = phone;
+    if (avatar != null && avatar!.isNotEmpty) data['avatar'] = avatar;
+    if (isActive != null) data['isActive'] = isActive;
+    if (isVerified != null) data['isVerified'] = isVerified;
+    if (createdAt != null) data['createdAt'] = createdAt!.toIso8601String();
+    if (updatedAt != null) data['updatedAt'] = updatedAt!.toIso8601String();
+
+    return data;
+  }
+
+  // Factory untuk parsing dari JSON (jika perlu)
   factory UserProfileModel.fromJson(Map<String, dynamic> json) {
     return UserProfileModel(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      role: json['role'],
-      phone: json['phone'],
-      avatar: json['avatar'],
-      isActive: json['isActive'],
-      isVerified: json['isVerified'],
-      createdAt: json['createdAt'],
-      updatedAt: json['updatedAt'],
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      role: json['role'] as String?,
+      phone: json['phone'] as String?,
+      avatar: json['avatar'] as String?,
+      isActive: json['isActive'] as bool?,
+      isVerified: json['isVerified'] as bool?,
+      createdAt:
+          json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     );
   }
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "email": email,
-        "role": role,
-        "phone": phone,
-        "avatar": avatar,
-        "isActive": isActive,
-        "isVerified": isVerified,
-        "createdAt": createdAt,
-        "updatedAt": updatedAt,
-      };
+  UserProfileModel? get data => null;
 }
 
-// Berfungsi untuk mengambil data Nama Lengkap dan Nomor
-class NamaPhoneModel {
+class UpdateProfileModel {
   final String? id;
   final String? name;
-  final String? phone;
+  final String? email;
 
-  NamaPhoneModel({
+  UpdateProfileModel({
     this.id,
     this.name,
-    this.phone,
+    this.email,
   });
 
-  factory NamaPhoneModel.fromJson(Map<String, dynamic> json) {
-    return NamaPhoneModel(
-      id: json['id'],
-      name: json['name'],
-      phone: json['phone'],
-    );
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    if (id != null && id!.isNotEmpty) data['id'] = id;
+    if (name != null && name!.isNotEmpty) data['name'] = name;
+    if (email != null && email!.isNotEmpty) data['email'] = email;
+    return data;
   }
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "phone": phone,
-      };
+  factory UpdateProfileModel.fromJson(Map<String, dynamic> json) {
+    return UpdateProfileModel(
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+    );
+  }
+}
+
+class UpdateAvatarModel {
+  final String? id;
+  final String? avatarBase64; // atau url/file sesuai backend
+
+  UpdateAvatarModel({this.id, this.avatarBase64});
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    if (id != null && id!.isNotEmpty) data['id'] = id;
+    if (avatarBase64 != null && avatarBase64!.isNotEmpty)
+      data['avatar'] = avatarBase64;
+    return data;
+  }
+
+  // ✨ copyWith untuk update field tanpa membuat object baru dari awal
+  UpdateAvatarModel copyWith({
+    String? id,
+    String? avatarBase64,
+  }) {
+    return UpdateAvatarModel(
+      id: id ?? this.id,
+      avatarBase64: avatarBase64 ?? this.avatarBase64,
+    );
+  }
 }

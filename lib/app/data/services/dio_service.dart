@@ -37,10 +37,32 @@ class ApiInterceptor extends InterceptorsWrapper {
 
   ApiInterceptor({required this.requestRetrier});
 
+  // @override
+  // void onRequest(
+  //     RequestOptions options, RequestInterceptorHandler handler) async {
+  //   options.contentType = Headers.jsonContentType;
+
+  //   dev.log('======================\n');
+  //   dev.log('========onRequest=====\n');
+  //   dev.log(options.path, name: 'path');
+  //   dev.log(options.headers.toString(), name: 'headers');
+  //   dev.log(options.queryParameters.toString(), name: 'queryParameters');
+  //   dev.log(options.data.toString(), name: 'data');
+
+  //   dev.log('======================\n');
+
+  //   super.onRequest(options, handler);
+  // }
+
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     options.contentType = Headers.jsonContentType;
+
+    // Fix: Hilangkan slash ganda di depan path
+    if (options.path.startsWith('/')) {
+      options.path = options.path.substring(1);
+    }
 
     dev.log('======================\n');
     dev.log('========onRequest=====\n');
@@ -48,7 +70,6 @@ class ApiInterceptor extends InterceptorsWrapper {
     dev.log(options.headers.toString(), name: 'headers');
     dev.log(options.queryParameters.toString(), name: 'queryParameters');
     dev.log(options.data.toString(), name: 'data');
-
     dev.log('======================\n');
 
     super.onRequest(options, handler);

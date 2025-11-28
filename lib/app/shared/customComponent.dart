@@ -1,11 +1,14 @@
+// import 'package:get/get.dart';
+// import 'package:get/get_core/src/get_main.dart';
+// import 'package:flutter/material.dart';
+// import 'package:jepretin/app/data/request/territory_service.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:jepretin/app/modules/menu-navbar/home/controllers/home_controller.dart';
+import 'package:jepretin/app/data/models/territory_model.dart';
+import 'package:jepretin/app/data/core/helper/address_helper.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter/material.dart';
 import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 
 customAppbar({
@@ -39,10 +42,13 @@ customAppbar({
 }
 
 class CustomInput extends StatelessWidget {
+  final bool? readOnly;
   final String hintText;
   final TextEditingController controller;
   final bool obscureText;
   final TextInputType keyboardType;
+  final bool? filled;
+  final Color? fillColor;
   final VoidCallback? onIconTap;
   final TextStyle? hintStyle;
   final String? prefixIcon;
@@ -52,10 +58,13 @@ class CustomInput extends StatelessWidget {
 
   const CustomInput({
     super.key,
+    this.readOnly,
     required this.hintText,
     required this.controller,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
+    this.filled,
+    this.fillColor,
     this.onIconTap,
     this.hintStyle,
     this.suffixIcon,
@@ -72,6 +81,7 @@ class CustomInput extends StatelessWidget {
           width: width,
           height: height,
           child: TextField(
+            readOnly: readOnly ?? false,
             controller: controller,
             keyboardType: keyboardType,
             decoration: InputDecoration(
@@ -81,8 +91,8 @@ class CustomInput extends StatelessWidget {
                 fontWeight: regular,
                 color: hintInputAuth,
               ),
-              filled: true,
-              fillColor: inputColorAuth,
+              filled: filled ?? true,
+              fillColor: fillColor ?? inputColorAuth,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(25),
                 borderSide: BorderSide.none,
@@ -207,103 +217,156 @@ class _CustomInputAuthState extends State<CustomInputAuth> {
   }
 }
 
-class DataCity {
-  final String city;
-  final String province;
+abstract class AddressSelectable {
+  Future<List<dynamic>> searchProvinces(String q);
+  Future<List<dynamic>> searchRegencies(String q);
+  Future<List<dynamic>> searchDistricts(String q);
+  Future<List<dynamic>> searchVillages(String q);
 
-  DataCity({required this.city, required this.province});
+  void onProvinceSelected(ProvinceModel p);
+  void onRegencySelected(RegencyModel r);
+  void onDistrictSelected(DistrictModel d);
+  void onVillageSelected(VillageModel v);
+
+  TextEditingController get provinceController;
+  TextEditingController get regencyController;
+  TextEditingController get districtController;
+  TextEditingController get villageController;
+
+  Future<List<dynamic>> search(AddressLevel level, String q);
+  void select(AddressLevel level, dynamic item);
 }
 
-class CustomAddressInput extends StatelessWidget {
+class CustomAddressInput extends StatefulWidget {
+  final AddressLevel level;
   final String hintText;
   final IconData? suffixIcon;
-  final TextStyle? hintStyle;
   final VoidCallback? onIconTap;
-  final TextEditingController controller;
+  final TextStyle? hintStyle;
 
-  CustomAddressInput({
+  // ⬅️ Tambah ini
+  final AddressSelectable handler;
+
+  const CustomAddressInput({
     super.key,
+    required this.level,
     required this.hintText,
-    required this.controller,
+    required this.handler,
     this.suffixIcon,
     this.onIconTap,
     this.hintStyle,
   });
 
-  final List<DataCity> address = [
-    DataCity(city: "Jakarta", province: "Indonesia"),
-    DataCity(city: "Bandung", province: "Indonesia"),
-    DataCity(city: "Surabaya", province: "Indonesia"),
-    DataCity(city: "Medan", province: "Indonesia"),
-  ];
+  @override
+  State<CustomAddressInput> createState() => _CustomAddressInputState();
+}
 
+class _CustomAddressInputState extends State<CustomAddressInput> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TypeAheadField<DataCity>(
-        controller: controller,
-        suggestionsCallback: (search) {
-          final q = search.toLowerCase();
-          return address
-              .where((datacity) => datacity.city.toLowerCase().contains(q))
-              .toList();
-        },
-        builder: (context, controller, focusNode) {
-          return TextField(
-            controller: controller,
-            focusNode: focusNode,
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: styletext(
-                fontsize: 12,
-                fontWeight: medium,
-                color: textInputColor.withOpacity(0.7),
-              ),
-              filled: true,
-              fillColor: inputColor,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(100),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 14,
-              ),
-              suffixIcon: suffixIcon != null
-                  ? IconButton(
-                      icon: Icon(
-                        suffixIcon,
-                        color: Colors.blueGrey,
-                        size: 21,
-                      ),
-                      onPressed: onIconTap,
-                    )
-                  : null,
-            ),
-          );
-        },
-        itemBuilder: (context, datacity) {
-          return ListTile(
-            title: Text(datacity.city),
-            subtitle: Text(datacity.province),
-          );
-        },
-        onSelected: (datacity) {
-          controller.text = datacity.city;
+    final handler = widget.handler;
 
-          // Kalau kamu mau langsung jalankan selectLocation setelah memilih kota:
-          final homeController = Get.find<HomeController>();
-          homeController.selectLocation(
-            // province: datacity.province,
-            city: datacity.city,
-            // district: '',
-            // village: '',
-          );
-        },
-      ),
+    // Ambil controller yang sesuai level
+    final TextEditingController controller =
+        AddressHelper.getController(widget.level, handler);
+
+    return TypeAheadField<dynamic>(
+      controller: controller,
+      suggestionsCallback: (search) =>
+          AddressHelper.search(widget.level, search, handler),
+      builder: (context, c, focus) {
+        return TextField(
+          controller: c,
+          focusNode: focus,
+          decoration: InputDecoration(
+            hintText: widget.hintText,
+            hintStyle: widget.hintStyle,
+            filled: true,
+            fillColor: Colors.grey.withOpacity(0.1),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(100),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            suffixIcon: widget.suffixIcon != null
+                ? IconButton(
+                    icon: Icon(widget.suffixIcon),
+                    onPressed: widget.onIconTap,
+                  )
+                : null,
+          ),
+        );
+      },
+      itemBuilder: (context, item) {
+        return ListTile(title: Text(item.name));
+      },
+      onSelected: (item) => handler.select(widget.level, item),
     );
   }
 }
+
+// class _CustomAddressInputState extends State<CustomAddressInput> {
+//   late final TextEditingController controller;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     controller = TextEditingController();
+//   }
+
+//   @override
+//   void dispose() {
+//     controller.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final handler = widget.handler; // ambil dari parameter
+
+//     return TypeAheadField<dynamic>(
+//       controller: controller,
+//       // suggestionsCallback: (search) => handler.search(widget.level, search),
+//       suggestionsCallback: (search) =>
+//           AddressHelper.search(widget.level, search, handler),
+//       builder: (context, c, focus) {
+//         return TextField(
+//           controller: c,
+//           focusNode: focus,
+//           decoration: InputDecoration(
+//             hintText: widget.hintText,
+//             hintStyle: widget.hintStyle ??
+//                 TextStyle(
+//                   fontSize: 12,
+//                   fontWeight: FontWeight.w500,
+//                   color: Colors.grey.withOpacity(0.7),
+//                 ),
+//             filled: true,
+//             fillColor: Colors.grey.withOpacity(0.1),
+//             border: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(100),
+//               borderSide: BorderSide.none,
+//             ),
+//             contentPadding:
+//                 const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+//             suffixIcon: widget.suffixIcon != null
+//                 ? IconButton(
+//                     icon: Icon(widget.suffixIcon),
+//                     onPressed: widget.onIconTap,
+//                   )
+//                 : null,
+//           ),
+//         );
+//       },
+//       itemBuilder: (context, item) {
+//         final name = (item as dynamic).name ?? "-";
+//         return ListTile(title: Text(name));
+//       },
+//       onSelected: (item) => handler.select(widget.level, item),
+//     );
+//   }
+// }
 
 class DateTimeInput extends StatelessWidget {
   final TextEditingController dateController = TextEditingController();
@@ -450,17 +513,17 @@ class CustomProviderInput extends StatelessWidget {
     this.hintStyle,
   });
 
-  final List<DataCity> address = [
-    DataCity(city: "Jakarta", province: "Indonesia"),
-    DataCity(city: "Bandung", province: "Indonesia"),
-    DataCity(city: "Surabaya", province: "Indonesia"),
-    DataCity(city: "Medan", province: "Indonesia"),
+  final List<DataProvider> address = [
+    DataProvider(city: "Jakarta", province: "Indonesia"),
+    DataProvider(city: "Bandung", province: "Indonesia"),
+    DataProvider(city: "Surabaya", province: "Indonesia"),
+    DataProvider(city: "Medan", province: "Indonesia"),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: TypeAheadField<DataCity>(
+      child: TypeAheadField<DataProvider>(
         controller: controller,
         suggestionsCallback: (search) {
           final q = search.toLowerCase();
@@ -676,6 +739,76 @@ class StatusBadge extends StatelessWidget {
           fontWeight: semibold,
         ),
       ),
+    );
+  }
+}
+
+class CustomDropdown extends StatefulWidget {
+  final String title;
+  final List<Widget> children;
+  final TextStyle? titleStyle;
+
+  const CustomDropdown({
+    super.key,
+    required this.title,
+    this.children = const [],
+    this.titleStyle,
+  });
+
+  @override
+  State<CustomDropdown> createState() => _CustomDropdownState();
+}
+
+class _CustomDropdownState extends State<CustomDropdown> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Header
+        Container(
+          height: 56,
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(color: primaryColor)),
+          ),
+          child: Row(
+            children: [
+              Text(
+                widget.title,
+                style: widget.titleStyle ??
+                    TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: primaryColor),
+              ),
+              Spacer(),
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isExpanded = !_isExpanded;
+                  });
+                },
+                icon: Icon(
+                  _isExpanded ? Icons.expand_more : Icons.chevron_right,
+                  color: primaryColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Dropdown Content
+        if (_isExpanded)
+          Container(
+            padding: EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widget.children,
+            ),
+          ),
+      ],
     );
   }
 }
