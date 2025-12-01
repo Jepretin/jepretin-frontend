@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jepretin/app/data/core/helper/token_manager.dart';
 import 'package:jepretin/app/data/models/auth_model.dart';
 import 'package:jepretin/app/data/request/auth_service.dart';
+import 'package:jepretin/app/modules/user/home/controllers/home_controller.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController();
@@ -13,8 +15,8 @@ class LoginController extends GetxController {
     isLoading.value = true;
 
     final request = LoginRequest(
-      email: emailController.text,
-      password: passwordController.text,
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
     );
 
     final res = await AuthService.loginUser(request);
@@ -23,16 +25,63 @@ class LoginController extends GetxController {
       (l) {
         Get.snackbar("Login Gagal", l.message ?? "Terjadi kesalahan");
       },
-      (r) {
-        final userEmail = r.data!.data?.user?.email ?? "-";
-        Get.snackbar("Sukses", "Login berhasil untuk $userEmail");
-
+      (r) async {
+        print("👉 Response di LoginController: ${r.toString()}");
         // Simpan token untuk auth berikutnya
-        final token = r.data!.data?.token ?? "";
-        print("➡️ Token: $token");
+        // final token = r.data?.data?.token ?? "";
+        // final userEmail = r.data?.data?.user?.email ?? "-";
+        final token = r.data?.token ?? "";
+        final userEmail = r.data?.user?.email ?? "-";
 
-        // Navigasi ke halaman berikutnya
-        // Get.toNamed('/home');
+        // print("📦 LoginResponse JSON: ${r.data?.toJson()}");
+
+        if (token.isNotEmpty) {
+          Get.snackbar("Sukses", "Login berhasil untuk $userEmail");
+          final role = r.data?.user?.role ?? "user";
+          final userId = r.data?.user?.id ?? "";
+
+          // Simpan ke secure storage
+          await TokenManager.saveToken(token);
+          await TokenManager.saveUserId(userId);
+
+          // ✅ Tambahkan ini supaya HomeController langsung tahu user sudah login
+          final homeController = Get.find<HomeController>();
+          homeController.checkLoginStatus();
+
+          // Navigasi berdasarkan role
+          if (role == "provider") {
+            Get.offAllNamed("/dashboard-provider");
+          } else {
+            Get.offAllNamed("/main");
+          }
+
+          print("🔑 Token tersimpan: $token");
+          print("🧩 Role: $role | User ID: $userId");
+        } else {
+          Get.snackbar("Login Gagal", "Token kosong, cek API response");
+        }
+
+        // if (token.isNotEmpty) {
+        //   Get.snackbar("Sukses", "Login berhasil untuk $userEmail");
+        //   final role = r.data?.user?.role ?? "user";
+        //   final userId = r.data?.user?.id ?? "";
+
+        //   // Simpan ke secure storage
+        //   await TokenManager.saveToken(token);
+        //   // await TokenManager.saveRole(role);
+        //   // await TokenManager.saveUserId(userId);
+        //   // Navigasi berdasarkan role
+        //   if (role == "provider") {
+        //     Get.offAllNamed("/dashboard-provider");
+        //   } else {
+        //     Get.offAllNamed("/main");
+        //   }
+
+        //   print("🔑 Token tersimpan: $token");
+        //   print("🧩 Role: $role | User ID: $userId");
+        // } else {
+        //   Get.snackbar("Login Gagal", "Token kosong, cek API response");
+        // }
       },
     );
 

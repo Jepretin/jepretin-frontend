@@ -11,16 +11,18 @@ class DioClient {
   static DioClient get instance => _instance = DioClient._internal();
 
   Dio initInstance() {
-    final Dio dio = Dio(BaseOptions(
-      receiveDataWhenStatusError: true,
-      baseUrl: dotenv.env['BASE_URL'] ?? '',
-      connectTimeout: const Duration(seconds: 60),
-      validateStatus: (status) {
-        return status != null && status >= 200 && status < 300;
-      },
+    final Dio dio = Dio(
+      BaseOptions(
+        receiveDataWhenStatusError: true,
+        baseUrl: dotenv.env['BASE_URL'] ?? '',
+        connectTimeout: const Duration(seconds: 60),
+        validateStatus: (status) {
+          return status != null && status >= 200 && status < 300;
+        },
 
-      // validateStatus: (status) => (status != null && (status < 403 || status == 412)),
-    ));
+        // validateStatus: (status) => (status != null && (status < 403 || status == 412)),
+      ),
+    );
 
     dio.interceptors.add(
       ApiInterceptor(requestRetrier: DioConnectivityRequestRetrier(dio: dio)),
@@ -35,10 +37,32 @@ class ApiInterceptor extends InterceptorsWrapper {
 
   ApiInterceptor({required this.requestRetrier});
 
+  // @override
+  // void onRequest(
+  //     RequestOptions options, RequestInterceptorHandler handler) async {
+  //   options.contentType = Headers.jsonContentType;
+
+  //   dev.log('======================\n');
+  //   dev.log('========onRequest=====\n');
+  //   dev.log(options.path, name: 'path');
+  //   dev.log(options.headers.toString(), name: 'headers');
+  //   dev.log(options.queryParameters.toString(), name: 'queryParameters');
+  //   dev.log(options.data.toString(), name: 'data');
+
+  //   dev.log('======================\n');
+
+  //   super.onRequest(options, handler);
+  // }
+
   @override
   void onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     options.contentType = Headers.jsonContentType;
+
+    // Fix: Hilangkan slash ganda di depan path
+    if (options.path.startsWith('/')) {
+      options.path = options.path.substring(1);
+    }
 
     dev.log('======================\n');
     dev.log('========onRequest=====\n');
@@ -46,7 +70,6 @@ class ApiInterceptor extends InterceptorsWrapper {
     dev.log(options.headers.toString(), name: 'headers');
     dev.log(options.queryParameters.toString(), name: 'queryParameters');
     dev.log(options.data.toString(), name: 'data');
-
     dev.log('======================\n');
 
     super.onRequest(options, handler);

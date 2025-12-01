@@ -19,32 +19,32 @@ Future<CardImageRatio> getImageRatio(String url) async {
   return height > width ? CardImageRatio.portrait : CardImageRatio.landscape;
 }
 
-final List<Map<String, dynamic>> dummyData = [
-  {
-    "profileImage": "images/monyet.jpg",
-    "title": "Tim Jepretin",
-    "subtitle": "Photographer",
-    "mainImage": "images/content/mount.png",
-    "likes": 18,
-    "ratio": CardImageRatio.landscape,
-  },
-  {
-    "profileImage": "images/monyet.jpg",
-    "title": "Diamond Pictora",
-    "subtitle": "Photographer & Videographer",
-    "mainImage": "images/content/wedding.png",
-    "likes": 27,
-    "ratio": CardImageRatio.portrait,
-  },
-  {
-    "profileImage": "images/monyet.jpg",
-    "title": "Sky Lens",
-    "subtitle": "Drone Specialist",
-    "mainImage": "images/content/drone.png",
-    "likes": 45,
-    "ratio": CardImageRatio.landscape,
-  },
-];
+// final List<Map<String, dynamic>> dummyData = [
+  // {
+  //   "profileImage": ImagekitEndpoint.images("monyet.jpg"),
+  //   "title": "Tim Jepretin",
+  //   "subtitle": "Photographer",
+  //   "mainImage": ImagekitEndpoint.feed("mount.png"),
+  //   "likes": 18,
+  //   "ratio": CardImageRatio.landscape,
+  // },
+  // {
+  //   "profileImage": ImagekitEndpoint.images("monyet.jpg"),
+  //   "title": "Diamond Pictora",
+  //   "subtitle": "Photographer & Videographer",
+  //   "mainImage": ImagekitEndpoint.feed("wedding.png"),
+  //   "likes": 27,
+  //   "ratio": CardImageRatio.portrait,
+  // },
+  // {
+  //   "profileImage": ImagekitEndpoint.images("monyet.jpg"),
+  //   "title": "Sky Lens",
+  //   "subtitle": "Drone Specialist",
+  //   "mainImage": ImagekitEndpoint.feed("buthak.jpg"),
+  //   "likes": 45,
+  //   "ratio": CardImageRatio.landscape,
+  // },
+// ];
 
 class SharedCard extends StatelessWidget {
   final String profileImage;
@@ -87,7 +87,7 @@ class SharedCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(profileImage),
+                  backgroundImage: NetworkImage(profileImage),
                   radius: 20,
                 ),
                 const SizedBox(width: 10),
@@ -112,14 +112,14 @@ class SharedCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: imageRatio == CardImageRatio.portrait
-                  ? Image.asset(
+                  ? Image.network(
                       mainImage,
                       fit: BoxFit.cover,
                       width: double.infinity,
                     )
                   : AspectRatio(
                       aspectRatio: 4 / 3,
-                      child: Image.asset(
+                      child: Image.network(
                         mainImage,
                         fit: BoxFit.cover,
                         width: double.infinity,
@@ -173,7 +173,7 @@ CustomCardProfile({
       borderRadius: BorderRadius.circular(12),
     ),
     elevation: 3,
-    margin: const EdgeInsets.symmetric(vertical: 17, horizontal: 12),
+    margin: const EdgeInsets.symmetric(vertical: 17, horizontal: 4),
     child: Padding(
       padding: const EdgeInsets.all(28),
       child: Row(
@@ -181,7 +181,7 @@ CustomCardProfile({
         children: [
           // Foto profil
           CircleAvatar(
-            backgroundImage: AssetImage(profileImage),
+            backgroundImage: NetworkImage(profileImage),
             radius: 28,
           ),
           const SizedBox(width: 15),
@@ -203,7 +203,7 @@ CustomCardSingle({
       borderRadius: BorderRadius.circular(12),
     ),
     elevation: 3,
-    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+    margin: const EdgeInsets.symmetric(vertical: 17, horizontal: 4),
     child: Padding(
       padding: const EdgeInsets.all(15),
       child: child, // <-- isi card
@@ -222,7 +222,7 @@ CustomCardMultiple({
       borderRadius: BorderRadius.circular(12),
     ),
     elevation: 3,
-    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+    margin: const EdgeInsets.symmetric(vertical: 17, horizontal: 4),
     child: Padding(
       padding: const EdgeInsets.all(15), // biar gak mepet
       child: Column(

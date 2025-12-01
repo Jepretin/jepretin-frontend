@@ -1,18 +1,4 @@
-class UserModel {
-  final String? id;
-  final String? email;
-  final String? role;
-
-  UserModel({this.id, this.email, this.role});
-
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
-      id: json["id"]?.toString(),
-      email: json["email"],
-      role: json["role"],
-    );
-  }
-}
+import 'package:jepretin/app/data/models/user_model.dart';
 
 class LoginRequest {
   final String email;
@@ -33,24 +19,47 @@ class LoginRequest {
       };
 }
 
+// class LoginResponse {
+//   final int? code;
+//   final String? message;
+//   final LoginData? data;
+
+//   LoginResponse({
+//     this.code,
+//     this.message,
+//     this.data,
+//   });
+
+//   factory LoginResponse.fromJson(Map<String, dynamic> json) {
+//     return LoginResponse(
+//       code: json['code'],
+//       message: json['message'],
+//       data: json['data'] != null ? LoginData.fromJson(json['data']) : null,
+//     );
+//   }
+// }
+
 class LoginResponse {
-  final int? code;
-  final String? message;
-  final LoginData? data;
+  final String? token;
+  final UserModel? user;
 
   LoginResponse({
-    this.code,
-    this.message,
-    this.data,
+    this.token,
+    this.user,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
-      code: json['code'],
-      message: json['message'],
-      data: json['data'] != null ? LoginData.fromJson(json['data']) : null,
+      token: json['token'] ?? "",
+      // user: json['user'] != null ? UserModel.fromJson(json['user']) : null,
+      user: UserModel.fromJson(json["user"] ?? {}),
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "token": token,
+        "user": user?.toJson(),
+      };
 }
 
 class LoginData {
@@ -68,6 +77,11 @@ class LoginData {
       user: json['user'] != null ? UserModel.fromJson(json['user']) : null,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "token": token,
+        "user": user?.toJson(),
+      };
 }
 
 class RegisterRequest {

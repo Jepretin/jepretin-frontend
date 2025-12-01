@@ -19,12 +19,19 @@ class AuthService {
       HttpMethod.post,
       path: ApiEndpoint.login, // misalnya "auth/login"
       dio: DioClient.instance.initInstance(),
-      headers: HeaderClient.setHeaderBearer(),
+      headers: HeaderClient.basic(),
       body: request.toJson(),
-      responseConverter: (body) => BaseResponse<LoginResponse>.fromJson(
-        body,
-        (body) => LoginResponse.fromJson(body),
-      ),
+      responseConverter: (body) {
+        print("🐛 BODY di responseConverter: $body");
+        return BaseResponse<LoginResponse>.fromJson(
+          body,
+          (json) => LoginResponse.fromJson(json),
+        );
+      },
+      // (body) => BaseResponse<LoginResponse>.fromJson(
+      //   body,
+      //   (body) => LoginResponse.fromJson(body),
+      // ),
     );
   }
 
@@ -34,7 +41,7 @@ class AuthService {
       HttpMethod.post,
       path: ApiEndpoint.register,
       dio: DioClient.instance.initInstance(),
-      headers: HeaderClient.setHeaderBearer(),
+      headers: HeaderClient.basic(),
       body: request.toJson(),
       responseConverter: (body) => RegisterResponse.fromJson(body),
     );
@@ -46,7 +53,7 @@ class AuthService {
       HttpMethod.post,
       path: ApiEndpoint.verifyOtp, // misal: "auth/verify-otp"
       dio: DioClient.instance.initInstance(),
-      headers: HeaderClient.setHeaderBearer(),
+      headers: HeaderClient.basic(),
       body: request.toJson(),
       responseConverter: (body) => BaseResponse<OtpResponse>.fromJson(
         body,
@@ -54,4 +61,19 @@ class AuthService {
       ),
     );
   }
+
+  // static Future<void> logout() async {
+  //   final box = GetStorage();
+
+  //   // Hapus token yang disimpan
+  //   await box.remove("token");
+
+  //   await ApiClient.instance.request(
+  //     HttpMethod.post,
+  //     path: ApiEndpoint.logout,
+  //     dio: DioClient.instance.initInstance(),
+  //     headers: HeaderClient.setHeaderBearer(),
+  //     responseConverter: (body) {},
+  //   );
+  // }
 }

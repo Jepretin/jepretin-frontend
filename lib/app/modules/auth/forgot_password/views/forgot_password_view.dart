@@ -62,7 +62,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         hintText: "Email",
                         controller: TextEditingController(),
                         onIconTap: () => {print("Hit")},
-                        prefixIcon: 'icons/email.svg',
+                        prefixIcon: 'email.svg',
                       ),
                     ),
                   ],
@@ -141,7 +141,8 @@ class KonfirmasiResetPassword extends StatelessWidget {
                     input: CustomInputAuth(
                       hintText: "Kata Sandi Baru",
                       controller: TextEditingController(),
-                      Icon: 'icons/lock_key.svg',
+                      iconName: "lock_key.svg",
+                      // Icon: 'icons/lock_key.svg',
                     ),
                   ),
                   InputWithLabel(
@@ -149,7 +150,8 @@ class KonfirmasiResetPassword extends StatelessWidget {
                     input: CustomInputAuth(
                       hintText: "Konfirmasi Kata Sandi Baru",
                       controller: TextEditingController(),
-                      Icon: 'icons/lock_key.svg',
+                      iconName: "lock_key.svg",
+                      // Icon: 'icons/lock_key.svg',
                     ),
                   ),
                 ],
