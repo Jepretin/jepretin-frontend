@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:jepretin/app/data/core/helper/token_manager.dart';
-import 'package:jepretin/app/modules/main/controllers/main_controller.dart';
+import 'package:jepretin/app/modules/navigation/user_nav/controllers/user_nav_controller.dart';
 import 'app/routes/app_pages.dart';
 import 'package:jepretin/app/themes/themes.dart';
 

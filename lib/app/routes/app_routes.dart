@@ -14,8 +14,8 @@ abstract class Routes {
   static const PROMOTION = _Paths.PROMOTION;
   static const PROFILE = _Paths.PROFILE;
   static const HELP = _Paths.HELP;
-  static const CONFIRM_PEMBAYARAN = _Paths.CONFIRM_PEMBAYARAN;
-  static const METODE_PEMBAYARAN = _Paths.METODE_PEMBAYARAN;
+  static const CONFIRM_PAYMENT = _Paths.CONFIRM_PAYMENT;
+  static const PAYMENT_METHOD = _Paths.PAYMENT_METHOD;
   static const FAVORITE = _Paths.FAVORITE;
   static const ADDRESS = _Paths.ADDRESS;
   static const NOTIFICATION = _Paths.NOTIFICATION;
@@ -26,13 +26,12 @@ abstract class Routes {
   static const SETTINGS = _Paths.SETTINGS;
   static const PROFILE_EDIT = _Paths.PROFILE_EDIT;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
-  static const ULASAN = _Paths.ULASAN;
-  static const DASHBOARD = _Paths.DASHBOARD;
-  static const DASHBOARD_PROVIDER = _Paths.DASHBOARD_PROVIDER;
-  static const MAINP = _Paths.MAINP;
-  static const PESANAN = _Paths.PESANAN;
-  static const UNGGAH_PORTO = _Paths.UNGGAH_PORTO;
-  static const JASA = _Paths.JASA;
+  static const REVIEW = _Paths.REVIEW;
+  static const HOME_PROVIDER = _Paths.HOME_PROVIDER;
+  static const PROVIDER = _Paths.PROVIDER;
+  static const MANAGEORDERS = _Paths.MANAGEORDERS;
+  static const UPLOAD_PORTFOLIO = _Paths.UPLOAD_PORTFOLIO;
+  static const OFFERS = _Paths.OFFERS;
   static const PROFILE_PROVIDER = _Paths.PROFILE_PROVIDER;
 }
 
@@ -49,8 +48,8 @@ abstract class _Paths {
   static const PROMOTION = '/promotion';
   static const PROFILE = '/profile';
   static const HELP = '/help';
-  static const CONFIRM_PEMBAYARAN = '/confirm-pembayaran';
-  static const METODE_PEMBAYARAN = '/metode-pembayaran';
+  static const CONFIRM_PAYMENT = '/confirm-payment';
+  static const PAYMENT_METHOD = '/payment-method';
   static const FAVORITE = '/favorite';
   static const ADDRESS = '/address';
   static const NOTIFICATION = '/notification';
@@ -61,12 +60,11 @@ abstract class _Paths {
   static const SETTINGS = '/settings';
   static const PROFILE_EDIT = '/profile-edit';
   static const FORGOT_PASSWORD = '/forgot-password';
-  static const ULASAN = '/ulasan';
-  static const DASHBOARD = '/dashboard';
-  static const DASHBOARD_PROVIDER = '/dashboard-provider';
-  static const MAINP = '/mainp';
-  static const PESANAN = '/pesanan';
-  static const UNGGAH_PORTO = '/unggah-porto';
-  static const JASA = '/jasa';
+  static const REVIEW = '/review';
+  static const HOME_PROVIDER = '/home-provider';
+  static const PROVIDER = '/provider';
+  static const MANAGEORDERS = '/manage-orders';
+  static const UPLOAD_PORTFOLIO = '/upload-portfolio';
+  static const OFFERS = '/offers';
   static const PROFILE_PROVIDER = '/profile-provider';
 }

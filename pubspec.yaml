@@ -44,6 +44,7 @@ dependencies:
   flutter_secure_storage: ^9.2.4
   image_picker: ^1.2.0 # Support Android
   file_picker: ^8.0.0 # Support Web
+  dotted_border: ^2.0.0 # Border Putus Putus
 
 
 dev_dependencies:

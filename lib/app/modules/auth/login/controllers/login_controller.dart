@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:jepretin/app/data/core/helper/token_manager.dart';
 import 'package:jepretin/app/data/models/auth_model.dart';
 import 'package:jepretin/app/data/request/auth_service.dart';
-import 'package:jepretin/app/modules/menu-navbar/home/controllers/home_controller.dart';
+import 'package:jepretin/app/modules/user/home/controllers/home_controller.dart';
 
 class LoginController extends GetxController {
   final emailController = TextEditingController();

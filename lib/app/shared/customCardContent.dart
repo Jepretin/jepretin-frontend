@@ -173,7 +173,7 @@ CustomCardProfile({
       borderRadius: BorderRadius.circular(12),
     ),
     elevation: 3,
-    margin: const EdgeInsets.symmetric(vertical: 17, horizontal: 12),
+    margin: const EdgeInsets.symmetric(vertical: 17, horizontal: 4),
     child: Padding(
       padding: const EdgeInsets.all(28),
       child: Row(
@@ -203,7 +203,7 @@ CustomCardSingle({
       borderRadius: BorderRadius.circular(12),
     ),
     elevation: 3,
-    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+    margin: const EdgeInsets.symmetric(vertical: 17, horizontal: 4),
     child: Padding(
       padding: const EdgeInsets.all(15),
       child: child, // <-- isi card
@@ -222,7 +222,7 @@ CustomCardMultiple({
       borderRadius: BorderRadius.circular(12),
     ),
     elevation: 3,
-    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+    margin: const EdgeInsets.symmetric(vertical: 17, horizontal: 4),
     child: Padding(
       padding: const EdgeInsets.all(15), // biar gak mepet
       child: Column(

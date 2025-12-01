@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jepretin/app/modules/user/customer/menu_profile/regis_provider/controllers/regis_provider_controller.dart';
+import 'package:jepretin/app/modules/user/home_submenu/profile_submenu/regis_provider/controllers/regis_provider_controller.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/widgets.dart';
 

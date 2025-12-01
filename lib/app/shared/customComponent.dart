@@ -3,6 +3,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:jepretin/app/data/request/territory_service.dart';
 import 'package:get/get.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:jepretin/app/data/models/territory_model.dart';
 import 'package:jepretin/app/data/core/helper/address_helper.dart';
 import 'package:jepretin/app/themes/themes.dart';
@@ -305,68 +306,6 @@ class _CustomAddressInputState extends State<CustomAddressInput> {
     );
   }
 }
-
-// class _CustomAddressInputState extends State<CustomAddressInput> {
-//   late final TextEditingController controller;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     controller = TextEditingController();
-//   }
-
-//   @override
-//   void dispose() {
-//     controller.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final handler = widget.handler; // ambil dari parameter
-
-//     return TypeAheadField<dynamic>(
-//       controller: controller,
-//       // suggestionsCallback: (search) => handler.search(widget.level, search),
-//       suggestionsCallback: (search) =>
-//           AddressHelper.search(widget.level, search, handler),
-//       builder: (context, c, focus) {
-//         return TextField(
-//           controller: c,
-//           focusNode: focus,
-//           decoration: InputDecoration(
-//             hintText: widget.hintText,
-//             hintStyle: widget.hintStyle ??
-//                 TextStyle(
-//                   fontSize: 12,
-//                   fontWeight: FontWeight.w500,
-//                   color: Colors.grey.withOpacity(0.7),
-//                 ),
-//             filled: true,
-//             fillColor: Colors.grey.withOpacity(0.1),
-//             border: OutlineInputBorder(
-//               borderRadius: BorderRadius.circular(100),
-//               borderSide: BorderSide.none,
-//             ),
-//             contentPadding:
-//                 const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-//             suffixIcon: widget.suffixIcon != null
-//                 ? IconButton(
-//                     icon: Icon(widget.suffixIcon),
-//                     onPressed: widget.onIconTap,
-//                   )
-//                 : null,
-//           ),
-//         );
-//       },
-//       itemBuilder: (context, item) {
-//         final name = (item as dynamic).name ?? "-";
-//         return ListTile(title: Text(name));
-//       },
-//       onSelected: (item) => handler.select(widget.level, item),
-//     );
-//   }
-// }
 
 class DateTimeInput extends StatelessWidget {
   final TextEditingController dateController = TextEditingController();
@@ -811,4 +750,163 @@ class _CustomDropdownState extends State<CustomDropdown> {
       ],
     );
   }
+}
+
+class ToppingListSection extends StatelessWidget {
+  final List<ToppingItemModel> toppings;
+  final VoidCallback? onAddTap;
+  final VoidCallback? onSeeAllTap;
+
+  const ToppingListSection({
+    super.key,
+    required this.toppings,
+    this.onAddTap,
+    this.onSeeAllTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 2),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 12,
+            offset: Offset(0, 3),
+          )
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // HEADER
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Daftar Topping",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              InkWell(
+                onTap: onSeeAllTap,
+                child: Row(
+                  children: const [
+                    Text(
+                      "Lihat Semua",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.blueGrey,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Icon(Icons.arrow_forward_ios,
+                        size: 12, color: Colors.blueGrey),
+                  ],
+                ),
+              )
+            ],
+          ),
+
+          const SizedBox(height: 16),
+
+          // TAMBAH TOPPING
+          InkWell(
+            onTap: onAddTap,
+            child: DottedBorder(
+              dashPattern: const [6, 2], // garis 6px, jarak 4px
+              strokeWidth: 1.2,
+              color: Colors.grey,
+              borderType: BorderType.RRect,
+              radius: const Radius.circular(12),
+
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+                width: double.infinity,
+                child: const Text(
+                  "+ Tambah Topping",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
+          // LIST TOPPING
+          Column(
+            children: toppings
+                .map((t) => Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: ToppingItem(
+                        name: t.name,
+                        price: t.price,
+                      ),
+                    ))
+                .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ToppingItem extends StatelessWidget {
+  final String name;
+  final String price;
+
+  const ToppingItem({
+    super.key,
+    required this.name,
+    required this.price,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        color: const Color(0xFFEFF5F9),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            price,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+// MODEL SIMPLE UNTUK DATA
+class ToppingItemModel {
+  final String name;
+  final String price;
+
+  ToppingItemModel(this.name, this.price);
 }
