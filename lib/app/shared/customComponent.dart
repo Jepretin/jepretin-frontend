@@ -5,12 +5,12 @@
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:jepretin/app/data/models/territory_model.dart';
-import 'package:jepretin/app/data/core/helper/address_helper.dart';
+import 'package:jepretin/app/core/helper/address_helper.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
+import 'package:jepretin/app/core/constants/imagekit_endpoint.dart';
 
 customAppbar({
   required VoidCallback backButton,

@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'base_model.dart';
+import '../response/base_model.dart';
 
 enum HttpMethod { get, post, patch, put, delete }
 

@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jepretin/app/data/core/helper/token_manager.dart';
+import 'package:jepretin/app/core/helper/token_manager.dart';
 import 'package:jepretin/app/data/models/user_model.dart';
-import 'package:jepretin/app/data/request/user_service.dart';
+import 'package:jepretin/app/data/services/user_service.dart';
 
 class ProfileEditController extends GetxController {
   final emailController = TextEditingController();

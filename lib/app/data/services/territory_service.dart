@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:jepretin/app/data/models/territory_model.dart';
-import 'package:jepretin/app/data/services/api_endpoint.dart';
-import 'package:jepretin/app/data/services/api_service.dart';
-import 'package:jepretin/app/data/services/base_model.dart';
-import 'package:jepretin/app/data/services/dio_service.dart';
-import 'package:jepretin/app/data/services/header_client.dart';
+import 'package:jepretin/app/core/constants/api_endpoint.dart';
+import 'package:jepretin/app/core/network/api_client.dart';
+import 'package:jepretin/app/core/response/base_model.dart';
+import 'package:jepretin/app/core/network/dio_client.dart';
+import 'package:jepretin/app/core/network/header_client.dart';
 
 class TerritoryService {
   static Future<Either<ExceptionResponse, ApiResponse<List<T>>>>

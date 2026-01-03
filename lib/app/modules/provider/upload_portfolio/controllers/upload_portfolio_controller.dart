@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jepretin/app/data/models/provider_model.dart';
 import 'package:jepretin/app/data/models/role_model.dart';
-import 'package:jepretin/app/data/request/provider_service.dart';
+import 'package:jepretin/app/data/services/provider_service.dart';
 
 class UploadPortfolioController extends GetxController {
   final RxList<File> selectedMedia = <File>[].obs;

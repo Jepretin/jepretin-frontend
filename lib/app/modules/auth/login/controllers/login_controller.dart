@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jepretin/app/data/core/helper/token_manager.dart';
+import 'package:jepretin/app/core/helper/token_manager.dart';
 import 'package:jepretin/app/data/models/auth_model.dart';
-import 'package:jepretin/app/data/request/auth_service.dart';
+import 'package:jepretin/app/data/services/auth_service.dart';
 import 'package:jepretin/app/modules/user/home/controllers/home_controller.dart';
 
 class LoginController extends GetxController {
@@ -23,7 +23,17 @@ class LoginController extends GetxController {
 
     res.fold(
       (l) {
-        Get.snackbar("Login Gagal", l.message ?? "Terjadi kesalahan");
+        if (l.statusCode == 401) {
+          Get.snackbar(
+            "Login Gagal",
+            "Email atau password salah",
+          );
+        } else {
+          Get.snackbar(
+            "Terjadi Kesalahan",
+            l.message ?? "Silakan coba beberapa saat lagi",
+          );
+        }
       },
       (r) async {
         print("👉 Response di LoginController: ${r.toString()}");

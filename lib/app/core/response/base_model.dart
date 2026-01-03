@@ -104,29 +104,28 @@ class ExceptionResponse {
     this.message,
     this.statusCode,
     this.path,
+    this.errors,
   });
 
   final String? message;
   final int? statusCode;
   final String? path;
-
-  // factory ExceptionResponse.fromJson(Map<String, dynamic> json) =>
-  //     ExceptionResponse(
-  //       path: json["path"],
-  //       message: json["message"],
-  //       statusCode: json["status_code"],
-  //     );
+  final List<String>? errors;
 
   factory ExceptionResponse.fromJson(Map<String, dynamic> json) =>
       ExceptionResponse(
         path: json["path"],
         message: json["message"] ?? json["msg"],
         statusCode: json["status_code"] ?? json["status"] ?? json["code"],
+        errors: json["errors"] != null
+            ? List<String>.from(json["errors"])
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
         "path": path,
         "message": message,
         "status_code": statusCode,
+        "errors": errors,
       };
 }

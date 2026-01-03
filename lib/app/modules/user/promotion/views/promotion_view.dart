@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
+import 'package:jepretin/app/core/constants/imagekit_endpoint.dart';
 import 'package:jepretin/app/themes/themes.dart';
 
 import '../controllers/promotion_controller.dart';

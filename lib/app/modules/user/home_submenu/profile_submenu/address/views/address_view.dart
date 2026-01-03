@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jepretin/app/data/core/helper/address_helper.dart';
+import 'package:jepretin/app/core/helper/address_helper.dart';
 import 'package:jepretin/app/data/models/territory_model.dart';
 import 'package:jepretin/app/shared/customButton.dart';
 import 'package:jepretin/app/shared/customCardContent.dart';

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:get/get.dart';
-import 'package:jepretin/app/data/request/auth_service.dart';
+import 'package:jepretin/app/data/services/auth_service.dart';
 import 'package:jepretin/app/data/models/auth_model.dart';
 
 class OtpController extends GetxController {

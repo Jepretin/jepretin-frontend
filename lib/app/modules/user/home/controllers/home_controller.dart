@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jepretin/app/data/core/helper/token_manager.dart';
-import 'package:jepretin/app/data/core/helper/address_helper.dart';
+import 'package:jepretin/app/core/helper/token_manager.dart';
+import 'package:jepretin/app/core/helper/address_helper.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/data/models/territory_model.dart';
-import 'package:jepretin/app/data/request/provider_service.dart';
-import 'package:jepretin/app/data/request/territory_service.dart';
+import 'package:jepretin/app/data/services/provider_service.dart';
+import 'package:jepretin/app/data/services/territory_service.dart';
 // import 'package:jepretin/app/data/models/provider_model.dart';
 // import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
 // import 'package:jepretin/app/routes/app_pages.dart';

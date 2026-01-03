@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:jepretin/app/data/core/helper/token_manager.dart';
-import 'package:jepretin/app/data/core/helper/address_helper.dart';
-import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
+import 'package:jepretin/app/core/helper/token_manager.dart';
+import 'package:jepretin/app/core/helper/address_helper.dart';
+import 'package:jepretin/app/core/constants/imagekit_endpoint.dart';
 import 'package:jepretin/app/modules/auth/login/views/login_view.dart';
 import 'package:jepretin/app/modules/auth/register/views/register_view.dart';
 // import 'package:jepretin/app/routes/app_pages.dart';

@@ -1,5 +1,5 @@
 // import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
-import 'package:jepretin/app/data/core/helper/token_manager.dart';
+import 'package:jepretin/app/core/helper/token_manager.dart';
 import 'package:jepretin/app/modules/user/home/views/home_view.dart';
 import 'package:jepretin/app/modules/user/transaction/history/views/history_transaction_view.dart';
 import 'package:jepretin/app/modules/user/promotion/views/promotion_view.dart';

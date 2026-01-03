@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:jepretin/app/data/core/helper/token_manager.dart';
-import 'package:jepretin/app/data/core/helper/address_helper.dart';
+import 'package:jepretin/app/core/helper/token_manager.dart';
+import 'package:jepretin/app/core/helper/address_helper.dart';
 import 'package:jepretin/app/data/models/territory_model.dart';
-import 'package:jepretin/app/data/request/territory_service.dart';
+import 'package:jepretin/app/data/services/territory_service.dart';
 import 'package:jepretin/app/shared/customButton.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/themes/themes.dart';

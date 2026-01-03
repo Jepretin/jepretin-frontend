@@ -1,5 +1,5 @@
 import 'package:flutter_svg/svg.dart';
-import 'package:jepretin/app/data/services/imagekit_endpoint.dart';
+import 'package:jepretin/app/core/constants/imagekit_endpoint.dart';
 import 'package:jepretin/app/shared/customComponent.dart';
 import 'package:jepretin/app/themes/themes.dart';
 import 'package:flutter/material.dart';

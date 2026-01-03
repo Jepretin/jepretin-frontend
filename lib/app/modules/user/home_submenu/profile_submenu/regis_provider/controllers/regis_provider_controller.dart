@@ -2,9 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:jepretin/app/data/models/provider_model.dart';
 import 'package:jepretin/app/data/models/role_model.dart';
-import 'package:jepretin/app/data/request/provider_service.dart';
-import 'package:jepretin/app/data/request/user_service.dart';
-import 'package:jepretin/app/data/core/helper/token_manager.dart';
+import 'package:jepretin/app/data/services/provider_service.dart';
+import 'package:jepretin/app/data/services/user_service.dart';
+import 'package:jepretin/app/core/helper/token_manager.dart';
 import 'package:jepretin/app/data/models/user_model.dart';
 
 class RegisProviderController extends GetxController {

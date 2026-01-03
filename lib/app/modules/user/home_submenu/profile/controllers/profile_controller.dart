@@ -1,8 +1,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:jepretin/app/routes/app_pages.dart';
-import 'package:jepretin/app/data/core/helper/token_manager.dart';
+import 'package:jepretin/app/core/helper/token_manager.dart';
 import 'package:jepretin/app/data/models/user_model.dart';
-import 'package:jepretin/app/data/request/user_service.dart';
+import 'package:jepretin/app/data/services/user_service.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
