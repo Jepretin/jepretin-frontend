@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+
+# Abaikan semua file yang berawalan .env (termasuk .env, .env.dev, .env.prod, dll)
+.env*
+
+# Pengecualian: TETAP baca dan masukkan .env.test ke dalam Git
+!.env.test

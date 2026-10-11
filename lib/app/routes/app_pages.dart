@@ -1,22 +1,24 @@
 import 'package:get/get.dart';
 
+import '../modules/auth/forgot_password/bindings/forgot_password_binding.dart';
+import '../modules/auth/forgot_password/views/forgot_password_view.dart';
 import '../modules/auth/login/bindings/login_binding.dart';
 import '../modules/auth/login/views/login_view.dart';
-import '../modules/auth/otp/bindings/otp_binding.dart';
-import '../modules/auth/otp/views/otp_view.dart';
 import '../modules/auth/register/bindings/register_binding.dart';
 import '../modules/auth/register/views/register_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/main/bindings/main_binding.dart';
 import '../modules/main/views/main_view.dart';
+import '../modules/onboarding/bindings/onboarding_binding.dart';
+import '../modules/onboarding/views/onboarding_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN; // Untuk tes ganti dot setelah routes, contoh: Routes.HOME -> ini sebagai defauld
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -25,9 +27,9 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.MAIN,
-      page: () => const MainView(),
-      binding: MainBinding(),
+      name: _Paths.ONBOARDING,
+      page: () => const OnboardingView(),
+      binding: OnboardingBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
@@ -40,9 +42,14 @@ class AppPages {
       binding: RegisterBinding(),
     ),
     GetPage(
-      name: _Paths.OTP,
-      page: () => const OtpView(),
-      binding: OtpBinding(),
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => const ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAIN,
+      page: () => const MainView(),
+      binding: MainBinding(),
     ),
   ];
 }

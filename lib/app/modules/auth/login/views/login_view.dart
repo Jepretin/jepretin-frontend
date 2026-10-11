@@ -9,16 +9,14 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('LoginView'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('LoginView'),
+        centerTitle: true,
+      ),
       body: const Center(
-        child: Column(
-          children: [
-            Column(children: [Text("Masuk")]),
-            SizedBox(height: 20),
-            Column(
-              
-            ),
-          ],
+        child: Text(
+          'LoginView is working',
+          style: TextStyle(fontSize: 20),
         ),
       ),
     );
